@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+      "projectUniqueName": "C:\\Users\\Gordon\\source\\repos\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
       "projectName": "DojoTemplateConsoleApp",
-      "projectPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+      "projectPath": "C:\\Users\\Gordon\\source\\repos\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
       "packagesPath": "C:\\Users\\Gordon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\obj\\",
+      "outputPath": "C:\\Users\\Gordon\\source\\repos\\Dojos\\DojoTemplateConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

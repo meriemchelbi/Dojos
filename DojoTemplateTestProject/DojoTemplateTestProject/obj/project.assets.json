@@ -1651,6 +1651,16 @@
         "build": {
           "build/netcoreapp1.0/xunit.runner.visualstudio.props": {}
         }
+      },
+      "DojoTemplateConsoleApp/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.0",
+        "compile": {
+          "bin/placeholder/DojoTemplateConsoleApp.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DojoTemplateConsoleApp.dll": {}
+        }
       }
     }
   },
@@ -5602,10 +5612,16 @@
         "xunit.runner.visualstudio.2.4.1.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "DojoTemplateConsoleApp/1.0.0": {
+      "type": "project",
+      "path": "../../DojoTemplateConsoleApp/DojoTemplateConsoleApp.csproj",
+      "msbuildProject": "../../DojoTemplateConsoleApp/DojoTemplateConsoleApp.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
+      "DojoTemplateConsoleApp >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 16.3.0",
       "coverlet.collector >= 1.1.0",
       "xunit >= 2.4.1",
@@ -5619,11 +5635,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj",
+      "projectUniqueName": "C:\\Users\\Gordon\\source\\repos\\Dojos\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj",
       "projectName": "DojoTemplateTestProject",
-      "projectPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj",
+      "projectPath": "C:\\Users\\Gordon\\source\\repos\\Dojos\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj",
       "packagesPath": "C:\\Users\\Gordon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateTestProject\\DojoTemplateTestProject\\obj\\",
+      "outputPath": "C:\\Users\\Gordon\\source\\repos\\Dojos\\DojoTemplateTestProject\\DojoTemplateTestProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5641,7 +5657,11 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Gordon\\source\\repos\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {
+              "projectPath": "C:\\Users\\Gordon\\source\\repos\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

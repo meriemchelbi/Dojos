@@ -56,38 +56,35 @@ namespace DojoTemplateConsoleApp
         private int CalculateTotalScore()
         {
             var totalScore = 0;
-
-            for (int i = 0; i < Scores.Count; i++)
+            var numberOfScores = Scores.Count;
+            
+            for (int i = 0; i < numberOfScores; i++)
             {
-                if (Scores[i] == 10)
-                {
-                    totalScore += 10 + Scores[i + 1] + Scores[i + 2];
 
-                    if (i == (Scores.Count - 3))
-                    {
-                        break;
-                    }
+                totalScore += Scores[i] + Scores[i + 1]; 
+                
+                if (Scores[i] == 10 || ((Scores[i] + Scores[i + 1]) == 10))
+                {
+                    totalScore += Scores[i + 2];
+
+                    if (i == (numberOfScores - 3)) break;
+                    else if (Scores[i] != 10) i++;
+
                 }
 
-                else if ((i < (Scores.Count - 2)) && (Scores[i] + Scores[i + 1]) == 10)
-                {
-                    totalScore += 10 + Scores[i + 2];
+                #region commented out
+                //else if ((Scores[i] + Scores[i + 1]) == 10)
+                //{
+                //    totalScore += Scores[i + 2];
 
-                    if (i == (Scores.Count - 3))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        i ++;
-                    }
-                }
+                //    if (i == (numberOfScores - 3)) break;
+                //    else i++;
 
-                else
-                {
-                    totalScore += Scores[i] + Scores[i + 1];
-                    i++;
-                }
+                //}
+                #endregion
+
+                else i++;
+
             }
 
             return totalScore;

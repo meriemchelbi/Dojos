@@ -9,7 +9,7 @@ namespace DojoTemplateConsoleApp
 {
     public class BowlingGame
     {
-        public IEnumerable<int> LoadScores(string inputScores)
+        public IList<int> LoadScores(string inputScores)
         {
             var scores = new List<int>();
             var trimmedScores = inputScores.Replace(" ", String.Empty);
@@ -38,7 +38,7 @@ namespace DojoTemplateConsoleApp
             return scores;
         }
 
-        public int CalculateTotalScore(List<int> scores)
+        public int CalculateTotalScore(IList<int> scores)
         {
             var totalScore = 0;
 

@@ -15,7 +15,7 @@ namespace DojoTemplateTestProject
             {
                 switch (game[i])
                 {
-                    case 'X': // Stike has the next two rolls who count as bonus
+                    case 'X': // Strike has the next two rolls who count as bonus
                         result += CalculateRollScore(game, i);
                         result += CalculateRollScore(game, i + 1);
                         result += CalculateRollScore(game, i + 2);

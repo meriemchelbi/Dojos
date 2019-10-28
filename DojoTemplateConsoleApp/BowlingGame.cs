@@ -13,26 +13,28 @@ namespace DojoTemplateConsoleApp
         {
             var scores = new List<int>();
             var trimmedScores = inputScores.Replace(" ", String.Empty);
+            
             for (int i = 0; i < trimmedScores.Length; i++)
             {
-                if (trimmedScores[i] == 'X')
+                switch (trimmedScores[i])
                 {
-                    scores.Add(10);
+                    case 'X':
+                        scores.Add(10);
+                        break;
+                    case '/':
+                        var remainder = int.Parse(trimmedScores[i - 1].ToString());
+                        scores.Add(10 - remainder);
+                        break;
+                    case '-':
+                        scores.Add(0);
+                        break;
+                    default:
+                        var score = int.Parse(trimmedScores[i].ToString());
+                        scores.Add(score);
+                        break;
+
                 }
-                else if (trimmedScores[i] == '/')
-                {
-                    var remainder = int.Parse(trimmedScores[i - 1].ToString());
-                    scores.Add(10 - remainder);
-                }
-                else if (trimmedScores[i] == '-')
-                {
-                    scores.Add(0);
-                }
-                else
-                {
-                    var score = int.Parse(trimmedScores[i].ToString());
-                    scores.Add(score);
-                }
+                
             }
             
             return scores;

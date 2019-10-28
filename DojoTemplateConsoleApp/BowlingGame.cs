@@ -2,17 +2,30 @@
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
-/// http://codingdojo.org/kata/Bowling/
-/// </summary>
+
+// http://codingdojo.org/kata/Bowling/
+
 namespace DojoTemplateConsoleApp
 {
     public class BowlingGame
     {
-        public IList<int> LoadScores(string inputScores)
+        public IList<int> Scores { get; private set; }
+
+        public int TotalScore { get; private set; }
+
+        private readonly string inputScores;
+
+        public BowlingGame(string inputScores)
+        {
+            this.inputScores = inputScores;
+            Scores = LoadScores();
+            TotalScore = CalculateTotalScore();
+        }
+        
+        private IList<int> LoadScores()
         {
             var scores = new List<int>();
-            var trimmedScores = inputScores.Replace(" ", String.Empty);
+            var trimmedScores = inputScores.Replace(" ", string.Empty);
             
             for (int i = 0; i < trimmedScores.Length; i++)
             {
@@ -34,33 +47,33 @@ namespace DojoTemplateConsoleApp
                         break;
 
                 }
-                
+                                              
             }
             
             return scores;
         }
 
-        public int CalculateTotalScore(IList<int> scores)
+        private int CalculateTotalScore()
         {
             var totalScore = 0;
 
-            for (int i = 0; i < scores.Count; i++)
+            for (int i = 0; i < Scores.Count; i++)
             {
-                if (scores[i] == 10)
+                if (Scores[i] == 10)
                 {
-                    totalScore += 10 + scores[i + 1] + scores[i + 2];
+                    totalScore += 10 + Scores[i + 1] + Scores[i + 2];
 
-                    if (i == (scores.Count - 3))
+                    if (i == (Scores.Count - 3))
                     {
                         break;
                     }
                 }
 
-                else if ((i < (scores.Count - 2)) && (scores[i] + scores[i + 1]) == 10)
+                else if ((i < (Scores.Count - 2)) && (Scores[i] + Scores[i + 1]) == 10)
                 {
-                    totalScore += 10 + scores[i + 2];
+                    totalScore += 10 + Scores[i + 2];
 
-                    if (i == (scores.Count - 3))
+                    if (i == (Scores.Count - 3))
                     {
                         break;
                     }
@@ -72,7 +85,7 @@ namespace DojoTemplateConsoleApp
 
                 else
                 {
-                    totalScore += scores[i] + scores[i + 1];
+                    totalScore += Scores[i] + Scores[i + 1];
                     i++;
                 }
             }

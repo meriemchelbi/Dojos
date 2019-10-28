@@ -16,22 +16,20 @@ namespace DojoTemplateTestProject
         public void TestScoresLoadedAndCalculated(string inputScores, string expectedScoresString, int totalScore)
         {
             // ARRANGE
-            var bowlingGame = new BowlingGame();
-
+            var bowlingGame = new BowlingGame(inputScores);
 
             // ACT
-            var actualScores = bowlingGame.LoadScores(inputScores);
             string actualScoresString = string.Empty;
-            foreach (var score in actualScores)
+            foreach (var score in bowlingGame.Scores)
             {
                 var scoreString = score.ToString();
                 actualScoresString += scoreString;
             }
-            var actualScore = bowlingGame.CalculateTotalScore(actualScores);
+            
 
             // ASSERT
             Assert.Equal(expectedScoresString, actualScoresString);
-            Assert.Equal(totalScore, actualScore);
+            Assert.Equal(totalScore, bowlingGame.TotalScore);
         }
 
     }

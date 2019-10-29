@@ -3,7 +3,7 @@ using Xunit;
 
 namespace DojoTemplateTestProject
 {
-    public class UnitTest1
+    public class BowlingTests
     {
         [Fact]
         public void Test1()

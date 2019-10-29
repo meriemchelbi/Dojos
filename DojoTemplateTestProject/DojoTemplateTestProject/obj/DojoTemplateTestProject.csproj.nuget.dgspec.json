@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj": {}
+    "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj": {
+    "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj",
+        "projectUniqueName": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj",
         "projectName": "DojoTemplateTestProject",
-        "projectPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj",
-        "packagesPath": "C:\\Users\\Gordon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateTestProject\\DojoTemplateTestProject\\obj\\",
+        "projectPath": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateTestProject\\DojoTemplateTestProject\\DojoTemplateTestProject.csproj",
+        "packagesPath": "C:\\Users\\meriemc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateTestProject\\DojoTemplateTestProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Gordon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\meriemc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

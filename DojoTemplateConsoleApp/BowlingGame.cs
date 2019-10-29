@@ -35,8 +35,16 @@ namespace DojoTemplateConsoleApp
                         scores.Add(10);
                         break;
                     case '/':
-                        var remainder = int.Parse(trimmedScores[i - 1].ToString());
-                        scores.Add(10 - remainder);
+                        var remainder = 0;
+                        if (Equals(trimmedScores[i - 1], '-'))
+                        {
+                            scores.Add(10);
+                        }
+                        else
+                        {
+                            remainder = int.Parse(trimmedScores[i - 1].ToString());
+                            scores.Add(10 - remainder);
+                        }
                         break;
                     case '-':
                         scores.Add(0);

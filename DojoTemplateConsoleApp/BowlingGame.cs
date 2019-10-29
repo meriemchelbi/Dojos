@@ -60,28 +60,26 @@ namespace DojoTemplateConsoleApp
             
             for (int i = 0; i < numberOfScores; i++)
             {
+                var currentAndNext = Scores[i] + Scores[i + 1];
 
-                totalScore += Scores[i] + Scores[i + 1]; 
+                totalScore += currentAndNext; 
                 
-                if (Scores[i] == 10 || ((Scores[i] + Scores[i + 1]) == 10))
+                if (Scores[i] == 10)
+                {
+                    totalScore += Scores[i + 2];
+                    if (i == (numberOfScores - 3)) break;
+
+                }
+
+                else if (currentAndNext == 10)
                 {
                     totalScore += Scores[i + 2];
 
                     if (i == (numberOfScores - 3)) break;
-                    else if (Scores[i] != 10) i++;
+                    else i++;
 
                 }
 
-                #region commented out
-                //else if ((Scores[i] + Scores[i + 1]) == 10)
-                //{
-                //    totalScore += Scores[i + 2];
-
-                //    if (i == (numberOfScores - 3)) break;
-                //    else i++;
-
-                //}
-                #endregion
 
                 else i++;
 

@@ -4,7 +4,10 @@ using System.Text;
 
 namespace DojoTemplateConsoleApp
 {
-    class Frame
+    public class Frame
     {
+        public int Roll1 { get; set; }
+        public int Roll2 { get; set; }
+        public bool isStrike { get; set; }
     }
 }

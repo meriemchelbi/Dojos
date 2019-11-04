@@ -4,7 +4,11 @@ using System.Text;
 
 namespace DojoTemplateConsoleApp
 {
-    class BowlingGame
+    public class BowlingGame
     {
+        public void TestMethod()
+        {
+            return;
+        }
     }
 }

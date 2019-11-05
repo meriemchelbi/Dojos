@@ -8,6 +8,7 @@ namespace DojoTemplateConsoleApp
     {
         public int Roll1 { get; set; }
         public int Roll2 { get; set; }
-        public bool isStrike { get; set; }
+        public bool IsStrike { get; set; }
+        public bool IsSpare { get; set; }
     }
 }

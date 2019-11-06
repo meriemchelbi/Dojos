@@ -12,19 +12,18 @@ namespace DojoTemplateTestProject
         [ClassData(typeof(FramesTestDataClass))]
         public void LoadFramesLoadsAllScoreFrames(string scores, List<Frame> expectedFrames)
         {
-            // actual = call LoadFrames with scores as argument
             var bowlingGame = new BowlingGame(scores);
             bowlingGame.LoadFrames();
             
-            // assert that number of frames in expected = actual
             Assert.Equal(expectedFrames.Count, bowlingGame.Scores.Count);
-            Assert.Equal(expectedFrames, bowlingGame.Scores);
-
-            // For i in length of expected frame scores, assert that
-            // expected.Framei.roll1 = actual.framei.roll1
-            // expected.Framei.roll2 = actual.framei.roll2
-            // expected.Framei.IsStrike = actual.framei.IsStrike
-            // expected.Framei.IsSpare = actual.framei.IsSpare
+            
+            for (int i = 0; i < expectedFrames.Count; i++)
+            {
+                Assert.Equal(expectedFrames[i].Roll1, bowlingGame.Scores[i].Roll1);
+                Assert.Equal(expectedFrames[i].Roll2, bowlingGame.Scores[i].Roll2);
+                Assert.Equal(expectedFrames[i].IsStrike, bowlingGame.Scores[i].IsStrike);
+                Assert.Equal(expectedFrames[i].IsSpare, bowlingGame.Scores[i].IsSpare);
+            }
 
 
         }

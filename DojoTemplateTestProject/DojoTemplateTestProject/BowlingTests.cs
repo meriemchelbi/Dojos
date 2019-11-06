@@ -15,8 +15,10 @@ namespace DojoTemplateTestProject
             var bowlingGame = new BowlingGame(scores);
             bowlingGame.LoadFrames();
             
+            // Correct number of frames created
             Assert.Equal(expectedFrames.Count, bowlingGame.Scores.Count);
             
+            // Frames created with correct data
             for (int i = 0; i < expectedFrames.Count; i++)
             {
                 Assert.Equal(expectedFrames[i].Roll1, bowlingGame.Scores[i].Roll1);
@@ -24,8 +26,7 @@ namespace DojoTemplateTestProject
                 Assert.Equal(expectedFrames[i].IsStrike, bowlingGame.Scores[i].IsStrike);
                 Assert.Equal(expectedFrames[i].IsSpare, bowlingGame.Scores[i].IsSpare);
             }
-
-
+            
         }
 
         [InlineData("X X X X X X X X X X X X", 300)] // all strikes

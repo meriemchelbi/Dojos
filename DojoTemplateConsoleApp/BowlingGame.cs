@@ -51,7 +51,33 @@ namespace DojoTemplateConsoleApp
 
         private void AddFrame(char currentElement, char nextElement)
         {
-            throw new NotImplementedException();
+            var frame = new Frame();
+
+            switch (currentElement)
+            {
+                case '-':
+                    frame.Roll1 = 0;
+                    break;
+                default:
+                    frame.Roll1 = int.Parse(currentElement.ToString());
+                    break;
+            }
+
+            switch (nextElement)
+            {
+                case '-':
+                    frame.Roll2 = 0;
+                    break;
+                case '/':
+                    frame.Roll2 = 10 - currentElement;
+                    //frame.IsSpare = true;
+                    break;
+                default:
+                    frame.Roll1 = int.Parse(nextElement.ToString());
+                    break;
+            }
+
+            Scores.Add(frame);
         }
 
         private void AddStrikeFrame()

@@ -20,43 +20,53 @@ namespace DojoTemplateConsoleApp
         public void LoadFrames()
         {
             var trimmedScores = this._scores.Replace(" ", "");
-            
-            for (int index = 0; index < trimmedScores.Length; index++)
+            int increment;
+
+            for (int index = 0; index < trimmedScores.Length; index += increment)
             {
                 var currentElement = trimmedScores[index];
+                Frame newFrame;
 
                 switch (currentElement)
                 {
                     case 'X':
-                        AddStrikeFrame();
+                        newFrame = AddFrame(currentElement, '0');
                         break;
                     default:
                         switch (index)
                         {
-                            case 20: // If index 20 is hit, then our last frame was a spare so we need to add only one more score.
-                                AddFrame(currentElement, '0');
+                            case 20: // If final frame is a spare. 
+                                newFrame = AddFrame(currentElement, '0');
                                 break;
                             default:
                                 var nextElement = trimmedScores[index + 1];
-                                AddFrame(currentElement, nextElement);
-                                index++; //TODO: refactor to increment in loop logic only?
+                                newFrame = AddFrame(currentElement, nextElement);
                                 break;
                         }
                         break;
-                        
                 }
 
+                increment = newFrame.IsStrike switch
+                {
+                    true => 1,
+                    false => 2
+                };
 
             }
 
+
         }
 
-        private void AddFrame(char currentElement, char nextElement)
+        private Frame AddFrame(char currentElement, char nextElement)
         {
             var frame = new Frame();
 
             switch (currentElement)
             {
+                case 'X':
+                    frame.Roll1 = 10;
+                    frame.IsStrike = true;
+                    break;
                 case '-':
                     frame.Roll1 = 0;
                     break;
@@ -80,13 +90,9 @@ namespace DojoTemplateConsoleApp
             }
 
             Scores.Add(frame);
+            return frame;
         }
 
-        private void AddStrikeFrame()
-        {
-            var frame = new Frame() { IsStrike = true, Roll1 = 10, Roll2 = 0 };
-            Scores.Add(frame);
-        }
 
         public object CalculateTotalScore()
         {

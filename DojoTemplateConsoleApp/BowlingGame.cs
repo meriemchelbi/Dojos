@@ -33,7 +33,7 @@ namespace DojoTemplateConsoleApp
                     default:
                         switch (index)
                         {
-                            case 20:
+                            case 20: // If index 20 is hit, then our last frame was a spare so we need to add only one more score.
                                 AddFrame(currentElement, '0');
                                 break;
                             default:

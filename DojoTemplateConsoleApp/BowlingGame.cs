@@ -36,6 +36,7 @@ namespace DojoTemplateConsoleApp
         private readonly string _scores;
         private readonly IList<Frame> _frames;
         private int _totalScore;
+        private readonly FrameScoringStrategyRepository _frameScoringStrategyRepository;
 
         public BowlingGame(string scores)
         {
@@ -43,6 +44,7 @@ namespace DojoTemplateConsoleApp
             _scores = scores;
             _frames = new List<Frame>();
             _totalScore = 0;
+            _frameScoringStrategyRepository = new FrameScoringStrategyRepository();
 
         }
 
@@ -134,19 +136,14 @@ namespace DojoTemplateConsoleApp
 
                 if (currentFrame.IsSpare)
                 {
-                    _totalScore += Frames[i + 1].Roll1;
+                    _totalScore += _frameScoringStrategyRepository.FrameScoringStrategies["Spare"]
+                        (new List<Frame>() { Frames[i + 1] }); 
                 }
                 else if (currentFrame.IsStrike)
                 {
-                    switch (Frames[i + 1].IsStrike)
-                    {
-                        case true:
-                            _totalScore += Frames[i + 1].Roll1 + Frames[i + 2].Roll1;
-                            break;
-                        case false:
-                            _totalScore += Frames[i + 1].Roll1 + Frames[i + 1].Roll2;
-                            break;
-                    }
+                    _totalScore += _frameScoringStrategyRepository.FrameScoringStrategies["Strike"]
+                        (new List<Frame>() { Frames[i + 1], Frames[i + 2] });
+
                 }
             }
             

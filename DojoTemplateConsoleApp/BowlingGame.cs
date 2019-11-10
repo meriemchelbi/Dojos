@@ -6,14 +6,44 @@ namespace DojoTemplateConsoleApp
 {
     public class BowlingGame
     {
-        public IList<Frame> Scores { get; private set; }
+        public IList<Frame> Frames 
+        {
+            get
+            {
+                if (_frames.Count == 0)
+                {
+                    LoadFrames();
+                }
+                return _frames;
+            }
+            private set { }
+        }
+        public int TotalScore
+        {
+            get
+            {
+                if (_totalScore == 0)
+                {
+                    CalculateTotalScore();
+                }
+                return _totalScore;
+            }
+            private set { }
+        }
+
+
+
         private readonly string _scores;
-        
+        private readonly IList<Frame> _frames;
+        private int _totalScore;
+
         public BowlingGame(string scores)
         {
             
-            this._scores = scores;
-            Scores = new List<Frame>();
+            _scores = scores;
+            _frames = new List<Frame>();
+            _totalScore = 0;
+
         }
 
 
@@ -89,14 +119,37 @@ namespace DojoTemplateConsoleApp
                     break;
             }
 
-            Scores.Add(frame);
+            _frames.Add(frame);
             return frame;
         }
 
 
-        public object CalculateTotalScore()
+        public void CalculateTotalScore()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < 10; i++)
+            {
+                var currentFrame = Frames[i];
+
+                _totalScore += currentFrame.Roll1 + currentFrame.Roll2;
+
+                if (currentFrame.IsSpare)
+                {
+                    _totalScore += Frames[i + 1].Roll1;
+                }
+                else if (currentFrame.IsStrike)
+                {
+                    switch (Frames[i + 1].IsStrike)
+                    {
+                        case true:
+                            _totalScore += Frames[i + 1].Roll1 + Frames[i + 2].Roll1;
+                            break;
+                        case false:
+                            _totalScore += Frames[i + 1].Roll1 + Frames[i + 1].Roll2;
+                            break;
+                    }
+                }
+            }
+            
         }
     }
 }

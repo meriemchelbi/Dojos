@@ -19,31 +19,33 @@ namespace DojoTemplateConsoleApp
 
         public void LoadFrames()
         {
-            // trim scores
             var trimmedScores = this._scores.Replace(" ", "");
             
             for (int index = 0; index < trimmedScores.Length; index++)
             {
-                var isNotStrike = false;
                 var currentElement = trimmedScores[index];
 
                 switch (currentElement)
                 {
                     case 'X':
-                        isNotStrike = false;
                         AddStrikeFrame();
                         break;
                     default:
-                        isNotStrike = true;
-                        var nextElement = trimmedScores[index + 1];
-                        AddFrame(currentElement, nextElement);
+                        switch (index)
+                        {
+                            case 20:
+                                AddFrame(currentElement, '0');
+                                break;
+                            default:
+                                var nextElement = trimmedScores[index + 1];
+                                AddFrame(currentElement, nextElement);
+                                index++; //TODO: refactor to increment in loop logic only?
+                                break;
+                        }
                         break;
+                        
                 }
 
-                while (isNotStrike)
-                {
-                    index++;
-                }
 
             }
 
@@ -69,11 +71,11 @@ namespace DojoTemplateConsoleApp
                     frame.Roll2 = 0;
                     break;
                 case '/':
-                    frame.Roll2 = 10 - currentElement;
-                    //frame.IsSpare = true;
+                    frame.Roll2 = (10 - frame.Roll1);
+                    frame.IsSpare = true;
                     break;
                 default:
-                    frame.Roll1 = int.Parse(nextElement.ToString());
+                    frame.Roll2 = int.Parse(nextElement.ToString());
                     break;
             }
 

@@ -6,55 +6,99 @@ namespace DojoTemplateConsoleApp
 {
     public class BowlingGame
     {
-        public IList<Frame> Scores { get; private set; }
+        public IList<Frame> Frames 
+        {
+            get
+            {
+                if (_frames.Count == 0)
+                {
+                    LoadFrames();
+                }
+                return _frames;
+            }
+            private set { }
+        }
+        public int TotalScore
+        {
+            get
+            {
+                if (_totalScore == 0)
+                {
+                    CalculateTotalScore();
+                }
+                return _totalScore;
+            }
+            private set { }
+        }
+
+
+
         private readonly string _scores;
-        
+        private readonly IList<Frame> _frames;
+        private int _totalScore;
+        private readonly FrameScoringStrategyRepository _frameScoringStrategyRepository;
+
         public BowlingGame(string scores)
         {
             
-            this._scores = scores;
-            Scores = new List<Frame>();
+            _scores = scores;
+            _frames = new List<Frame>();
+            _totalScore = 0;
+            _frameScoringStrategyRepository = new FrameScoringStrategyRepository();
+
         }
 
 
         public void LoadFrames()
         {
-            // trim scores
             var trimmedScores = this._scores.Replace(" ", "");
-            
-            for (int index = 0; index < trimmedScores.Length; index++)
+            int increment;
+
+            for (int index = 0; index < trimmedScores.Length; index += increment)
             {
-                var isNotStrike = false;
                 var currentElement = trimmedScores[index];
+                Frame newFrame;
 
                 switch (currentElement)
                 {
                     case 'X':
-                        isNotStrike = false;
-                        AddStrikeFrame();
+                        newFrame = AddFrame(currentElement, '0');
                         break;
                     default:
-                        isNotStrike = true;
-                        var nextElement = trimmedScores[index + 1];
-                        AddFrame(currentElement, nextElement);
+                        switch (index)
+                        {
+                            case 20: // If final frame is a spare. 
+                                newFrame = AddFrame(currentElement, '0');
+                                break;
+                            default:
+                                var nextElement = trimmedScores[index + 1];
+                                newFrame = AddFrame(currentElement, nextElement);
+                                break;
+                        }
                         break;
                 }
 
-                while (isNotStrike)
+                increment = newFrame.IsStrike switch
                 {
-                    index++;
-                }
+                    true => 1,
+                    false => 2
+                };
 
             }
 
+
         }
 
-        private void AddFrame(char currentElement, char nextElement)
+        private Frame AddFrame(char currentElement, char nextElement)
         {
             var frame = new Frame();
 
             switch (currentElement)
             {
+                case 'X':
+                    frame.Roll1 = 10;
+                    frame.IsStrike = true;
+                    break;
                 case '-':
                     frame.Roll1 = 0;
                     break;
@@ -69,26 +113,40 @@ namespace DojoTemplateConsoleApp
                     frame.Roll2 = 0;
                     break;
                 case '/':
-                    frame.Roll2 = 10 - currentElement;
-                    //frame.IsSpare = true;
+                    frame.Roll2 = (10 - frame.Roll1);
+                    frame.IsSpare = true;
                     break;
                 default:
-                    frame.Roll1 = int.Parse(nextElement.ToString());
+                    frame.Roll2 = int.Parse(nextElement.ToString());
                     break;
             }
 
-            Scores.Add(frame);
+            _frames.Add(frame);
+            return frame;
         }
 
-        private void AddStrikeFrame()
-        {
-            var frame = new Frame() { IsStrike = true, Roll1 = 10, Roll2 = 0 };
-            Scores.Add(frame);
-        }
 
-        public object CalculateTotalScore()
+        public void CalculateTotalScore()
         {
-            throw new NotImplementedException();
+            for (var i = 0; i < 10; i++)
+            {
+                var currentFrame = Frames[i];
+
+                _totalScore += currentFrame.Roll1 + currentFrame.Roll2;
+
+                if (currentFrame.IsSpare)
+                {
+                    _totalScore += _frameScoringStrategyRepository.FrameScoringStrategies["Spare"]
+                        (Frames, i); 
+                }
+                else if (currentFrame.IsStrike)
+                {
+                    _totalScore += _frameScoringStrategyRepository.FrameScoringStrategies["Strike"]
+                        (Frames, i);
+
+                }
+            }
+            
         }
     }
 }

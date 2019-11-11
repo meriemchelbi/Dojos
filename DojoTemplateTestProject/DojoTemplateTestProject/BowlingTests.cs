@@ -13,18 +13,18 @@ namespace DojoTemplateTestProject
         public void LoadFramesLoadsAllScoreFrames(string scores, List<Frame> expectedFrames)
         {
             var bowlingGame = new BowlingGame(scores);
-            bowlingGame.LoadFrames();
+            var actualFrames = bowlingGame.Frames;
             
             // Correct number of frames created
-            Assert.Equal(expectedFrames.Count, bowlingGame.Scores.Count);
+            Assert.Equal(expectedFrames.Count, actualFrames.Count);
             
             // Frames created with correct data
             for (int i = 0; i < expectedFrames.Count; i++)
             {
-                Assert.Equal(expectedFrames[i].Roll1, bowlingGame.Scores[i].Roll1);
-                Assert.Equal(expectedFrames[i].Roll2, bowlingGame.Scores[i].Roll2);
-                Assert.Equal(expectedFrames[i].IsStrike, bowlingGame.Scores[i].IsStrike);
-                Assert.Equal(expectedFrames[i].IsSpare, bowlingGame.Scores[i].IsSpare);
+                Assert.Equal(expectedFrames[i].Roll1, actualFrames[i].Roll1);
+                Assert.Equal(expectedFrames[i].Roll2, actualFrames[i].Roll2);
+                Assert.Equal(expectedFrames[i].IsStrike, actualFrames[i].IsStrike);
+                Assert.Equal(expectedFrames[i].IsSpare, actualFrames[i].IsSpare);
             }
             
         }
@@ -32,13 +32,12 @@ namespace DojoTemplateTestProject
         [InlineData("X X X X X X X X X X X X", 300)] // all strikes
         [InlineData("9- 9- 9- 9- 9- 9- 9- 9- 9- 9-", 90)] // I'm not very good, but at least I'm consistent
         [InlineData("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5", 150)] // all spares
-        [InlineData("9- 52 -/ 71 -- 16 X 11 43 -7", 72)] // mix of strikes, spares & misses, incl miss & spare in same frame
+        [InlineData("9- 52 -/ 71 -- 16 X 11 43 -7", 76)] // mix of strikes, spares & misses, incl miss & spare in same frame
         [Theory]
         public void CalculateTotalScoreCalculatesCorrectScore(string scores, int expectedTotalScore)
         {
             var bowlingGame = new BowlingGame(scores);
-            bowlingGame.LoadFrames();
-            var totalScore = bowlingGame.CalculateTotalScore();
+            var totalScore = bowlingGame.TotalScore;
 
             Assert.Equal(expectedTotalScore, totalScore);
 

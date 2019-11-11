@@ -17,7 +17,7 @@ namespace DojoTemplateConsoleApp
             };
         }
 
-        private int GetSpareFrameSupplement(IList<Frame> frames, int currentFrameIndex)
+        private static int GetSpareFrameSupplement(IList<Frame> frames, int currentFrameIndex)
         {
             var spareSupplement = frames[currentFrameIndex + 1].Roll1;
             return spareSupplement;
@@ -25,20 +25,14 @@ namespace DojoTemplateConsoleApp
         }
 
 
-        private int GetStrikeFrameSupplement(IList<Frame> frames, int currentFrameIndex)
+        private static int GetStrikeFrameSupplement(IList<Frame> frames, int currentFrameIndex)
         {
-            int strikeSupplement;
-            
-            switch (frames[0].IsStrike)
+            var strikeSupplement = frames[0].IsStrike switch
             {
-                case true:
-                    strikeSupplement = frames[currentFrameIndex].Roll1 + frames[currentFrameIndex + 1].Roll1;
-                    break;
-                case false:
-                    strikeSupplement = frames[currentFrameIndex + 1].Roll1 + frames[currentFrameIndex + 1].Roll2;
-                    break;
-            }
-            
+                true => (frames[currentFrameIndex].Roll1 + frames[currentFrameIndex + 1].Roll1),
+                false => (frames[currentFrameIndex + 1].Roll1 + frames[currentFrameIndex + 1].Roll2)
+            };
+
             return strikeSupplement;
         }
     }

@@ -51,10 +51,10 @@ namespace DojoTemplateConsoleApp
 
         public void LoadFrames()
         {
-            var trimmedScores = this._scores.Replace(" ", "");
+            var trimmedScores = _scores.Replace(" ", "");
             int increment;
 
-            for (int index = 0; index < trimmedScores.Length; index += increment)
+            for (var index = 0; index < trimmedScores.Length; index += increment)
             {
                 var currentElement = trimmedScores[index];
                 Frame newFrame;

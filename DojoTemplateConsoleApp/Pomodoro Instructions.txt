@@ -1,0 +1,30 @@
+﻿Let's Make a 🍅 Timer!
+
+One of the great things about being a coder is that we can make tools to solve our problems.
+
+Let's assume you find it hard to get focused time due to meetings etc. 😉
+
+Wouldn't it be great if we worked in 25 minute blocks, tracked our time spend, and monitored
+our interruptions?
+
+Enter the Pomodoro Technique!
+
+It works like this:
+
+- You start a 25 minute timer.
+- You focus on a single task for that time.
+- You take a 5 minute break at the end.
+- Every 4 tomatoes, you get a longer 30 minute break.
+- If you get interrupted while on a tomato, you lose the tomato (to account for context switching)
+
+
+## Tasks
+
+> You may not get all the way through this, it's by design 😊
+
+1. Create a timer that starts a 'tomato' (25 minute block) - you'll see that time can be interesting with TDD 😉
+2. Add the ability to take a short (5 min) or long (30 mins) break.
+3. Add a count and total time of tomatoes and breaks completed.
+4. Add the ability to 'interrupt' a tomato - noting the reason why - note that interrupted tomatoes are 'lost' - you get 0 credit for focus!
+5. Add a simple task list, to track tomatoes against.
+6. Add estimated tomato count for a task, then compare with actual.

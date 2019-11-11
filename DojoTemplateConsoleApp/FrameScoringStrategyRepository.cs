@@ -20,9 +20,10 @@ namespace DojoTemplateConsoleApp
         private int GetSpareFrameSupplement(IList<Frame> frames, int currentFrameIndex)
         {
             var spareSupplement = frames[currentFrameIndex + 1].Roll1;
-
             return spareSupplement;
+
         }
+
 
         private int GetStrikeFrameSupplement(IList<Frame> frames, int currentFrameIndex)
         {

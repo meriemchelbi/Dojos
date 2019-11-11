@@ -129,6 +129,7 @@ namespace DojoTemplateConsoleApp
         public void CalculateTotalScore()
         {
             for (var i = 0; i < 10; i++)
+
             {
                 var currentFrame = Frames[i];
 
@@ -138,11 +139,13 @@ namespace DojoTemplateConsoleApp
                 {
                     _totalScore += _frameScoringStrategyRepository.FrameScoringStrategies["Spare"]
                         (Frames, i); 
+
                 }
                 else if (currentFrame.IsStrike)
                 {
                     _totalScore += _frameScoringStrategyRepository.FrameScoringStrategies["Strike"]
                         (Frames, i);
+
 
                 }
             }

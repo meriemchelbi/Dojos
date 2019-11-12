@@ -27,11 +27,10 @@ namespace DojoTemplateConsoleApp
 
         private static int GetStrikeFrameSupplement(IList<Frame> frames, int currentFrameIndex)
         {
-            var strikeSupplement = frames[0].IsStrike switch
-            {
-                true => (frames[currentFrameIndex].Roll1 + frames[currentFrameIndex + 1].Roll1),
-                false => (frames[currentFrameIndex + 1].Roll1 + frames[currentFrameIndex + 1].Roll2)
-            };
+
+            var strikeSupplement = frames[0].IsStrike
+                ? (frames[currentFrameIndex].Roll1 + frames[currentFrameIndex + 1].Roll1)
+                : (frames[currentFrameIndex + 1].Roll1 + frames[currentFrameIndex + 1].Roll2);
 
             return strikeSupplement;
         }

@@ -4,11 +4,11 @@ using System.Text;
 
 namespace DojoTemplateConsoleApp
 {
-    class FrameScoringStrategyRepository
+    class FrameScoringStrategyFactory
     {
         public Dictionary<string, Func<IList<Frame>, int, int>> FrameScoringStrategies;
 
-        public FrameScoringStrategyRepository()
+        public FrameScoringStrategyFactory()
         {
             FrameScoringStrategies = new Dictionary<string, Func<IList<Frame>, int, int>>
             {
@@ -18,7 +18,7 @@ namespace DojoTemplateConsoleApp
             
         }
 
-        private static int GetSpareFrameSupplement(IList<Frame> frames, int currentFrameIndex)
+        public static int GetSpareFrameSupplement(IList<Frame> frames, int currentFrameIndex)
         {
             var spareSupplement = frames[currentFrameIndex + 1].Roll1;
             return spareSupplement;
@@ -26,7 +26,7 @@ namespace DojoTemplateConsoleApp
         }
 
 
-        private static int GetStrikeFrameSupplement(IList<Frame> frames, int currentFrameIndex)
+        public static int GetStrikeFrameSupplement(IList<Frame> frames, int currentFrameIndex)
         {
 
             var strikeSupplement = frames[0].IsStrike

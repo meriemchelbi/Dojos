@@ -9,13 +9,13 @@ namespace DojoTemplateConsoleApp
     {
       
         private int _totalScore;
-        private readonly FrameScoringStrategyRepository _frameScoringStrategyRepository;
+        private readonly FrameScoringStrategyFactory _frameScoringStrategyRepository;
         
         public ScoreCalculator()
         {
             
             _totalScore = 0;
-            _frameScoringStrategyRepository = new FrameScoringStrategyRepository();
+            _frameScoringStrategyRepository = new FrameScoringStrategyFactory();
 
         }
 
@@ -31,14 +31,15 @@ namespace DojoTemplateConsoleApp
 
                 if (currentFrame.IsSpare)
                 {
+                    // lookup func from dictionary
                     _totalScore += _frameScoringStrategyRepository.FrameScoringStrategies["Spare"]
                         (frames, i); 
 
                 }
                 else if (currentFrame.IsStrike)
                 {
-                    _totalScore += _frameScoringStrategyRepository.FrameScoringStrategies["Strike"]
-                        (frames, i);
+                    // using helper method instead of func
+                    _totalScore += FrameScoringStrategyFactory.GetStrikeFrameSupplement(frames, i);
                 }
 
             }

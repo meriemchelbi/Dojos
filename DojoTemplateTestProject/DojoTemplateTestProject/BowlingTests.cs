@@ -9,11 +9,11 @@ namespace DojoTemplateTestProject
     {
         
         [Theory]
-        [ClassData(typeof(FramesTestDataClass))]
+        [ClassData(typeof(LoadFramesTestData))]
         public void LoadFramesLoadsAllScoreFrames(string scores, List<Frame> expectedFrames)
         {
-            var bowlingGame = new BowlingGame(scores);
-            var actualFrames = bowlingGame.Frames;
+            var framesLoader = new FramesLoader();
+            var actualFrames = framesLoader.LoadFrames(scores);
             
             // Correct number of frames created
             Assert.Equal(expectedFrames.Count, actualFrames.Count);
@@ -29,15 +29,12 @@ namespace DojoTemplateTestProject
             
         }
 
-        [InlineData("X X X X X X X X X X X X", 300)] // all strikes
-        [InlineData("9- 9- 9- 9- 9- 9- 9- 9- 9- 9-", 90)] // I'm not very good, but at least I'm consistent
-        [InlineData("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5", 150)] // all spares
-        [InlineData("9- 52 -/ 71 -- 16 X 11 43 -7", 76)] // mix of strikes, spares & misses, incl miss & spare in same frame
         [Theory]
-        public void CalculateTotalScoreCalculatesCorrectScore(string scores, int expectedTotalScore)
+        [ClassData(typeof(CalculateScoresTestData))]
+        public void CalculateTotalScoreCalculatesCorrectScore(List<Frame> frames, int expectedTotalScore)
         {
-            var bowlingGame = new BowlingGame(scores);
-            var totalScore = bowlingGame.TotalScore;
+            var scoreCalculator = new ScoreCalculator();
+            var totalScore = scoreCalculator.CalculateTotalScore(frames);
 
             Assert.Equal(expectedTotalScore, totalScore);
 

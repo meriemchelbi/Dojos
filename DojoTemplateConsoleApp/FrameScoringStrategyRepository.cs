@@ -15,6 +15,7 @@ namespace DojoTemplateConsoleApp
                 {"Spare", GetSpareFrameSupplement },
                 {"Strike", GetStrikeFrameSupplement }
             };
+            
         }
 
         private static int GetSpareFrameSupplement(IList<Frame> frames, int currentFrameIndex)

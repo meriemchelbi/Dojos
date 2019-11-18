@@ -6,7 +6,11 @@ namespace DojoTemplateConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("What are the scores, George Dawes? \n> ");
+            var scores = Console.ReadLine();
+            // TODO: validate scores input
+            var bowlingGame = new BowlingGame(scores);
+            bowlingGame.Play();
         }
     }
 }

@@ -7,11 +7,7 @@ namespace DojoTemplateConsoleApp
     
     public class ScoreCalculator
     {
-        public IList<Frame> Frames { get; set; }
-        public int TotalScore { get; set; }
-    
-        
-        private readonly FramesLoader _framesLoader;
+      
         private int _totalScore;
         private readonly FrameScoringStrategyRepository _frameScoringStrategyRepository;
         
@@ -20,7 +16,6 @@ namespace DojoTemplateConsoleApp
             
             _totalScore = 0;
             _frameScoringStrategyRepository = new FrameScoringStrategyRepository();
-            _framesLoader = new FramesLoader();
 
         }
 

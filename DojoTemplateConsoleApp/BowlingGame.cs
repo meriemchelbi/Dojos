@@ -17,10 +17,11 @@ namespace DojoTemplateConsoleApp
             _framesLoader = new FramesLoader();
             _scoreCalculator = new ScoreCalculator();
         }
-        public void Play()
+        public int Play()
         {
             var frames = _framesLoader.LoadFrames(_scores);
-            _scoreCalculator.CalculateTotalScore(frames);
+            var totalScore = _scoreCalculator.CalculateTotalScore(frames);
+            return totalScore;
         }
     }
 }

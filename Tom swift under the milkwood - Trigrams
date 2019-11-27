@@ -1,0 +1,70 @@
+# Trigrams
+
+This coding dojo is all about _Trigrams_!
+
+[Tom swift under the milkwood](http://codekata.com/kata/kata14-tom-swift-under-the-milkwood/)
+> Trigrams can be used to mutate text into new, surreal, forms. But what heuristics do we apply to get a reasonable result?
+
+A Trigram is a group of three consecutive written units such as letters, syllables or words. Today we will be working with word trigrams.
+
+Trigram analysis is simple: for each group of three consecutive words, use the first two as the key and append the third to an array of all words that follow that pair. For example, given the sentence:
+```
+I wish I may I wish I might
+```
+You might generate:
+```
+"I wish" => ["I", "I"]
+"wish I" => ["may", "might"]
+"may I" => ["wish"]
+"I may" => ["I"]
+```
+
+This shows that "I wish" is followed by "I" two times, "wish I" is followed by "may" once and "might" once, and so on.
+
+Now that we have our trigram analysis, we can use it to generate some text!
+
+Pick a random pair of words as a starting point, then pick a random word from the array of possible next words for that pair.
+
+Add your next word to your list of generated words, along with the first two. Now you have three words you can take the last two for your next pair and generate another word. Rinse and repeat until you reach a dead end (there's no possible next word for a pair).
+
+For example, given the above trigram analysis, we might pick "I may" as a starting point. The only possible next word is “I”, so now we have:
+
+```
+I may I
+```
+
+The last two words are “may I”, so the next word is “wish”. We then look up “I wish”, and find our choice is constrained to another “I”.
+
+```
+I may I wish I
+```
+
+Now we look up “wish I”, and find we have a choice. Let’s choose “may”.
+
+```
+I may I wish I may
+```
+
+Now we’re back where we started from, with “I may.” Following the same sequence, but choosing “might” this time, we get:
+
+```
+I may I wish I may I wish I might
+```
+
+At this point we stop, as no sequence starts “I might.”
+
+
+---
+## Primary objective:
+
+Create a program that will read in some text and generate some new text based on trigram analysis of the input text. There are lots of free books available as text on [gutenberg.org](https://www.gutenberg.org/wiki/Main_Page)
+
+## Bonus objectives:
+
+- Handle punctuation. Should a full stop be treated as a "word" by itself? Or should it be joined to a word? Maybe we could remove it entirely? What about commas? How you treat punctuation affects the heuristics of the program!
+- Consider performance. How have you structured your data and how does that impact the time and compute resource required to run your program?
+- Add the ability to backtrack and carry on along another route if you hit a dead end.
+
+### Resources
+[http://codekata.com/kata/kata14-tom-swift-under-the-milkwood/](http://codekata.com/kata/kata14-tom-swift-under-the-milkwood/)
+[https://www.gutenberg.org/wiki/Main_Page](https://www.gutenberg.org/wiki/Main_Page)

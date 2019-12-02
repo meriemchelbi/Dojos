@@ -6,7 +6,8 @@ namespace DojoTemplateConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var moduleMassParser = new ModuleMassParser();
+            moduleMassParser.ParseModuleMass();
         }
     }
 }

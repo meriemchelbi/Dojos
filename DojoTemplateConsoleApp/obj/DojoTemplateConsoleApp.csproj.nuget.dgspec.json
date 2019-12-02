@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {}
+    "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {}
   },
   "projects": {
-    "c:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {
+    "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
         "projectName": "DojoTemplateConsoleApp",
-        "projectPath": "c:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+        "projectPath": "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
         "packagesPath": "C:\\Users\\merie\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\obj\\",
+        "outputPath": "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

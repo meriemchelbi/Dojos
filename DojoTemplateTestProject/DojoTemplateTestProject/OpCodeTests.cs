@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xunit;
 using DojoTemplateConsoleApp;
 
@@ -19,14 +20,11 @@ namespace DojoTemplateTestProject
         }
                 
         
-        [Theory]
-        [InlineData(14, 2)]
-        [InlineData(1969, 966)]
-        [InlineData(100756, 50346)]
-        public void CalculateModuleFuelMassShouldReturnCorrectMass(int moduleMass, int expectedFuelMass)
+        [Fact]
+        public void AddShouldInsertCorrectResultInExpectedPosition(List<int> opCodes, int positionOne, int positionTwo, int PositionThree)
         {
-            var fuelMassCalculator = new FuelMassCalculator();
-            var actualModuleMass = fuelMassCalculator.CalculateModuleFuelMass(moduleMass);
+            var opCodeOperations = new OpCodeOperationFactory();
+            var add = opCodeOperations.Add(opCodes, positionOne, positionTwo, PositionThree);
 
             Assert.Equal(expectedFuelMass, actualModuleMass);
         }

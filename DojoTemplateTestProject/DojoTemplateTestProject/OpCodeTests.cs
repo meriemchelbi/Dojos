@@ -4,20 +4,18 @@ using DojoTemplateConsoleApp;
 
 namespace DojoTemplateTestProject
 {
-    public class FuelRequirementsTests
+    public class OpCodeTests
     {
         [Theory]
-        [InlineData(51585, 0)]
-        [InlineData(103969, 16)]
-        [InlineData(72867, 56)]
-        [InlineData(102481, 90)]
-        [InlineData(126543, 99)]
-        public void ModuleMassParsesStringToIntMass(int expectedMass, int elementIndex)
+        [InlineData(0, 1)]
+        [InlineData(4, 10)]
+        [InlineData(1, 20)]
+        public void OpCodeParserParsesToList(int opCode, int expectedElementIndex)
         {
             var inputParser = new InputParser();
-            var actual = inputParser.ParseModuleMass();
+            var list = inputParser.ParseOpCode();
             
-            Assert.Equal(expectedMass, actual[elementIndex]);
+            Assert.Equal(opCode, list[expectedElementIndex]);
         }
                 
         

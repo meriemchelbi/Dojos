@@ -6,7 +6,7 @@ namespace DojoTemplateConsoleApp
     {
         static void Main(string[] args)
         {
-            var moduleMassParser = new ModuleMassParser();
+            var moduleMassParser = new InputParser();
             moduleMassParser.ParseModuleMass();
         }
     }

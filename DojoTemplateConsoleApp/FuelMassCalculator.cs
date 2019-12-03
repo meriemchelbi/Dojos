@@ -6,10 +6,10 @@ namespace DojoTemplateConsoleApp
 {
     public class FuelMassCalculator
     {
-        private readonly ModuleMassParser _moduleMassParser;
+        private readonly InputParser _moduleMassParser;
         public FuelMassCalculator()
         {
-            _moduleMassParser = new ModuleMassParser();
+            _moduleMassParser = new InputParser();
         }
 
         public int CalculateModuleFuelMass(int mass)
@@ -24,11 +24,11 @@ namespace DojoTemplateConsoleApp
             return fuelMass;
         }
 
-        public int CalculateTotalFuelRequirements()
+        public int CalculateTotalFuelRequirements(IEnumerable<int> moduleMasses)
         {
             int totalFuelMass = 0;
 
-            foreach (var moduleMass in _moduleMassParser.ModuleMasses)
+            foreach (var moduleMass in moduleMasses)
             {
                 totalFuelMass += CalculateModuleFuelMass(moduleMass);
             }

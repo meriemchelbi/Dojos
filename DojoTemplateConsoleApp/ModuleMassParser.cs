@@ -22,7 +22,7 @@ namespace DojoTemplateConsoleApp
         public List<int> ParseModuleMass()
         {
             var moduleMasses = new List<int>();
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\merie\Documents\GitHub\Dojos\DojoTemplateConsoleApp\ModuleMasses.txt");
+            string[] lines = System.IO.File.ReadAllLines(@"..\..\..\..\..\DojoTemplateConsoleApp\ModuleMasses.txt");
             foreach (string line in lines)
             {
                 var moduleMass = int.Parse(line);

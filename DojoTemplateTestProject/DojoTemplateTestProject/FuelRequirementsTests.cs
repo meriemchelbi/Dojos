@@ -40,7 +40,7 @@ namespace DojoTemplateTestProject
         //    var actualTotalFuelMass = fuelMassCalculator.CalculateTotalFuelRequirements();
 
         //    Assert.Equal(3384232, actualTotalFuelMass);
-        }
+        //}
         
     }
 }

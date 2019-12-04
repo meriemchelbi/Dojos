@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
+using System.Linq;
 
 namespace DojoTemplateConsoleApp
 {
@@ -23,6 +25,7 @@ namespace DojoTemplateConsoleApp
         {
             var moduleMasses = new List<int>();
             var input = System.IO.File.ReadAllLines(@"..\..\..\..\..\DojoTemplateConsoleApp\ModuleMasses.txt");
+            //Assembly.GetExecutingAssembly().GetManifestResourceStream("DojoTemplateConsoleApp.ModuleMasses.txt"); 
             foreach (var line in input)
             {
                 var moduleMass = int.Parse(line);
@@ -35,15 +38,12 @@ namespace DojoTemplateConsoleApp
 
         public List<int> ParseOpCode()
         {
-            var opCodes = new List<int>();
+            var opCodeOperationFactory = new OpCodeOperationFactory();
             var commaDelimitedInput = System.IO.File.ReadAllText(@"..\..\..\..\..\DojoTemplateConsoleApp\OpCode.txt");
             var inputArray = commaDelimitedInput.Split(",");
-            foreach (var item in inputArray)
-            {
-                var code = int.Parse(item);
-                opCodes.Add(code);
-            }
-
+            var opCodes = opCodeOperationFactory.OpCodes;
+            opCodes = inputArray.Select(c => int.Parse(c)).ToList();
+               
             return opCodes;
         }
     }

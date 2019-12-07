@@ -14,11 +14,11 @@ namespace DojoTemplateConsoleApp
         }
         public InputParser(OpCodeOperations opCodeOperations)
         {
-            _opCodeOperationFactory = opCodeOperations;
+            _opCodeOps = opCodeOperations;
         }
 
         private List<int> _moduleMasses;
-        private readonly OpCodeOperations _opCodeOperationFactory;
+        private readonly OpCodeOperations _opCodeOps;
         
         public List<int> ParseModuleMass()
         {
@@ -39,9 +39,10 @@ namespace DojoTemplateConsoleApp
         {
             var commaDelimitedInput = System.IO.File.ReadAllText(@"..\..\..\..\..\DojoTemplateConsoleApp\OpCode.txt");
             var inputArray = commaDelimitedInput.Split(",");
-            _opCodeOperationFactory.OpCodes = inputArray.Select(c => int.Parse(c)).ToList();
+            
+            _opCodeOps.OpCodes = inputArray.Select(c => int.Parse(c)).ToList();
                
-            return _opCodeOperationFactory.OpCodes;
+            return _opCodeOps.OpCodes;
         }
     }
 }

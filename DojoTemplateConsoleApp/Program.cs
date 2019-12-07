@@ -6,8 +6,13 @@ namespace DojoTemplateConsoleApp
     {
         static void Main(string[] args)
         {
-            var moduleMassParser = new InputParser();
-            moduleMassParser.ParseModuleMass();
+            var opCodeOps = new OpCodeOperations(); 
+            var inputParser = new InputParser(opCodeOps);
+                        
+            inputParser.ParseOpCode();
+            opCodeOps.ExecuteOpCode();
+
+            Console.WriteLine(opCodeOps.OpCodes);
         }
     }
 }

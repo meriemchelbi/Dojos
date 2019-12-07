@@ -8,17 +8,6 @@ namespace DojoTemplateConsoleApp
 {
     public class InputParser
     {
-        //public List<int> ModuleMasses
-        //{
-        //    get
-        //    { 
-        //        if (_moduleMasses is null) 
-        //            _moduleMasses = ParseModuleMass();
-        //        return _moduleMasses;
-        //    }
-        //    private set {}
-        //}
-
         public InputParser()
         {
 

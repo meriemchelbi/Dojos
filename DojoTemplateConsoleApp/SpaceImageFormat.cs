@@ -9,9 +9,9 @@ namespace DojoTemplateConsoleApp
     {
         public SpaceImageFormat()
         {
-            Layers = new Dictionary<int, List<string>>();
+            Layers = new List<Layer>();
         }
-        public Dictionary<int, List<string>> Layers { get; set; }
+        public List<Layer> Layers { get; set; }
 
         public void IsolateLayers(string imagePixels, int layerWidth, int layerHeight)
         {
@@ -19,33 +19,33 @@ namespace DojoTemplateConsoleApp
 
             for (int i = 1; i <= noOfLayers; i++)
             {
-                var layer = new List<string>();
+                var layer = new Layer(i, layerHeight, layerWidth);
 
                 for (int lineNo = 0; lineNo < layerHeight; lineNo++)
                 {
                     var stringBuilder = new StringBuilder();
 
-                    for (int pixel = 0; pixel < layerWidth; pixel++) // create line in layer
+                    for (int pixel = 0; pixel < layerWidth; pixel++) 
                     {
                         var selectedPixel = imagePixels[pixel];
                         stringBuilder.Append(selectedPixel);
                     }
 
                     var line = stringBuilder.ToString();
-                    layer.Add(line);
+                    layer.Lines.Add(line);
                     imagePixels = imagePixels.Remove(0, 3);
                 }
 
-                Layers.Add(i, layer);
+                Layers.Add(layer);
             }
         }
 
-        public object CountInstancesOfDigit(List<string> layer, int digit)
+        public object CountInstancesOfDigit(Layer layer, int digit)
         {
             var stringDigit = digit.ToString();
             var digitCount = 0;
 
-            foreach (var line in layer)
+            foreach (var line in layer.Lines)
             {
                 digitCount += line.Count(c => digit.Equals(c));
             }
@@ -57,8 +57,16 @@ namespace DojoTemplateConsoleApp
 
     public class Layer
     {
-        public int Height { get; set; }
+        public Layer(int id, int height = 0, int width = 0)
+        {
+            LayerID = id;
+            Height = height;
+            Width = width;
+            Lines = new List<string>();
+        }
 
+        public int LayerID { get; set; }
+        public int Height { get; set; }
         public int Width { get; set; }
 
         public List<string> Lines { get; set; }

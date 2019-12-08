@@ -17,10 +17,16 @@ namespace DojoTemplateTestProject
             var layerWidth = 3;
             var layerHeight = 2;
             var substitute = Substitute.For<SpaceImageFormat>();
-            var expectedLayers = new Dictionary<int, List<string>>()
+            var expectedLayers = new List<Layer>()
             {
-                { 1, new List<string>(){ "123", "456" } },
-                { 2 ,new List<string>(){ "789", "012" } }
+                new Layer(1, layerHeight, layerWidth)
+                {
+                    Lines = new List<string>() { "123", "456" } ,
+                },
+                new Layer(2, layerHeight, layerWidth)
+                {
+                    Lines = new List<string>() { "789", "012" }, 
+                }
             };
 
             substitute.IsolateLayers(imagePixels, layerWidth, layerHeight);
@@ -33,7 +39,10 @@ namespace DojoTemplateTestProject
         [InlineData("15554", "52415", "59444", 5, 6)]
         public void CountInstancesOfDigitInLayerReturnsCorrectCount(string line1, string line2, string line3, int digit, int count)
         {
-            var layer = new List<string>() { line1, line2, line3 };
+            var layer = new Layer(1)
+            {
+                Lines = new List<string> { line1, line2, line3 }
+            };
             var sut = new SpaceImageFormat();
 
             var actualCount = sut.CountInstancesOfDigit(layer, digit);

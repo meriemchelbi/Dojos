@@ -8,11 +8,14 @@ namespace DojoTemplateConsoleApp
         {
             var opCodeOps = new OpCodeOperations(); 
             var inputParser = new InputParser(opCodeOps);
-                        
             inputParser.ParseOpCode();
-            opCodeOps.ExecuteOpCode();
+            //opCodeOps.ExecuteOpCode();
+            //Console.WriteLine($"Day 2 part 1 result is {opCodeOps.OpCodes[0]}.");
 
-            Console.WriteLine(opCodeOps.OpCodes[0]);
+            opCodeOps.FindNounVerb(19690720);
+            Console.WriteLine($"Day 2 part 2 noun & verb are noun: {opCodeOps.OpCodes[1]} & verb {opCodeOps.OpCodes[2]}.");
+
+
         }
     }
 }

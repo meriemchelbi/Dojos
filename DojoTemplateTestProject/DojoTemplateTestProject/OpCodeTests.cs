@@ -40,13 +40,16 @@ namespace DojoTemplateTestProject
         }
 
         [Fact]
-        public void OpCodeExecutorFinalResult()
+        public void OpCodeExecutorFinalResultValidation()
         {
             var opCodeOperations = new OpCodeOperations();
             var inputParser = new InputParser(opCodeOperations);
             inputParser.ParseOpCode();
             opCodeOperations.ExecuteOpCode();
             var result = opCodeOperations.OpCodes[0];
+
+            //result.Should().Be(4090701); //Day 2, part 1 expected total
+            result.Should().Be(19690720); //Day 2, part 2 expected total
         }
 
         [Fact]
@@ -72,16 +75,18 @@ namespace DojoTemplateTestProject
         }
 
         [Theory]
-        [InlineData("1,2,0,2", 12, 2)]
-        public void FindNounVerbTest(string input, int noun, int verb)
+        [InlineData("2,2,5,0,99", 4, 8, 32)]
+        [InlineData("1,7,3,0,99", 7, 87, 94)]
+        //[InlineData("2,4,4,5,99,0", "2,4,4,5,99,9801")]
+        //[InlineData("1,1,1,4,99,5,6,0,99", "30,1,1,4,2,5,6,0,99")]
+        public void FindNounVerbTest(string input, int noun, int verb, int expectedOutput)
         {
-            throw new NotImplementedException();
+            var substitute1 = Substitute.For<OpCodeOperations>();
+            substitute1.OpCodes = input.Split(',').Select(int.Parse).ToList();
+            substitute1.FindNounVerb(expectedOutput);
+
+            Assert.Equal(noun, substitute1.OpCodes[1]);           
+            Assert.Equal(verb, substitute1.OpCodes[2]);           
         }
-
-
-        
-        
-
-        
     }
 }

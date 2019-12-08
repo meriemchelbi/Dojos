@@ -41,5 +41,6 @@ namespace DojoTemplateConsoleApp
         {
             return OpCodes[operandIndex1] * OpCodes[operandIndex2];
         }
+
     }
 }

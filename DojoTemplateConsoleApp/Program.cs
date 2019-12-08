@@ -12,7 +12,7 @@ namespace DojoTemplateConsoleApp
             inputParser.ParseOpCode();
             opCodeOps.ExecuteOpCode();
 
-            Console.WriteLine(opCodeOps.OpCodes);
+            Console.WriteLine(opCodeOps.OpCodes[0]);
         }
     }
 }

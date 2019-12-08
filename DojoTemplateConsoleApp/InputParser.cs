@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Linq;
+using System.IO;
 
 namespace DojoTemplateConsoleApp
 {
@@ -37,7 +38,10 @@ namespace DojoTemplateConsoleApp
 
         public List<int> ParseOpCode()
         {
-            var commaDelimitedInput = System.IO.File.ReadAllText(@"..\..\..\..\..\DojoTemplateConsoleApp\OpCode.txt");
+            //var commaDelimitedInput = System.IO.File.ReadAllText(@"..\..\..\..\..\DojoTemplateConsoleApp\OpCode.txt");
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"OpCode.txt");
+            var commaDelimitedInput = File.ReadAllText(path);
+            // Assembly.GetExecutingAssembly().GetManifestResourceStream("DojoTemplateConsoleApp.OpCode.txt").BeginRead();
             var inputArray = commaDelimitedInput.Split(",");
             
             _opCodeOps.OpCodes = inputArray.Select(c => int.Parse(c)).ToList();

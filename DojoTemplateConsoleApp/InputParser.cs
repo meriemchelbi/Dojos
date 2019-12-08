@@ -24,8 +24,8 @@ namespace DojoTemplateConsoleApp
         public List<int> ParseModuleMass()
         {
             var moduleMasses = new List<int>();
-            var input = System.IO.File.ReadAllLines(@"..\..\..\..\..\DojoTemplateConsoleApp\ModuleMasses.txt");
-            //Assembly.GetExecutingAssembly().GetManifestResourceStream("DojoTemplateConsoleApp.ModuleMasses.txt"); 
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"ModuleMasses.txt");
+            var input = System.IO.File.ReadAllLines(path);
             foreach (var line in input)
             {
                 var moduleMass = int.Parse(line);
@@ -38,10 +38,8 @@ namespace DojoTemplateConsoleApp
 
         public List<int> ParseOpCode()
         {
-            //var commaDelimitedInput = System.IO.File.ReadAllText(@"..\..\..\..\..\DojoTemplateConsoleApp\OpCode.txt");
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"OpCode.txt");
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"OpCode.txt");
             var commaDelimitedInput = File.ReadAllText(path);
-            // Assembly.GetExecutingAssembly().GetManifestResourceStream("DojoTemplateConsoleApp.OpCode.txt").BeginRead();
             var inputArray = commaDelimitedInput.Split(",");
             
             _opCodeOps.OpCodes = inputArray.Select(c => int.Parse(c)).ToList();

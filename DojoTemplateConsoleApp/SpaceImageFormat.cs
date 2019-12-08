@@ -53,6 +53,10 @@ namespace DojoTemplateConsoleApp
             return digitCount;
         }
 
+        public object FindLayerWithFewestInstancesOfDigit(object digit)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Layer

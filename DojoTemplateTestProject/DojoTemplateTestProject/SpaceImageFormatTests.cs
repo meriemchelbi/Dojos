@@ -5,6 +5,7 @@ using Xunit;
 using FluentAssertions;
 using NSubstitute;
 using DojoTemplateConsoleApp;
+using System.Collections;
 
 namespace DojoTemplateTestProject
 {
@@ -51,10 +52,47 @@ namespace DojoTemplateTestProject
         }
 
 
-        [Fact]
-        public void FindLayerWithFewestDigitInstancesReturnsCorrectLayer()
+        [Theory]
+        [ClassData(typeof(LayerComparisonData))]
+        public void FindLayerWithFewestDigitInstancesReturnsCorrectLayer(Layer layer1, Layer layer2, Layer layer3, int digit, int expectedResult)
         {
+            var substitute = Substitute.For<SpaceImageFormat>();
+            substitute.Layers = new List<Layer>()
+            {
+                layer1,
+                layer2,
+                layer3
+            };
 
+            var result = substitute.FindLayerWithFewestInstancesOfDigit(digit);
+
+            result.Should().Equals(expectedResult);
+        }
+
+        internal class LayerComparisonData: IEnumerable<object[]>
+        {
+            public IEnumerator<object[]> GetEnumerator()
+            {
+                yield return new object[] 
+                { 
+                    new Layer(1, 2, 3)
+                    {
+                        Lines = new List<string>(){"111", "222"}
+                    },
+                    new Layer(2, 2, 3)
+                    {
+                        Lines = new List<string>(){"010", "333"}
+                    },
+                    new Layer(3, 2, 3)
+                    {
+                        Lines = new List<string>(){"010", "111"}
+                    },
+                    1,
+                    3
+                };
+            }
+
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }
 }

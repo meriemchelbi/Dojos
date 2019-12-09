@@ -63,17 +63,19 @@ namespace DojoTemplateConsoleApp
 
             for (int i = 0; i < Layers.Count-1; i++)
             {
-                var layerCurrentCount = CountInstancesOfDigit(Layers[i], digit);
-                var layerNextCount = CountInstancesOfDigit(Layers[i+1], digit);
+                var lowestCount = int.MaxValue;
+                var currentLayerCount = CountInstancesOfDigit(Layers[i], digit);
+                //var layerNextCount = CountInstancesOfDigit(Layers[i+1], digit);
 
-                if (layerCurrentCount > layerNextCount)
-                {
-                    lowest = Layers[i + 1];
-                }
-                else
+                if (currentLayerCount < lowestCount)
                 {
                     lowest = Layers[i];
+                    lowestCount = currentLayerCount;
                 }
+                //else
+                //{
+                //    lowest = Layers[i];
+                //}
             }
 
             return lowest;

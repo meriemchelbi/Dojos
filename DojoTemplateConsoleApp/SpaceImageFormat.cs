@@ -12,9 +12,12 @@ namespace DojoTemplateConsoleApp
             Layers = new List<Layer>();
         }
         public List<Layer> Layers { get; set; }
+        public string Input { get; internal set; }
 
-        public void IsolateLayers(string imagePixels, int layerWidth, int layerHeight)
+        public void IsolateLayers(int layerWidth, int layerHeight)
         {
+            var imagePixels = Input;
+
             var noOfLayers = imagePixels.Length / (layerHeight * layerWidth);
 
             for (int i = 1; i <= noOfLayers; i++)
@@ -40,7 +43,7 @@ namespace DojoTemplateConsoleApp
             }
         }
 
-        public object CountInstancesOfDigit(Layer layer, int digit)
+        public int CountInstancesOfDigit(Layer layer, char digit)
         {
             var stringDigit = digit.ToString();
             var digitCount = 0;
@@ -53,9 +56,33 @@ namespace DojoTemplateConsoleApp
             return digitCount;
         }
 
-        public object FindLayerWithFewestInstancesOfDigit(object digit)
+        public Layer FindLayerWithFewestInstancesOfDigit(char digit)
         {
-            throw new NotImplementedException();
+            Layer lowest = null;
+
+            for (int i = 0; i < Layers.Count-1; i++)
+            {
+                var layerCurrentCount = CountInstancesOfDigit(Layers[i], digit);
+                var layerNextCount = CountInstancesOfDigit(Layers[i+1], digit);
+
+                if (layerCurrentCount > layerNextCount)
+                {
+                    lowest = Layers[i + 1];
+                }
+                else
+                {
+                    lowest = Layers[i];
+                }
+            }
+
+            return lowest;
+        }
+
+        public Layer GetLayerByID(int layerID)
+        {
+            var layerQuery = Layers.Where(l => l.LayerID == layerID).ToArray();
+            var layer = layerQuery[0];
+            return layer;
         }
     }
 
@@ -74,5 +101,6 @@ namespace DojoTemplateConsoleApp
         public int Width { get; set; }
 
         public List<string> Lines { get; set; }
+
     }
 }

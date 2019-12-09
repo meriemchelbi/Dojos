@@ -42,5 +42,11 @@ namespace DojoTemplateConsoleApp
                
             return _opCodeOps.OpCodes;
         }
+
+        public void ParseSpaceImage(SpaceImageFormat spaceImageFormat)
+        {
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"SpaceImage.txt");
+            spaceImageFormat.Input = File.ReadAllText(path);
+        }
     }
 }

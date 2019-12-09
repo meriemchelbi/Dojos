@@ -11,6 +11,19 @@ namespace DojoTemplateTestProject
 {
     public class SpaceImageFormatTests
     {
+        [Theory]
+        [InlineData('2', 0)]
+        [InlineData('1', 11)]
+        [InlineData('0', 15)]
+        public void SpaceImageParserParsesToList(char pixel, int expectedElementIndex)
+        {
+            var spaceImageFormat = new SpaceImageFormat();
+            var inputParser = new InputParser();
+            inputParser.ParseSpaceImage(spaceImageFormat);
+
+            Assert.Equal(pixel, spaceImageFormat.Input[expectedElementIndex]);
+        }
+
         [Fact]
         public void IsolateLayersCreatesLayers()
         {
@@ -36,9 +49,9 @@ namespace DojoTemplateTestProject
         }
 
         [Theory]
-        [InlineData("1224", "5241", "9444", 4, 5)]
-        [InlineData("15554", "52415", "59444", 5, 6)]
-        public void CountInstancesOfDigitInLayerReturnsCorrectCount(string line1, string line2, string line3, int digit, int count)
+        [InlineData("1224", "5241", "9444", '4', 5)]
+        [InlineData("15554", "52415", "59444", '5', 6)]
+        public void CountInstancesOfDigitInLayerReturnsCorrectCount(string line1, string line2, string line3, char digit, int count)
         {
             var layer = new Layer(1)
             {
@@ -48,13 +61,13 @@ namespace DojoTemplateTestProject
 
             var actualCount = sut.CountInstancesOfDigit(layer, digit);
 
-            actualCount.Should().Equals(count);
+            actualCount.Should().Be(count);
         }
 
 
         [Theory]
         [ClassData(typeof(LayerComparisonData))]
-        public void FindLayerWithFewestDigitInstancesReturnsCorrectLayer(Layer layer1, Layer layer2, Layer layer3, int digit, int expectedResult)
+        public void FindLayerWithFewestDigitInstancesReturnsCorrectLayer(Layer layer1, Layer layer2, Layer layer3, char digit, int expectedResult)
         {
             var substitute = Substitute.For<SpaceImageFormat>();
             substitute.Layers = new List<Layer>()
@@ -64,9 +77,9 @@ namespace DojoTemplateTestProject
                 layer3
             };
 
-            var result = substitute.FindLayerWithFewestInstancesOfDigit(digit);
+            var result = substitute.FindLayerWithFewestInstancesOfDigit(digit).LayerID;
 
-            result.Should().Equals(expectedResult);
+            result.Should().Be(expectedResult);
         }
 
         internal class LayerComparisonData: IEnumerable<object[]>
@@ -87,7 +100,24 @@ namespace DojoTemplateTestProject
                     {
                         Lines = new List<string>(){"010", "111"}
                     },
-                    1,
+                    '1',
+                    2
+                };
+                yield return new object[] 
+                { 
+                    new Layer(1, 2, 3)
+                    {
+                        Lines = new List<string>(){"014", "444"}
+                    },
+                    new Layer(2, 2, 3)
+                    {
+                        Lines = new List<string>(){"414", "444"}
+                    },
+                    new Layer(3, 2, 3)
+                    {
+                        Lines = new List<string>(){"421", "000"}
+                    },
+                    '4',
                     3
                 };
             }

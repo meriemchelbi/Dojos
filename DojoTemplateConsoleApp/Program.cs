@@ -22,8 +22,8 @@ namespace DojoTemplateConsoleApp
             var inputParser = new InputParser();
             var spaceImageFormat = new SpaceImageFormat();
 
-            inputParser.ParseSpaceImage(spaceImageFormat);
-            spaceImageFormat.IsolateLayers(25, 6);
+            inputParser.ParseSpaceImageArray(spaceImageFormat);
+            spaceImageFormat.IsolateLayersList(25, 6);
             var layerWithFewestZeros = spaceImageFormat.FindLayerWithFewestInstancesOfDigit('0');
             var numberOfOnes = spaceImageFormat.CountInstancesOfDigit(layerWithFewestZeros, '1');
             var numberOfTwos = spaceImageFormat.CountInstancesOfDigit(layerWithFewestZeros, '2');

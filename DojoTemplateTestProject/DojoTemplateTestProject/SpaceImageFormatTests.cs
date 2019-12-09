@@ -6,6 +6,7 @@ using FluentAssertions;
 using NSubstitute;
 using DojoTemplateConsoleApp;
 using System.Collections;
+using System.Linq;
 
 namespace DojoTemplateTestProject
 {
@@ -15,22 +16,22 @@ namespace DojoTemplateTestProject
         [InlineData('2', 0)]
         [InlineData('1', 11)]
         [InlineData('0', 15)]
-        public void SpaceImageParserParsesToList(char pixel, int expectedElementIndex)
+        public void SpaceImageParserParsesToArray(char pixel, int expectedElementIndex)
         {
             var spaceImageFormat = new SpaceImageFormat();
             var inputParser = new InputParser();
-            inputParser.ParseSpaceImage(spaceImageFormat);
+            inputParser.ParseSpaceImageArray(spaceImageFormat);
 
-            Assert.Equal(pixel, spaceImageFormat.Input[expectedElementIndex]);
+            Assert.Equal(pixel, spaceImageFormat.InputArray[expectedElementIndex]);
         }
 
         [Fact]
         public void IsolateLayersCreatesLayers()
         {
-            var imagePixels = "123456789012";
             var layerWidth = 3;
             var layerHeight = 2;
             var substitute = Substitute.For<SpaceImageFormat>();
+            substitute.InputArray = "123456789012".ToArray();
             var expectedLayers = new List<Layer>()
             {
                 new Layer(1, layerHeight, layerWidth)
@@ -39,11 +40,11 @@ namespace DojoTemplateTestProject
                 },
                 new Layer(2, layerHeight, layerWidth)
                 {
-                    Lines = new List<string>() { "789", "012" }, 
+                    Lines = new List<string>() { "789", "012" },
                 }
             };
 
-            substitute.IsolateLayers(imagePixels, layerWidth, layerHeight);
+            substitute.IsolateLayersList(layerWidth, layerHeight);
 
             substitute.Layers.Should().BeEquivalentTo(expectedLayers);
         }

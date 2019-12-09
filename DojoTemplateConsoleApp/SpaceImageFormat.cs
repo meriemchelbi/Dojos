@@ -12,23 +12,24 @@ namespace DojoTemplateConsoleApp
             Layers = new List<Layer>();
         }
         public List<Layer> Layers { get; set; }
-        public string Input { get; internal set; }
+        public char[] InputArray { get; set; }
 
-        public void IsolateLayers(int layerWidth, int layerHeight)
+        public void IsolateLayersList(int layerWidth, int layerHeight)
         {
-            var imagePixels = Input;
+            var imagePixels = InputArray;
 
             var noOfLayers = imagePixels.Length / (layerHeight * layerWidth);
+            var x = 0;
 
             for (int i = 1; i <= noOfLayers; i++)
             {
                 var layer = new Layer(i, layerHeight, layerWidth);
 
-                for (int lineNo = 0; lineNo < layerHeight; lineNo++)
+                for (var lineNo = 0 ; lineNo < layerHeight; lineNo++)
                 {
                     var stringBuilder = new StringBuilder();
 
-                    for (int pixel = 0; pixel < layerWidth; pixel++) 
+                    for (int pixel = x; pixel < layerWidth + x; pixel++) 
                     {
                         var selectedPixel = imagePixels[pixel];
                         stringBuilder.Append(selectedPixel);
@@ -36,7 +37,7 @@ namespace DojoTemplateConsoleApp
 
                     var line = stringBuilder.ToString();
                     layer.Lines.Add(line);
-                    imagePixels = imagePixels.Remove(0, 3);
+                    x += layerWidth;
                 }
 
                 Layers.Add(layer);

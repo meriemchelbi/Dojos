@@ -60,22 +60,17 @@ namespace DojoTemplateConsoleApp
         public Layer FindLayerWithFewestInstancesOfDigit(char digit)
         {
             Layer lowest = null;
+            var lowestCount = int.MaxValue;
 
-            for (int i = 0; i < Layers.Count-1; i++)
+            for (int i = 0; i < Layers.Count; i++)
             {
-                var lowestCount = int.MaxValue;
                 var currentLayerCount = CountInstancesOfDigit(Layers[i], digit);
-                //var layerNextCount = CountInstancesOfDigit(Layers[i+1], digit);
 
                 if (currentLayerCount < lowestCount)
                 {
                     lowest = Layers[i];
-                    lowestCount = currentLayerCount;
+                    lowestCount = currentLayerCount; 
                 }
-                //else
-                //{
-                //    lowest = Layers[i];
-                //}
             }
 
             return lowest;

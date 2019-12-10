@@ -5,14 +5,14 @@ using Xunit;
 using NSubstitute;
 using FluentAssertions;
 using DojoTemplateConsoleApp;
-
+using DojoTemplateConsoleApp.OpCode;
 
 namespace DojoTemplateTestProject
 {
     public class OpCodeTests
     {
         [Theory]
-        [InlineData(12, 1)]
+        [InlineData(3, 3)]
         [InlineData(4, 10)]
         [InlineData(1, 20)]
         public void OpCodeParserParsesToList(int opCode, int expectedElementIndex)
@@ -39,18 +39,18 @@ namespace DojoTemplateTestProject
             substitute1.Should().Equals(expectedOutput);
         }
 
-        [Fact]
-        public void OpCodeExecutorFinalResultValidation()
-        {
-            var opCodeOperations = new OpCodeOperations();
-            var inputParser = new InputParser(opCodeOperations);
-            inputParser.ParseOpCode();
-            opCodeOperations.ExecuteOpCode();
-            var result = opCodeOperations.OpCodes[0];
+        //[Fact]
+        //public void OpCodeExecutorFinalResultValidation()
+        //{
+        //    var opCodeOperations = new OpCodeOperations();
+        //    var inputParser = new InputParser(opCodeOperations);
+        //    inputParser.ParseOpCode();
+        //    opCodeOperations.ExecuteOpCode();
+        //    var result = opCodeOperations.OpCodes[0];
 
-            //result.Should().Be(4090701); //Day 2, part 1 expected total
-            result.Should().Be(19690720); //Day 2, part 2 expected total
-        }
+        //    //result.Should().Be(4090701); //Day 2, part 1 expected total
+        //    result.Should().Be(19690720); //Day 2, part 2 expected total
+        //}
 
         [Fact]
         public void AddOpReturnsExpectedTotal()

@@ -7,6 +7,7 @@ using NSubstitute;
 using DojoTemplateConsoleApp;
 using System.Collections;
 using System.Linq;
+using DojoTemplateConsoleApp.SpaceImage;
 
 namespace DojoTemplateTestProject
 {

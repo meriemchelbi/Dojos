@@ -1,4 +1,5 @@
 ﻿using System;
+using DojoTemplateConsoleApp.SpaceImage;
 
 namespace DojoTemplateConsoleApp
 {

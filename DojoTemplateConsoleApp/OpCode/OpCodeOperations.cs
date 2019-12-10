@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DojoTemplateConsoleApp
+namespace DojoTemplateConsoleApp.OpCode
 {
     public class OpCodeOperations
     {

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using DojoTemplateConsoleApp.SpaceImage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DojoTemplateConsoleApp
+namespace DojoTemplateConsoleApp.SpaceImage
 {
     public class SpaceImageFormat
     {
@@ -75,30 +76,7 @@ namespace DojoTemplateConsoleApp
 
             return lowest;
         }
-
-        public Layer GetLayerByID(int layerID)
-        {
-            var layerQuery = Layers.Where(l => l.LayerID == layerID).ToArray();
-            var layer = layerQuery[0];
-            return layer;
-        }
     }
 
-    public class Layer
-    {
-        public Layer(int id, int height = 0, int width = 0)
-        {
-            LayerID = id;
-            Height = height;
-            Width = width;
-            Lines = new List<string>();
-        }
 
-        public int LayerID { get; set; }
-        public int Height { get; set; }
-        public int Width { get; set; }
-
-        public List<string> Lines { get; set; }
-
-    }
 }

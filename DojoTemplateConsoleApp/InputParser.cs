@@ -4,6 +4,8 @@ using System.Reflection;
 using System.Text;
 using System.Linq;
 using System.IO;
+using DojoTemplateConsoleApp.SpaceImage;
+using DojoTemplateConsoleApp.OpCode;
 
 namespace DojoTemplateConsoleApp
 {
@@ -34,7 +36,7 @@ namespace DojoTemplateConsoleApp
 
         public List<int> ParseOpCode()
         {
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"OpCode.txt");
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"OpCode\OpCode.txt");
             var commaDelimitedInput = File.ReadAllText(path);
             var inputArray = commaDelimitedInput.Split(",");
             
@@ -45,7 +47,7 @@ namespace DojoTemplateConsoleApp
         
         public void ParseSpaceImageArray(SpaceImageFormat spaceImageFormat)
         {
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"SpaceImage.txt");
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"SpaceImage\SpaceImage.txt");
             spaceImageFormat.InputArray = File.ReadAllText(path).ToArray();
         }
     }

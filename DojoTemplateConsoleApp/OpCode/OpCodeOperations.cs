@@ -34,23 +34,23 @@ namespace DojoTemplateConsoleApp.OpCode
             for (int i = 0; i < (OpCodes.Count - 3); i++)
             {
                 var replaceIndex = OpCodes[i + 3];
-                var operandIndex1 = OpCodes[i + 1];
-                var operandIndex2 = OpCodes[i + 2];
+                var nounIndex = OpCodes[i + 1];
+                var verbIndex = OpCodes[i + 2];
 
                 if (replaceIndex < OpCodes.Count &&
-                    operandIndex1 < OpCodes.Count &&
-                    operandIndex2 < OpCodes.Count)
+                    nounIndex < OpCodes.Count &&
+                    verbIndex < OpCodes.Count)
                 {
                     switch (OpCodes[i])
                     {
                         case 99:
                             return;
                         case 1:
-                            OpCodes[replaceIndex] = AddOp(operandIndex1, operandIndex2);
+                            OpCodes[replaceIndex] = AddOp(nounIndex, verbIndex);
                             i += 3;
                             break;
                         case 2:
-                            OpCodes[replaceIndex] = MultiplyOp(operandIndex1, operandIndex2);
+                            OpCodes[replaceIndex] = MultiplyOp(nounIndex, verbIndex);
                             i += 3;
                             break;
                     }

@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
-using NSubstitute;
-using FluentAssertions;
 using DojoTemplateConsoleApp;
+using NSubstitute;
 using DojoTemplateConsoleApp.OpCode;
 
 namespace DojoTemplateTestProject
@@ -12,7 +10,7 @@ namespace DojoTemplateTestProject
     public class OpCodeTests
     {
         [Theory]
-        [InlineData(3, 3)]
+        [InlineData(0, 1)]
         [InlineData(4, 10)]
         [InlineData(1, 20)]
         public void OpCodeParserParsesToList(int opCode, int expectedElementIndex)
@@ -24,33 +22,30 @@ namespace DojoTemplateTestProject
             Assert.Equal(opCode, list[expectedElementIndex]);
         }
                 
-        [Theory]
-        [InlineData("33,4,6,5,1,0,3,5,2,7,3,4,99,2,1,7,3", "33,4,6,5,25,38,3,5,2,7,3,4,99,2,1,7,3")]
-        [InlineData("2,3,0,3,99", "2,3,0,6,99")]
-        [InlineData("1,0,0,0,99", "2,0,0,0,99")]
-        [InlineData("2,4,4,5,99,0", "2,4,4,5,99,9801")]
-        [InlineData("1,1,1,4,99,5,6,0,99", "30,1,1,4,2,5,6,0,99")]
-        public void OpCodeExecutorInsertsExpectedResultInCorrectPosition(string sourceCode, string expectedOutput)
+        // TODO add test for out of range
+        [Fact]
+        public void OpCodeExecutorInsertsExpectedResultInCorrectPosition()
         {
             var substitute1 = Substitute.For<OpCodeOperations>();
-            substitute1.OpCodes = sourceCode.Split(',').Select(int.Parse).ToList();
+            substitute1.OpCodes = new List<int>(){33, 4, 6, 5, 1, 0, 3, 5, 2, 7, 3, 4, 99, 2, 1, 7, 3};
             substitute1.ExecuteOpCode();
-
-            substitute1.Should().Equals(expectedOutput);
+            
+            Assert.Equal(38, substitute1.OpCodes[5]);
+            Assert.Equal(25, substitute1.OpCodes[4]);
+            Assert.Equal(5, substitute1.OpCodes[3]);
         }
 
-        //[Fact]
-        //public void OpCodeExecutorFinalResultValidation()
-        //{
-        //    var opCodeOperations = new OpCodeOperations();
-        //    var inputParser = new InputParser(opCodeOperations);
-        //    inputParser.ParseOpCode();
-        //    opCodeOperations.ExecuteOpCode();
-        //    var result = opCodeOperations.OpCodes[0];
+        [Fact]
+        public void OpCodeExecutorFinalResult()
+        {
+            var opCodeOperations = new OpCodeOperations();
+            var inputParser = new InputParser(opCodeOperations);
+            inputParser.ParseOpCode();
+            opCodeOperations.ExecuteOpCode();
+            var result = opCodeOperations.OpCodes[0];
 
-        //    //result.Should().Be(4090701); //Day 2, part 1 expected total
-        //    result.Should().Be(19690720); //Day 2, part 2 expected total
-        //}
+            Console.WriteLine(result);
+        }
 
         [Fact]
         public void AddOpReturnsExpectedTotal()
@@ -74,19 +69,10 @@ namespace DojoTemplateTestProject
 
         }
 
-        [Theory]
-        [InlineData("2,2,5,0,99", 4, 8, 32)]
-        [InlineData("1,7,3,0,99", 7, 87, 94)]
-        //[InlineData("2,4,4,5,99,0", "2,4,4,5,99,9801")]
-        //[InlineData("1,1,1,4,99,5,6,0,99", "30,1,1,4,2,5,6,0,99")]
-        public void FindNounVerbTest(string input, int noun, int verb, int expectedOutput)
-        {
-            var substitute1 = Substitute.For<OpCodeOperations>();
-            substitute1.OpCodes = input.Split(',').Select(int.Parse).ToList();
-            substitute1.FindNounVerb(expectedOutput);
 
-            Assert.Equal(noun, substitute1.OpCodes[1]);           
-            Assert.Equal(verb, substitute1.OpCodes[2]);           
-        }
+        
+        
+
+        
     }
 }

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {}
+    "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {
+    "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
         "projectName": "DojoTemplateConsoleApp",
-        "projectPath": "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
-        "packagesPath": "C:\\Users\\merie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\obj\\",
+        "projectPath": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+        "packagesPath": "C:\\Users\\meriemc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\merie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\meriemc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -15,7 +15,6 @@ namespace DojoTemplateConsoleApp.UniveralOrbit
             _root = new SpaceBody("COM");
             SpaceBodies = new List<SpaceBody>();
         }
-
         public void LoadBodies()
         {
 

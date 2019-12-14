@@ -6,6 +6,7 @@ using System.Linq;
 using System.IO;
 using DojoTemplateConsoleApp.SpaceImage;
 using DojoTemplateConsoleApp.OpCode;
+using DojoTemplateConsoleApp.UniveralOrbit;
 
 namespace DojoTemplateConsoleApp
 {
@@ -42,5 +43,13 @@ namespace DojoTemplateConsoleApp
             var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"SpaceImage\SpaceImage.txt");
             spaceImageFormat.InputArray = File.ReadAllText(path).ToArray();
         }
+
+        public void ParseSpaceBodies(Galaxy galaxy)
+        {
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"UniversalOrbit\UniversalOrbit.txt");
+            var input = System.IO.File.ReadAllLines(path);
+            galaxy.Input = input.ToList();
+        }
+
     }
 }

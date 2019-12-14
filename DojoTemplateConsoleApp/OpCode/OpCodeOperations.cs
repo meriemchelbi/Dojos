@@ -6,7 +6,23 @@ namespace DojoTemplateConsoleApp.OpCode
 {
     public class OpCodeOperations
     {
-        public List<int> OpCodes { get; set; }
+        public int[] Input { get; set; }
+        
+        public int[] OpCodes
+        {
+            get
+            {
+                if (_opCodes == null)
+                {
+                    _opCodes = new int[Input.Length];
+                    Array.Copy(Input, 0, _opCodes, 0, Input.Length);
+                }
+                return _opCodes;
+            }
+            set { }
+        }
+        private int[] _opCodes;
+
 
         public void FindNounVerb(int expectedTotal)
         {
@@ -25,21 +41,26 @@ namespace DojoTemplateConsoleApp.OpCode
                     {
                         return;
                     }
+                    else
+                    {
+                        Array.Copy(Input, 0, _opCodes, 0, Input.Length);
+                    }
                 }
             }
         }
         
         public void ExecuteOpCode()
         {
-            for (int i = 0; i < (OpCodes.Count - 3); i++)
+            var opCodesLength = OpCodes.Length;
+            for (int i = 0; i < (opCodesLength - 3); i++)
             {
                 var replaceIndex = OpCodes[i + 3];
                 var nounIndex = OpCodes[i + 1];
                 var verbIndex = OpCodes[i + 2];
 
-                if (replaceIndex < OpCodes.Count &&
-                    nounIndex < OpCodes.Count &&
-                    verbIndex < OpCodes.Count)
+                if (replaceIndex < opCodesLength &&
+                    nounIndex < opCodesLength &&
+                    verbIndex < opCodesLength)
                 {
                     switch (OpCodes[i])
                     {
@@ -74,3 +95,5 @@ namespace DojoTemplateConsoleApp.OpCode
 
     }
 }
+
+

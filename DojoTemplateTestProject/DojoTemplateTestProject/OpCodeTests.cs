@@ -18,8 +18,8 @@ namespace DojoTemplateTestProject
         public void OpCodeParserParsesToList(int opCode, int expectedElementIndex)
         {
             var opCodeOperations = new OpCodeOperations();
-            var inputParser = new InputParser(opCodeOperations);
-            var list = inputParser.ParseOpCode();
+            var inputParser = new InputParser();
+            var list = inputParser.ParseOpCode(opCodeOperations);
             
             Assert.Equal(opCode, list[expectedElementIndex]);
         }
@@ -32,11 +32,11 @@ namespace DojoTemplateTestProject
         [InlineData("1,1,1,4,99,5,6,0,99", "30,1,1,4,2,5,6,0,99")]
         public void OpCodeExecutorInsertsExpectedResultInCorrectPosition(string sourceCode, string expectedOutput)
         {
-            var substitute1 = Substitute.For<OpCodeOperations>();
-            substitute1.OpCodes = sourceCode.Split(',').Select(int.Parse).ToList();
-            substitute1.ExecuteOpCode();
+            var substitute = Substitute.For<OpCodeOperations>();
+            substitute.Input = sourceCode.Split(',').Select(int.Parse).ToArray();
+            substitute.ExecuteOpCode();
 
-            substitute1.Should().Equals(expectedOutput);
+            substitute.Should().Equals(expectedOutput);
         }
 
         //[Fact]
@@ -56,7 +56,7 @@ namespace DojoTemplateTestProject
         public void AddOpReturnsExpectedTotal()
         {
             var substitute = Substitute.For<OpCodeOperations>();
-            substitute.OpCodes = new List<int>() { 33, 4, 6, 5, 1, 0, 3, 2, 7, 3, 1, 99, 2, 1, 7, 3 };
+            substitute.Input = new int[] { 33, 4, 6, 5, 1, 0, 3, 2, 7, 3, 1, 99, 2, 1, 7, 3 };
             var result = substitute.AddOp(3, 1);
 
             Assert.Equal(9, result);
@@ -67,7 +67,7 @@ namespace DojoTemplateTestProject
         public void MultiplyOpReturnsExpectedTotal()
         {
             var substitute = Substitute.For<OpCodeOperations>();
-            substitute.OpCodes = new List<int>() { 33, 4, 6, 5, 1, 0, 3, 2, 7, 3, 1, 99, 2, 1, 7, 3 };
+            substitute.Input = new int[] { 33, 4, 6, 5, 1, 0, 3, 2, 7, 3, 1, 99, 2, 1, 7, 3 };
             var result = substitute.MultiplyOp(3, 1);
 
             Assert.Equal(20, result);
@@ -75,18 +75,18 @@ namespace DojoTemplateTestProject
         }
 
         [Theory]
-        [InlineData("2,2,5,0,99", 4, 8, 32)]
-        [InlineData("1,7,3,0,99", 7, 87, 94)]
-        //[InlineData("2,4,4,5,99,0", "2,4,4,5,99,9801")]
-        //[InlineData("1,1,1,4,99,5,6,0,99", "30,1,1,4,2,5,6,0,99")]
+        [InlineData("2,6,9,0,6,33", 4, 5, 198)]
+        [InlineData("1,10,8,0,52", 2, 4, 56)]
         public void FindNounVerbTest(string input, int noun, int verb, int expectedOutput)
         {
-            var substitute1 = Substitute.For<OpCodeOperations>();
-            substitute1.OpCodes = input.Split(',').Select(int.Parse).ToList();
-            substitute1.FindNounVerb(expectedOutput);
+            var substitute = Substitute.For<OpCodeOperations>();
+            substitute.Input = input.Split(',').Select(int.Parse).ToArray();
+            substitute.OpCodes = new int[substitute.Input.Length];
+            Array.Copy(substitute.Input, 0, substitute.OpCodes, 0, substitute.Input.Length);
+            substitute.FindNounVerb(expectedOutput);
 
-            Assert.Equal(noun, substitute1.OpCodes[1]);           
-            Assert.Equal(verb, substitute1.OpCodes[2]);           
+            Assert.Equal(noun, substitute.OpCodes[1]);           
+            Assert.Equal(verb, substitute.OpCodes[2]);           
         }
     }
 }

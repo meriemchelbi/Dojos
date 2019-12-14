@@ -11,14 +11,6 @@ namespace DojoTemplateConsoleApp
 {
     public class InputParser
     {
-        public InputParser() { }
-        public InputParser(OpCodeOperations opCodeOperations)
-        {
-            _opCodeOps = opCodeOperations;
-        }
-
-        private readonly OpCodeOperations _opCodeOps;
-        
         public List<int> ParseModuleMass()
         {
             var moduleMasses = new List<int>();
@@ -34,15 +26,15 @@ namespace DojoTemplateConsoleApp
         
         }
 
-        public List<int> ParseOpCode()
+        public int[] ParseOpCode(OpCodeOperations opCodeOperations)
         {
             var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"OpCode\OpCode.txt");
             var commaDelimitedInput = File.ReadAllText(path);
             var inputArray = commaDelimitedInput.Split(",");
             
-            _opCodeOps.OpCodes = inputArray.Select(c => int.Parse(c)).ToList();
-               
-            return _opCodeOps.OpCodes;
+            opCodeOperations.Input = inputArray.Select(c => int.Parse(c)).ToArray();
+   
+            return opCodeOperations.Input;
         }
         
         public void ParseSpaceImageArray(SpaceImageFormat spaceImageFormat)

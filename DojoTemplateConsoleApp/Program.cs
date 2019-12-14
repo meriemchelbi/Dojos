@@ -1,4 +1,5 @@
 ﻿using System;
+using DojoTemplateConsoleApp.OpCode;
 using DojoTemplateConsoleApp.SpaceImage;
 
 namespace DojoTemplateConsoleApp
@@ -9,29 +10,29 @@ namespace DojoTemplateConsoleApp
         {
 
             #region OpCode
-            //var opCodeOps = new OpCodeOperations(); 
-            //var inputParser = new InputParser(opCodeOps);
-            //inputParser.ParseOpCode();
-            ////opCodeOps.ExecuteOpCode();
-            ////Console.WriteLine($"Day 2 part 1 result is {opCodeOps.OpCodes[0]}.");
-
-            //opCodeOps.FindNounVerb(19690720);
-            //Console.WriteLine($"Day 2 part 2 noun & verb are noun: {opCodeOps.OpCodes[1]} & verb {opCodeOps.OpCodes[2]}.");
+            var opCodeOps = new OpCodeOperations();
+            var inputParser = new InputParser();
+            inputParser.ParseOpCode(opCodeOps);
+            opCodeOps.ExecuteOpCode();
+            Console.WriteLine($"Day 2 part 1 result is {opCodeOps.OpCodes[0]}.");
+            
+            opCodeOps.FindNounVerb(19690720);
+            Console.WriteLine($"Day 2 part 2 noun & verb are noun: {opCodeOps.OpCodes[1]} & verb {opCodeOps.OpCodes[2]}.");
             #endregion
 
             #region SpaceImage
-            var inputParser = new InputParser();
-            var spaceImageFormat = new SpaceImageFormat();
+            //var inputParser = new InputParser();
+            //var spaceImageFormat = new SpaceImageFormat();
 
-            inputParser.ParseSpaceImageArray(spaceImageFormat);
-            spaceImageFormat.IsolateLayersList(25, 6);
-            var layerWithFewestZeros = spaceImageFormat.FindLayerWithFewestInstancesOfDigit('0');
-            var numberOfOnes = spaceImageFormat.CountInstancesOfDigit(layerWithFewestZeros, '1');
-            var numberOfTwos = spaceImageFormat.CountInstancesOfDigit(layerWithFewestZeros, '2');
+            //inputParser.ParseSpaceImageArray(spaceImageFormat);
+            //spaceImageFormat.IsolateLayersList(25, 6);
+            //var layerWithFewestZeros = spaceImageFormat.FindLayerWithFewestInstancesOfDigit('0');
+            //var numberOfOnes = spaceImageFormat.CountInstancesOfDigit(layerWithFewestZeros, '1');
+            //var numberOfTwos = spaceImageFormat.CountInstancesOfDigit(layerWithFewestZeros, '2');
 
-            Console.WriteLine($"Layer {layerWithFewestZeros.LayerID} has the fewest zeros.");
-            Console.WriteLine($"Layer {layerWithFewestZeros.LayerID} has {numberOfOnes} instances of '1' and {numberOfTwos} instances of '2'.");
-            Console.WriteLine($"The final result is {numberOfOnes * numberOfTwos}");
+            //Console.WriteLine($"Layer {layerWithFewestZeros.LayerID} has the fewest zeros.");
+            //Console.WriteLine($"Layer {layerWithFewestZeros.LayerID} has {numberOfOnes} instances of '1' and {numberOfTwos} instances of '2'.");
+            //Console.WriteLine($"The final result is {numberOfOnes * numberOfTwos}");
 
             #endregion
 

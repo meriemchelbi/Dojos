@@ -10,16 +10,16 @@ namespace DojoTemplateConsoleApp.UniveralOrbit
 
         public SpaceBody CreateSpaceBodyWithSatellite(string input)
         {
-            var token = input.Substring(0, 1);
+            var token = input.Substring(0, 3);
             return new SpaceBody(token)
             {
-                Satellites = { new SpaceBody(input.Substring(2, 1)) }
+                Satellites = { new SpaceBody(input.Substring(4, 3)) }
             };
         }
 
         public void CreateSatellite(SpaceBody parent, string input)
         {
-            parent.Satellites.Add(new SpaceBody(input.Substring(2, 1)));
+            parent.Satellites.Add(new SpaceBody(input.Substring(4, 3)));
         }
     }
 }

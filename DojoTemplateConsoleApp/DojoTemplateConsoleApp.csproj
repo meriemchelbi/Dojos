@@ -9,7 +9,7 @@
     <None Remove="ModuleMasses.txt" />
     <None Remove="OpCode.txt" />
     <None Remove="SpaceImage.txt" />
-    <None Remove="UniveralOrbit\UniversalOrbit.txt" />
+    <None Remove="UniversalOrbit\UniversalOrbit.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,9 +25,9 @@
     <Content Include="SpaceImage\SpaceImage.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="UniveralOrbit\UniversalOrbit.txt">
+    <EmbeddedResource Include="UniversalOrbit\UniversalOrbit.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

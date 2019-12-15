@@ -17,9 +17,17 @@ namespace DojoTemplateConsoleApp.UniveralOrbit
             };
         }
 
-        public void CreateSatellite(SpaceBody parent, string input)
+        public SpaceBody CreateSpaceBodyWithoutSatellite(string name)
         {
-            parent.Satellites.Add(new SpaceBody(input.Substring(4, 3)));
+            return new SpaceBody(name);
+        }
+
+        public SpaceBody CreateSatellite(SpaceBody parent, string input)
+        {
+            var satellite = new SpaceBody(input.Substring(4, 3));
+            parent.Satellites.Add(satellite);
+
+            return satellite;
         }
     }
 }

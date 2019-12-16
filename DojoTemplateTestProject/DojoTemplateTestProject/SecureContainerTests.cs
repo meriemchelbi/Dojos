@@ -10,7 +10,7 @@ namespace DojoTemplateTestProject
     public class SecureContainerTests
     {
         [Theory]
-        [InlineData(156218, 652527, 1324)]
+        [InlineData(156218, 652527, 1148)]
         public void DisplayNumberOfMatchingPasswords(int lowerBound, int upperBound, int expectedResult)
         {
             var secureContainer = new SecureContainer();
@@ -39,7 +39,8 @@ namespace DojoTemplateTestProject
         [InlineData(122333, true)]
         [InlineData(122223, false)]
         [InlineData(112233, true)]
-        [InlineData(588899, true)]
+        [InlineData(122233, true)]
+        [InlineData(222448, true)]
         public void PasswordContainsTwoAdjacentDigits(int password, bool containsAdjacentDoubleDigits)
         {
             var secureContainer = new SecureContainer();
@@ -61,18 +62,6 @@ namespace DojoTemplateTestProject
         [InlineData(111111, true)]
         [InlineData(123455, true)]
         [InlineData(123444, true)]
-        [InlineData(123333, true)]
-        [InlineData(122222, true)]
-        [InlineData(123345, true)]
-        [InlineData(122345, true)]
-        [InlineData(123445, true)]
-        [InlineData(122234, true)]
-        [InlineData(123334, true)]
-        [InlineData(111222, true)]
-        [InlineData(122333, true)]
-        [InlineData(122223, true)]
-        [InlineData(112233, true)]
-        [InlineData(654321, false)]
         public void PasswordHasOnlyIncreasingDigits(int password, bool hasDecreasingDigits)
         {
             var secureContainer = new SecureContainer();

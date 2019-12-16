@@ -41,31 +41,16 @@ namespace DojoTemplateConsoleApp
             return matches;
         }
 
-        // implement with Linq by finding out whether single instance of double digit in collection
         public bool HasTwoAdjacentMatchingDigits(int password)
         {
-            var passwordString = password.ToString();
-            var hasTwoAdjacentMatchingDigits = false;
-            var tempValue = false;
-
-            for (int i = 1; i < passwordString.Length - 1; i++)
+            List<int> passwordList = new List<int>();
+            while (password > 0)
             {
-                hasTwoAdjacentMatchingDigits =
-                    (passwordString[i].Equals(passwordString[i - 1]) && !passwordString[i].Equals(passwordString[i + 1]) && (i == 1 || tempValue == true)) ? true
-                    : ((i == (passwordString.Length - 2)) && (!passwordString[i].Equals(passwordString[i - 1]) && passwordString[i].Equals(passwordString[i + 1]))) ? true : false;
-
-                if (hasTwoAdjacentMatchingDigits) break;
-
-                tempValue = (passwordString[i].Equals(passwordString[i + 1]) && !passwordString[i].Equals(passwordString[i - 1])) ? true : false;
-
-                if (passwordString[i].Equals(passwordString[i - 1]) && passwordString[i].Equals(passwordString[i + 1]))
-                {
-                    i += 2;
-                    tempValue = false;
-                }
+                passwordList.Add(password % 10);
+                password /= 10;
             }
 
-            return hasTwoAdjacentMatchingDigits;
+            return passwordList.GroupBy(c => c).Any(c => c.Count() == 2);
         }
     }
 }

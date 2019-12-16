@@ -39,20 +39,20 @@ namespace DojoTemplateConsoleApp
 
             #region SecureContainer
 
-            //var secureContainer = new SecureContainer();
-            //var result = secureContainer.FindNumberOfMatches(156218, 652527);
-            //Console.WriteLine($"The number of eligible passwords is {result}.");
+            var secureContainer = new SecureContainer();
+            var result = secureContainer.FindNumberOfMatches(156218, 652527);
+            Console.WriteLine($"The number of eligible passwords is {result}.");
 
             #endregion
 
             #region UniversalOrbit
 
-            var galaxy = new Galaxy();
-            galaxy.LoadInput();
-            galaxy.LoadSpaceBodies();
-            var COM = galaxy.FindBody("COM");
-            var result = galaxy.CalculateTotalOrbits(COM);
-            Console.WriteLine($"Day 6 part 1 result is {result} orbits");
+            //var galaxy = new Galaxy();
+            //galaxy.LoadInput();
+            //galaxy.LoadSpaceBodies();
+            //var COM = galaxy.FindBody("COM");
+            //var result = galaxy.CalculateTotalOrbits(COM);
+            //Console.WriteLine($"Day 6 part 1 result is {result} orbits");
 
             #endregion
 

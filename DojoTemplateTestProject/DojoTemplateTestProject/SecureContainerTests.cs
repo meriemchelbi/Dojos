@@ -39,6 +39,7 @@ namespace DojoTemplateTestProject
         [InlineData(122333, true)]
         [InlineData(122223, false)]
         [InlineData(112233, true)]
+        [InlineData(588899, true)]
         public void PasswordContainsTwoAdjacentDigits(int password, bool containsAdjacentDoubleDigits)
         {
             var secureContainer = new SecureContainer();

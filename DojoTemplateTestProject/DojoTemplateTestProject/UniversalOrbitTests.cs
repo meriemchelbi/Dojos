@@ -65,13 +65,13 @@ namespace DojoTemplateTestProject
                 Input = new List<string> { "BAA)CBB", "COM)BAA", "CBB)DCC", "DCC)EDD", "EDD)FEE",
                     "BAA)GFF", "GFF)HGG", "DCC)IHH", "EDD)JII", "JII)KJJ", "KJJ)LKK" },
             };
-            var expectedSpaceBodies = new List<SpaceBody> { COM, BodyB, BodyC, BodyD, BodyE, BodyG, BodyJ, BodyK };
+            var expectedSpaceBodies = new List<SpaceBody> { COM, BodyB, BodyC, BodyD, BodyE, BodyF, BodyG, BodyH, BodyI, BodyJ, BodyK, BodyL };
             var expectedRoot = new SpaceBody("COM") { Satellites = new List<SpaceBody> { BodyB } };
              
             sut.LoadSpaceBodies();
 
+            sut.Root.Satellites[0].Should().BeEquivalentTo(BodyB);
             sut.SpaceBodies.Should().BeEquivalentTo(expectedSpaceBodies);
-            sut.Root.Should().BeEquivalentTo(expectedRoot);
         }
 
         [Fact]

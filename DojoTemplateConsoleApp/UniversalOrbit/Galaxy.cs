@@ -77,13 +77,18 @@ namespace DojoTemplateConsoleApp.UniveralOrbit
 
             foreach (var satellite in spaceBody.Satellites)
             {
-
                 totalOrbit += CalculateTotalOrbits(satellite, depth) - 1;
             }
 
-            // totalOrbit;
-
             return totalOrbit;
+        }
+
+        public int CalculateOrbitalTransfer(SpaceBody origin, SpaceBody destination, int depth = 0)
+        {
+            var orbitalTransfer = 0;
+            
+
+            return orbitalTransfer;
         }
     }
 }

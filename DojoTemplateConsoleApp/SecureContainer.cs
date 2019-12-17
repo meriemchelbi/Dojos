@@ -43,7 +43,32 @@ namespace DojoTemplateConsoleApp
 
         public bool HasTwoAdjacentMatchingDigits(int password)
         {
-            return password.ToString().GroupBy(c => c).Any(c => c.Count() == 2);
+            var hasTwo = false;
+            var passwordString = password.ToString();
+
+            foreach (var character in passwordString)
+            {
+                var charToCompare = character;
+                var count = 0;
+
+                foreach (var number in passwordString)
+                {
+                    while (number.Equals(charToCompare))
+                    {
+                        count++;
+                    }
+                }
+                
+                if (count == 2)
+                {
+                    hasTwo = true;
+                    break;
+                }
+            }
+
+            return hasTwo;
+            
+            //return password.ToString().GroupBy(c => c).Any(c => c.Count() == 2);
         }
     }
 }

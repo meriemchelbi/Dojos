@@ -53,7 +53,7 @@ namespace DojoTemplateConsoleApp
 
                 foreach (var number in passwordString)
                 {
-                    while (number.Equals(charToCompare))
+                    if (number.Equals(charToCompare))
                     {
                         count++;
                     }

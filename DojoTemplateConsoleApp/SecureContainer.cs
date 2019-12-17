@@ -43,14 +43,7 @@ namespace DojoTemplateConsoleApp
 
         public bool HasTwoAdjacentMatchingDigits(int password)
         {
-            List<int> passwordList = new List<int>();
-            while (password > 0)
-            {
-                passwordList.Add(password % 10);
-                password /= 10;
-            }
-
-            return passwordList.GroupBy(c => c).Any(c => c.Count() == 2);
+            return password.ToString().GroupBy(c => c).Any(c => c.Count() == 2);
         }
     }
 }

@@ -67,8 +67,17 @@ namespace DojoTemplateConsoleApp
             }
 
             return hasTwo;
-            
-            //return password.ToString().GroupBy(c => c).Any(c => c.Count() == 2);
+
+            // With Linq:
+            // return password.ToString().GroupBy(c => c).Any(c => c.Count() == 2);
+            // Mike's solution:
+            //for (int i = 0; i < digits.Count - 1; i++)
+            //{
+            //    if (digits[i] == digits[i + 1]
+            //        && (i == 0 || digits[i] != digits[i - 1])
+            //        && (i == digits.Count - 2 || digits[i] != digits[i + 2]))
+            //        return true;
+            //}
         }
     }
 }

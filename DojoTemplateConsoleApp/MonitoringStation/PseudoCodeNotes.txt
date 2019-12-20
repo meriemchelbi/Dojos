@@ -1,0 +1,58 @@
+﻿Notes:
+Smallest grid from point of reference is 3 * 3 (4 axes)
+Then width increases by increments of 2, so next size up is 5 * 5 (8 axes)
+We expect axes to multiply by 2 with each increase of the grid 
+e.g. for an input grid of 33 width, we expect the point at the centre to be at the nexus of 131072 axes
+
+Domain:
+
+Asteroid class
+- coordinates (x, y)
+- number of visible asteroids
+- Axes = list of axis
+
+Asteroid finder class
+- number of axes
+- input
+- asteroids (list of asteroids)
+
+Axis class
+- func up (e.g. x => x + i, y => y + i)
+- func down
+
+PseudoCode:
+
+var input = ParseInput(string)
+
+var asteroids = LoadAsteroids(input)
+
+numberOfAxes = CalculateNumberOfAxes()
+
+
+var numberOfAsteroids = CalculateVisibleAsteroids(Asteroid)
+- foreach axis
+- var visibleAsteroids = FindVisibleAsteroidsInAxis(axis)
+- FindVisibleAsteroidsInAxis(Origin, Axis)
+position = origin.Coordinates
+while there is element
+IncrementPosition = CalculateNewPosition(Axis.funcUp) 
+Axis.funcUp(IncrementPosition) isAsteroid
+? Origin.visibleAsteroids += 1 & break
+: continue
+
+DecrementPosition = CalculateNewPosition(Axis.funcDown)
+if element at new position is asteroid
+break
+Origin.visibleAsteroids += 1
+else continue
+
+return origin.visibleAsteroids
+
+
+
+FindMonitoringStationPosition(map)
+- for each point on map
+- if point is Asteroid: visibleAsteroids = CalculateVisibleAsteroids(point)
+- else break
+
+- FindAsteroidWithHighestVisibleAsteroids()

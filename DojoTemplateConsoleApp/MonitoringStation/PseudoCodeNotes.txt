@@ -9,12 +9,11 @@ Domain:
 Asteroid class
 - coordinates (x, y)
 - number of visible asteroids
-- Axes = list of axis
 
 Asteroid finder class
-- number of axes
 - input
 - asteroids (list of asteroids)
+- Axes = list of axis
 
 Axis class
 - func up (e.g. x => x + i, y => y + i)
@@ -26,8 +25,7 @@ var input = ParseInput(string)
 
 var asteroids = LoadAsteroids(input)
 
-numberOfAxes = CalculateNumberOfAxes()
-
+ComputeAxes()
 
 var numberOfAsteroids = CalculateVisibleAsteroids(Asteroid)
 - foreach axis

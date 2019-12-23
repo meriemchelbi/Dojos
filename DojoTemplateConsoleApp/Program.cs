@@ -1,4 +1,5 @@
 ﻿using System;
+using DojoTemplateConsoleApp.MonitoringStation;
 using DojoTemplateConsoleApp.OpCode;
 using DojoTemplateConsoleApp.SpaceImage;
 using DojoTemplateConsoleApp.UniveralOrbit;
@@ -47,18 +48,27 @@ namespace DojoTemplateConsoleApp
 
             #region UniversalOrbit
 
-            var galaxy = new Galaxy();
-            galaxy.LoadInput();
-            galaxy.LoadSpaceBodies();
-            var COM = galaxy.FindBody("COM");
-            var YOU = galaxy.FindBody("YOU");
-            var SAN = galaxy.FindBody("SAN");
-            var resultDayOne = galaxy.CalculateTotalOrbits(COM);
-            var resultDayTwo = gala
-            Console.WriteLine($"Day 6 part 1 result is {resultDayOne} orbits");
+            //var galaxy = new Galaxy();
+            //galaxy.LoadInput();
+            //galaxy.LoadSpaceBodies();
+            //var COM = galaxy.FindBody("COM");
+            //var YOU = galaxy.FindBody("YOU");
+            //var SAN = galaxy.FindBody("SAN");
+            //var resultDayOne = galaxy.CalculateTotalOrbits(COM);
+            //var resultDayTwo = galaxy.CalculateOrbitalTransfer(COM, SAN);
+            //Console.WriteLine($"Day 6 part 1 result is {resultDayOne} orbits");
 
             #endregion
 
+            #region MonitoringStation
+
+            var asteroidFinder = new AsteroidFinder();
+            var parser = new MonitoringStationInputParser(asteroidFinder);
+            parser.ParseInput();
+            parser.LoadInputToMap();
+            asteroidFinder.LoadAsteroids();
+
+            #endregion
         }
     }
 }

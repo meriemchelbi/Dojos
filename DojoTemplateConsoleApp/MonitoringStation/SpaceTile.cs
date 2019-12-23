@@ -8,10 +8,12 @@ namespace DojoTemplateConsoleApp.MonitoringStation
     {
         public SpaceTile(int x, int y, bool isAsteroid)
         {
-            Coordinates = (x: x, y: y);
+            X = x;
+            Y = y;
             IsAsteroid = isAsteroid;
         }
-        public (int, int) Coordinates { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
         public int VisibleAsteroids { get; set; }
         public bool IsAsteroid { get; set; }
     }

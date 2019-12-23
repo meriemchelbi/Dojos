@@ -31,6 +31,13 @@ namespace DojoTemplateConsoleApp.MonitoringStation
             }
         }
 
+        public List<SpaceTile> CastRay(SpaceTile origin, SpaceTile destination)
+        {
+            var ray = new List<SpaceTile>();
+            
+            return ray;
+        }
+
         public (int, int) FindMonitoringStationPosition(string[][] map)
         {
             return (x: 9, y: 9);

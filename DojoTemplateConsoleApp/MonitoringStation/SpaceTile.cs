@@ -4,13 +4,15 @@ using System.Text;
 
 namespace DojoTemplateConsoleApp.MonitoringStation
 {
-    public class Asteroid
+    public class SpaceTile
     {
-        public Asteroid(int x, int y)
+        public SpaceTile(int x, int y, bool isAsteroid)
         {
             Coordinates = (x: x, y: y);
+            IsAsteroid = isAsteroid;
         }
         public (int, int) Coordinates { get; set; }
         public int VisibleAsteroids { get; set; }
+        public bool IsAsteroid { get; set; }
     }
 }

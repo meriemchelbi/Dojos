@@ -14,37 +14,53 @@ namespace DojoTemplateTestProject.MonitoringStationTests
         [Fact]
         public void LoadAsteroidsLoadsAsteroidsToList()
         {
-            var asteroidFinder = new AsteroidFinder();
-            asteroidFinder.Map = new char[][]
+            var asteroidFinder = new AsteroidFinder
             {
-                new char[]{ '#', '.', '.', '#' },
-                new char[]{ '.', '.', '.', '#' },
-                new char[]{ '.', '.', '#', '.' },
-                new char[]{ '.', '#', '.', '.' }
+                Map = new char[][]
+            {
+                new char[]{ '#', '.', '.' },
+                new char[]{ '.', '.', '#' },
+                new char[]{ '.', '#', '#' }
+            }
             };
-            var expectedAsteroids = new List<Asteroid>
+            var expectedAsteroids = new List<SpaceTile>
             {
-                new Asteroid(0, 3),
-                new Asteroid(1, 3),
-                new Asteroid(2, 2),
-                new Asteroid(0, 0),
-                new Asteroid(3, 1)
+                new SpaceTile(0, 0, true),
+                new SpaceTile(0, 1, false),
+                new SpaceTile(0, 2, false),
+                new SpaceTile(1, 0, false),
+                new SpaceTile(1, 1, false),
+                new SpaceTile(1, 2, true),
+                new SpaceTile(2, 0, false),
+                new SpaceTile(2, 1, true),
+                new SpaceTile(2, 2, true)
             };
 
-            asteroidFinder.LoadAsteroids();
+            asteroidFinder.LoadSpaceTiles();
 
-            asteroidFinder.Asteroids.Should().BeEquivalentTo(expectedAsteroids);
+            asteroidFinder.SpaceTiles.Should().BeEquivalentTo(expectedAsteroids);
         }
 
-        [Theory]
-        [ClassData(typeof(MonitoringStationTestData))]
-        public void FindMonitoringStationPositionIdentifiesCorrectAsteroid(string[][] map, (int, int) expectedResult)
+        [Fact]
+        public void CastRayShouldIntersectExpectedTiles()
         {
-            var asteroidFinder = new AsteroidFinder();
-            var result = asteroidFinder.FindMonitoringStationPosition(map);
-
-            result.Should().BeEquivalentTo(expectedResult);
+            // Bresenham algo returns expected intersection points in the map
         }
+
+        public void IntersectsWithAsteroidDetectsIntersection()
+        {
+            // Returns true if one of bresenham results matches coordinates of intersection point
+        }
+
+        //[Theory]
+        //[ClassData(typeof(MonitoringStationTestData))]
+        //public void FindMonitoringStationPositionIdentifiesCorrectAsteroid(string[][] map, (int, int) expectedResult)
+        //{
+        //    var asteroidFinder = new AsteroidFinder();
+        //    var result = asteroidFinder.FindMonitoringStationPosition(map);
+
+        //    result.Should().BeEquivalentTo(expectedResult);
+        //}
     }
 }
 

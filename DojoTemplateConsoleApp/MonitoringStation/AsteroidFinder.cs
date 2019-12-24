@@ -33,6 +33,8 @@ namespace DojoTemplateConsoleApp.MonitoringStation
             }
         }
 
+
+        // using Bresenham's line drawing algorithm https://www.codeproject.com/Articles/15604/Ray-casting-in-a-2D-tile-based-environment
         public IEnumerable<SpaceTile> CastRay(SpaceTile origin, SpaceTile destination)
         {
             var deltaX = destination.X - origin.X;
@@ -72,7 +74,6 @@ namespace DojoTemplateConsoleApp.MonitoringStation
                     error += deltaX;
                 }
             }
-            
             yield break;
         }
 

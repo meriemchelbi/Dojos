@@ -42,8 +42,10 @@ namespace DojoTemplateTestProject.MonitoringStationTests
         public void CastRayShouldIntersectExpectedTiles(List<SpaceTile> asteroids, List<SpaceTile> expectedRay, int originIndex, int destinationIndex)
         {
             // Bresenham algo returns expected intersection points in the map
-            var asteroidFinder = new AsteroidFinder();
-            asteroidFinder.Asteroids = asteroids;
+            var asteroidFinder = new AsteroidFinder
+            {
+                Asteroids = asteroids
+            };
 
             var origin = asteroidFinder.Asteroids[originIndex];
             var destination = asteroidFinder.Asteroids[destinationIndex];
@@ -52,6 +54,32 @@ namespace DojoTemplateTestProject.MonitoringStationTests
 
             result.Should().BeEquivalentTo(expectedRay);
 
+        }
+
+        [Fact]
+        public void CountVisibleAsteroidsCalculatesAsteroidsVisibleFromOrigin()
+        {
+            var asteroidFinder = new AsteroidFinder()
+            {
+                Asteroids = new List<SpaceTile>()
+                {
+                    new SpaceTile(1, 0),
+                    new SpaceTile(4, 0),
+                    new SpaceTile(0, 2),
+                    new SpaceTile(1, 2),
+                    new SpaceTile(2, 2),
+                    new SpaceTile(3, 2),
+                    new SpaceTile(4, 2),
+                    new SpaceTile(4, 3),
+                    new SpaceTile(3, 4),
+                    new SpaceTile(4, 4)
+                }
+            };
+            var originAsteroid = asteroidFinder.Asteroids[8];
+
+            asteroidFinder.CountVisibleAsteroids(originAsteroid);
+
+            originAsteroid.VisibleAsteroids.Should().Be(8);
         }
 
 

@@ -7,11 +7,6 @@ namespace DojoTemplateTestProject.MonitoringStationTests
 {
     internal class MonitoringStationTestData: IEnumerable<object[]>
     {
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerator<object[]> GetEnumerator()
         {
             yield return new object[]

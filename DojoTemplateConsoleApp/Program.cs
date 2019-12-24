@@ -66,7 +66,7 @@ namespace DojoTemplateConsoleApp
             var parser = new MonitoringStationInputParser(asteroidFinder);
             parser.ParseInput();
             parser.LoadInputToMap();
-            asteroidFinder.LoadSpaceTiles();
+            asteroidFinder.LoadAsteroids();
 
             #endregion
         }

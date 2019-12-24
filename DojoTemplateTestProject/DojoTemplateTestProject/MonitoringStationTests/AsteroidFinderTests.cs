@@ -6,6 +6,7 @@ using NSubstitute;
 using FluentAssertions;
 using DojoTemplateConsoleApp.MonitoringStation;
 using System.Collections;
+using System.Linq;
 
 namespace DojoTemplateTestProject.MonitoringStationTests
 {
@@ -25,20 +26,15 @@ namespace DojoTemplateTestProject.MonitoringStationTests
             };
             var expectedAsteroids = new List<SpaceTile>
             {
-                new SpaceTile(0, 0, true),
-                new SpaceTile(0, 1, false),
-                new SpaceTile(0, 2, false),
-                new SpaceTile(1, 0, false),
-                new SpaceTile(1, 1, false),
-                new SpaceTile(1, 2, true),
-                new SpaceTile(2, 0, false),
-                new SpaceTile(2, 1, true),
-                new SpaceTile(2, 2, true)
+                new SpaceTile(0, 0){ IsAsteroid = true },
+                new SpaceTile(1, 2){ IsAsteroid = true },
+                new SpaceTile(2, 1){ IsAsteroid = true },
+                new SpaceTile(2, 2){ IsAsteroid = true }
             };
 
-            asteroidFinder.LoadSpaceTiles();
+            asteroidFinder.LoadAsteroids();
 
-            asteroidFinder.SpaceTiles.Should().BeEquivalentTo(expectedAsteroids);
+            asteroidFinder.Asteroids.Should().BeEquivalentTo(expectedAsteroids);
         }
 
         [Fact]
@@ -46,27 +42,24 @@ namespace DojoTemplateTestProject.MonitoringStationTests
         {
             // Bresenham algo returns expected intersection points in the map
             var asteroidFinder = new AsteroidFinder();
-            asteroidFinder.SpaceTiles = new List<SpaceTile>
+            asteroidFinder.Asteroids = new List<SpaceTile>
             {
-                new SpaceTile(0, 0, true),
-                new SpaceTile(0, 1, false),
-                new SpaceTile(0, 2, false),
-                new SpaceTile(1, 0, false),
-                new SpaceTile(1, 1, false),
-                new SpaceTile(1, 2, true),
-                new SpaceTile(2, 0, false),
-                new SpaceTile(2, 1, true),
-                new SpaceTile(2, 2, true)
+                new SpaceTile(0, 0),
+                new SpaceTile(1, 2),
+                new SpaceTile(2, 1),
+                new SpaceTile(2, 2)
             };
             var expectedResult = new List<SpaceTile>
             {
-                new SpaceTile(1, 1, false),
+                new SpaceTile(0, 0),
+                new SpaceTile(1, 1),
+                new SpaceTile(2, 2)
             };
 
-            var tile1 = asteroidFinder.SpaceTiles[0];
-            var tile9 = asteroidFinder.SpaceTiles[8];
+            var tile1 = asteroidFinder.Asteroids[0];
+            var tile9 = asteroidFinder.Asteroids[3];
 
-            var result = asteroidFinder.CastRay(tile1, tile9);
+            var result = asteroidFinder.CastRay(tile1, tile9).ToList();
 
             result.Should().BeEquivalentTo(expectedResult);
 

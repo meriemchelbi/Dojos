@@ -15,5 +15,6 @@ namespace DojoTemplateConsoleApp.MonitoringStation
         public int Y { get; set; }
         public int VisibleAsteroids { get; set; }
         public bool IsAsteroid { get; set; }
+        public bool Counted { get; set; }
     }
 }

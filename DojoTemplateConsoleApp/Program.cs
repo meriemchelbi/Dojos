@@ -67,6 +67,7 @@ namespace DojoTemplateConsoleApp
             parser.ParseInput();
             parser.LoadInputToMap();
             asteroidFinder.LoadAsteroids();
+            asteroidFinder.CountVisibleAsteroids(asteroidFinder.Asteroids[1]);
 
             #endregion
         }

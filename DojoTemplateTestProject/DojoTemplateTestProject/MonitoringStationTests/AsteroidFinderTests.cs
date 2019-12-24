@@ -56,30 +56,19 @@ namespace DojoTemplateTestProject.MonitoringStationTests
 
         }
 
-        [Fact]
-        public void CountVisibleAsteroidsCalculatesAsteroidsVisibleFromOrigin()
+        [Theory]
+        [ClassData(typeof(CountVisibleAsteroidsTestData))]
+        public void CountVisibleAsteroidsCalculatesAsteroidsVisibleFromOrigin(List<SpaceTile> asteroids, int originAsteroidIndex, int expectedTotal)
         {
             var asteroidFinder = new AsteroidFinder()
             {
-                Asteroids = new List<SpaceTile>()
-                {
-                    new SpaceTile(1, 0),
-                    new SpaceTile(4, 0),
-                    new SpaceTile(0, 2),
-                    new SpaceTile(1, 2),
-                    new SpaceTile(2, 2),
-                    new SpaceTile(3, 2),
-                    new SpaceTile(4, 2),
-                    new SpaceTile(4, 3),
-                    new SpaceTile(3, 4),
-                    new SpaceTile(4, 4)
-                }
+                Asteroids = asteroids
             };
-            var originAsteroid = asteroidFinder.Asteroids[8];
+            var originAsteroid = asteroidFinder.Asteroids[originAsteroidIndex];
 
             asteroidFinder.CountVisibleAsteroids(originAsteroid);
 
-            originAsteroid.VisibleAsteroids.Should().Be(8);
+            originAsteroid.VisibleAsteroids.Should().Be(expectedTotal);
         }
 
 
@@ -92,6 +81,51 @@ namespace DojoTemplateTestProject.MonitoringStationTests
 
         //    result.Should().BeEquivalentTo(expectedResult);
         //}
+    }
+
+    internal class CountVisibleAsteroidsTestData : IEnumerable<object[]>
+    {
+        public IEnumerator<object[]> GetEnumerator()
+        {
+            yield return new object[]
+            {
+                new List<SpaceTile>()
+                {
+                    new SpaceTile(1, 0),// wrong order, index 8
+                    new SpaceTile(4, 0),// index 1
+                    new SpaceTile(0, 2),// index 2
+                    new SpaceTile(1, 2),// index 3
+                    new SpaceTile(2, 2),// index 4
+                    new SpaceTile(3, 2),// index 5
+                    new SpaceTile(4, 2),// index 6
+                    new SpaceTile(4, 3), // duplicated- indexes 0 & 7
+                    new SpaceTile(3, 4), //missing
+                    new SpaceTile(4, 4)// index 9
+                },
+                8,
+                8
+            };
+            yield return new object[]
+            {
+                new List<SpaceTile>()
+                {
+                    new SpaceTile(1, 0),
+                    new SpaceTile(4, 0),
+                    new SpaceTile(0, 2),
+                    new SpaceTile(1, 2),
+                    new SpaceTile(2, 2),
+                    new SpaceTile(3, 2),
+                    new SpaceTile(4, 2),
+                    new SpaceTile(4, 3),
+                    new SpaceTile(3, 4),
+                    new SpaceTile(4, 4)
+                },
+                6,
+                5
+            };
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
 

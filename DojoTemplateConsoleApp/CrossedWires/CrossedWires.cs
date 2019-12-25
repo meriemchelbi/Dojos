@@ -9,10 +9,15 @@ namespace DojoTemplateConsoleApp.CrossedWires
 {
     public class CrossedWires
     {
+        public CrossedWires()
+        {
+            Intersections = new List<(int, int)>();
+        }
         public List<string> WireOneDirections { get; set; }
         public List<string> WireTwoDirections { get; set; }
-        public object WireOnePath { get; set; }
-        public object WireTwoPath { get; set; }
+        public List<(int, int)> WireOnePath { get; set; }
+        public List<(int, int)> WireTwoPath { get; set; }
+        public List<(int, int)> Intersections { get; set; }
 
         public void ParseInput()
         {
@@ -56,6 +61,65 @@ namespace DojoTemplateConsoleApp.CrossedWires
             }
 
             return (x, y);
+        }
+
+        public void FindIntersections()
+        {
+            for (int i = 0; i < (WireOnePath.Count - 1); i++)
+            {
+                for (int j = 0; j < (WireTwoPath.Count - 1); j++)
+                {
+                    var CurrentOneX = WireOnePath[i].Item1;
+                    var CurrentOneY = WireOnePath[i].Item2;
+                    var NextOneX = WireOnePath[j+1].Item1;
+                    var NextOneY = WireOnePath[j+1].Item2;
+                    
+                    var CurrentTwoX = WireTwoPath[i].Item1;
+                    var CurrentTwoY = WireTwoPath[i].Item2;
+                    var NextTwoX = WireTwoPath[j+1].Item1;
+                    var NextTwoY = WireTwoPath[j+1].Item2;
+
+                    // One horizontal, Two vertical
+                    var wibble = ((CurrentTwoY <= CurrentOneY && CurrentOneY <= NextTwoY) || (CurrentTwoY >= CurrentOneY && CurrentOneY >= NextTwoY))
+                                && ((CurrentOneX <= CurrentTwoX && CurrentTwoX <= NextOneX) || (CurrentOneX >= CurrentTwoX && CurrentTwoX >= NextOneX));
+                    
+                    var wobble = ((CurrentOneY <= CurrentTwoY && CurrentTwoY <= NextOneY) || (CurrentOneY >= CurrentTwoY && CurrentTwoY >= NextOneY))
+                                && ((CurrentTwoX <= CurrentOneX && CurrentOneX <= NextTwoX) || (CurrentTwoX >= CurrentOneX && CurrentOneX >= NextTwoX));
+
+                    if (wibble)
+                    {
+                        var intersection = (CurrentTwoX, CurrentOneY);
+
+                        if (Intersections.Contains(intersection)) continue;
+                        else Intersections.Add(intersection);
+                    }
+                    if (wobble)
+                    {
+                        var intersection = (CurrentOneX, CurrentTwoY);
+
+                        if (Intersections.Contains(intersection)) continue;
+                        else Intersections.Add(intersection);
+                    }
+                }
+            }
+        }
+
+        public (int, int) FindClosestIntersection()
+        {
+            var closest = (0, 0);
+            var lowestTotal = int.MaxValue;
+
+            foreach (var point in Intersections)
+            {
+                var distance = Math.Abs(point.Item1) + Math.Abs(point.Item1);
+                if (distance < lowestTotal)
+                {
+                    closest = point;
+                    lowestTotal = distance;
+                };
+            }
+
+            return closest;
         }
     }
 }

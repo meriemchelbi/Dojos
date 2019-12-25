@@ -4,6 +4,7 @@ using System.Text;
 using Xunit;
 using FluentAssertions;
 using DojoTemplateConsoleApp.CrossedWires;
+using System.Linq;
 
 namespace DojoTemplateTestProject
 {
@@ -30,7 +31,6 @@ namespace DojoTemplateTestProject
             };
             var expectedWireOnePath = new List<(int, int)> 
             {
-                //(0, 0),
                 (8, 0),
                 (8, 5),
                 (3, 5),
@@ -38,7 +38,6 @@ namespace DojoTemplateTestProject
             };
             var expectedWireTwoPath = new List<(int, int)> 
             { 
-                //(0, 0),
                 (0, 7),
                 (6, 7),
                 (6, 3),
@@ -54,12 +53,50 @@ namespace DojoTemplateTestProject
         [Fact]
         public void FindIntersectionsFindsCorrectIntersections()
         {
+            var crossedWires = new CrossedWires()
+            {
+                WireOnePath = new List<(int, int)>
+                {
+                    (8, 0),
+                    (8, 5),
+                    (3, 5),
+                    (3, 2)
+                },
+                WireTwoPath = new List<(int, int)>
+                {
+                    (0, 7),
+                    (6, 7),
+                    (6, 3),
+                    (2, 3)
+                }
+            };
 
+            var expectedIntersections = new List<(int, int)>
+            {
+                (3, 3),
+                (6, 5)
+            };
+
+            crossedWires.FindIntersections();
+
+            crossedWires.Intersections.Should().BeEquivalentTo(expectedIntersections);
         }
 
-        public void FindClosestIntersectionsFindsIntersectionAtClosestManhattan()
+        [Fact]
+        public void FindClosestIntersectionFindsIntersectionAtClosestManhattan()
         {
+            var crossedWires = new CrossedWires()
+            {
+                Intersections = new List<(int, int)>
+                {
+                    (3, 3),
+                    (6, 5)
+                }
+            };
 
+            var result = crossedWires.FindClosestIntersection();
+
+            result.Should().Be(crossedWires.Intersections[0]);
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DojoTemplateConsoleApp
+namespace DojoTemplateConsoleApp.FuelRequirements
 {
     public class FuelMassCalculator
     {

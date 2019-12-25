@@ -3,6 +3,7 @@ using DojoTemplateConsoleApp.MonitoringStation;
 using DojoTemplateConsoleApp.OpCode;
 using DojoTemplateConsoleApp.SpaceImage;
 using DojoTemplateConsoleApp.UniveralOrbit;
+using DojoTemplateConsoleApp.CrossedWires;
 
 namespace DojoTemplateConsoleApp
 {
@@ -62,12 +63,24 @@ namespace DojoTemplateConsoleApp
 
             #region MonitoringStation
 
-            var asteroidFinder = new AsteroidFinder();
-            var parser = new MonitoringStationInputParser(asteroidFinder);
-            parser.ParseInput();
-            parser.LoadInputToMap();
-            asteroidFinder.LoadAsteroids();
-            asteroidFinder.CountVisibleAsteroids(asteroidFinder.Asteroids[1]);
+            //var asteroidFinder = new AsteroidFinder();
+            //var parser = new MonitoringStationInputParser(asteroidFinder);
+            //parser.ParseInput();
+            //parser.LoadInputToMap();
+            //asteroidFinder.LoadAsteroids();
+            //asteroidFinder.CountVisibleAsteroids(asteroidFinder.Asteroids[1]);
+
+            #endregion
+
+            #region CrossedWires
+
+            var crossedWires = new CrossedWiresFinder();
+            crossedWires.ParseInput();
+            crossedWires.LoadPaths();
+            crossedWires.FindIntersections();
+            var result = crossedWires.FindClosestIntersection();
+
+            Console.WriteLine($"The closest intersection is {result} distance from origin.");
 
             #endregion
         }

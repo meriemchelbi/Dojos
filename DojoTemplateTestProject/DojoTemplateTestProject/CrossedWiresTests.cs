@@ -13,7 +13,7 @@ namespace DojoTemplateTestProject
         [Fact]
         public void InputParserParsesDirectionsToLists()
         {
-            var crossedWires = new CrossedWires();
+            var crossedWires = new CrossedWiresFinder();
             crossedWires.ParseInput();
 
             crossedWires.WireOneDirections[0].Should().Be("R992");
@@ -24,7 +24,7 @@ namespace DojoTemplateTestProject
         [Fact]
         public void LoadPathsLoadsPathsToListOfCoordinates()
         {
-            var crossedWires = new CrossedWires()
+            var crossedWires = new CrossedWiresFinder()
             {
                 WireOneDirections = new List<string> { "R8", "U5", "L5", "D3" },
                 WireTwoDirections = new List<string> { "U7", "R6", "D4", "L4" }
@@ -53,7 +53,7 @@ namespace DojoTemplateTestProject
         [Fact]
         public void FindIntersectionsFindsCorrectIntersections()
         {
-            var crossedWires = new CrossedWires()
+            var crossedWires = new CrossedWiresFinder()
             {
                 WireOnePath = new List<(int, int)>
                 {
@@ -83,9 +83,9 @@ namespace DojoTemplateTestProject
         }
 
         [Fact]
-        public void FindClosestIntersectionFindsIntersectionAtClosestManhattan()
+        public void FindClosestIntersectionReturnsShortestDistance()
         {
-            var crossedWires = new CrossedWires()
+            var crossedWires = new CrossedWiresFinder()
             {
                 Intersections = new List<(int, int)>
                 {
@@ -96,7 +96,7 @@ namespace DojoTemplateTestProject
 
             var result = crossedWires.FindClosestIntersection();
 
-            result.Should().Be(crossedWires.Intersections[0]);
+            result.Should().Be(6);
         }
     }
 }

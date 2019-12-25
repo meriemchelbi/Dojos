@@ -7,9 +7,9 @@ using System.Text;
 
 namespace DojoTemplateConsoleApp.CrossedWires
 {
-    public class CrossedWires
+    public class CrossedWiresFinder
     {
-        public CrossedWires()
+        public CrossedWiresFinder()
         {
             Intersections = new List<(int, int)>();
         }
@@ -79,7 +79,6 @@ namespace DojoTemplateConsoleApp.CrossedWires
                     var NextTwoX = WireTwoPath[j+1].Item1;
                     var NextTwoY = WireTwoPath[j+1].Item2;
 
-                    // One horizontal, Two vertical
                     var wibble = ((CurrentTwoY <= CurrentOneY && CurrentOneY <= NextTwoY) || (CurrentTwoY >= CurrentOneY && CurrentOneY >= NextTwoY))
                                 && ((CurrentOneX <= CurrentTwoX && CurrentTwoX <= NextOneX) || (CurrentOneX >= CurrentTwoX && CurrentTwoX >= NextOneX));
                     
@@ -104,7 +103,7 @@ namespace DojoTemplateConsoleApp.CrossedWires
             }
         }
 
-        public (int, int) FindClosestIntersection()
+        public int FindClosestIntersection()
         {
             var closest = (0, 0);
             var lowestTotal = int.MaxValue;
@@ -119,7 +118,7 @@ namespace DojoTemplateConsoleApp.CrossedWires
                 };
             }
 
-            return closest;
+            return lowestTotal;
         }
     }
 }

@@ -11,14 +11,10 @@ namespace DojoTemplateConsoleApp.CrossedWires
     {
         public CrossedWiresFinder()
         {
-            Intersections = new List<(int, int)>();
-            WireOneSegments = new List<Segment>();
-            WireTwoSegments = new List<Segment>();
+            //Intersections = new List<(int, int)>();
         }
         public List<string> WireOneDirections { get; set; }
         public List<string> WireTwoDirections { get; set; }
-        public List<(int, int)> WireOnePoints { get; set; }
-        public List<(int, int)> WireTwoPoints { get; set; }
         public List<Segment> WireOneSegments { get; set; }
         public List<Segment> WireTwoSegments { get; set; }
         public List<(int, int)> Intersections { get; set; }
@@ -35,63 +31,35 @@ namespace DojoTemplateConsoleApp.CrossedWires
         {
             var start = (0, 0);
 
-            for (int i = 0; i < WireOneDirections.Count; i++)
-            {
-                var direction = WireOneDirections[i].Substring(0, 1);
-                var incline = (direction == "U" || direction == "D")
-                              ? "V"
-                              : "H";
-
-                var next = MoveWire(WireOneDirections[i], start);
-
-                var end = (start.Item1 <= next.Item1) && (start.Item2 <= next.Item2)
-                          ? next
-                          : start;
-                start = (start.Item1 <= next.Item1) && (start.Item2 <= next.Item2)
-                          ? start
-                          : next;
-
-                var segment = new Segment(direction, incline, start, end);
-
-                WireOneSegments.Add(segment);
-
-                start = next;
-            }
+            WireOneSegments = WireOneDirections.Select(d => BuildSegment(d, ref start)).ToList();
             
             start = (0, 0);
 
-            for (int i = 0; i < WireTwoDirections.Count; i++)
-            {
-                var direction = WireTwoDirections[i].Substring(0, 1);
-                var incline = (direction == "U" || direction == "D")
-                              ? "V"
-                              : "H";
-                var next = MoveWire(WireTwoDirections[i], start);
-
-                var end = (start.Item1 <= next.Item1) && (start.Item2 <= next.Item2)
-                          ? next
-                          : start;
-                
-                start = (start.Item1 <= next.Item1) && (start.Item2 <= next.Item2)
-                          ? start
-                          : next;
-
-                var segment = new Segment(direction, incline, start, end);
-
-                WireTwoSegments.Add(segment);
-
-                start = next;
-            }
-
+            WireTwoSegments = WireTwoDirections.Select(d => BuildSegment(d, ref start)).ToList();
         }
 
-        public void LoadPoints()
+        private Segment BuildSegment(string instruction, ref (int, int) startPosition)
         {
-            var (x, y) = (0, 0);
-            WireOnePoints = WireOneDirections.Select(i => (x, y) = MoveWire(i, (x, y))).ToList();
+            var direction = instruction.Substring(0, 1);
+            var incline = (direction == "U" || direction == "D")
+                          ? "V"
+                          : "H";
 
-            (x, y) = (0, 0);
-            WireTwoPoints = WireTwoDirections.Select(i => (x, y) = MoveWire(i, (x, y))).ToList();
+            var next = MoveWire(instruction, startPosition);
+
+            var end = (startPosition.Item1 <= next.Item1) && (startPosition.Item2 <= next.Item2)
+                      ? next
+                      : startPosition;
+            startPosition = (startPosition.Item1 <= next.Item1) && (startPosition.Item2 <= next.Item2)
+                      ? startPosition
+                      : next;
+
+            var segment = new Segment(direction, incline, startPosition, end);
+            
+            startPosition = next;
+
+            return segment;
+
         }
 
         private (int, int) MoveWire(string instruction, (int, int) position)
@@ -121,51 +89,32 @@ namespace DojoTemplateConsoleApp.CrossedWires
             return (x, y);
         }
 
-        public void FindIntersections()
+        public void FindIntersectionsWithSegments()
         {
-            for (int i = 0; i < (WireOnePoints.Count - 1); i++)
-            {
-                for (int j = 0; j < (WireTwoPoints.Count - 1); j++)
-                {
-                    var CurrentOne = (WireOnePoints[i].Item1, WireOnePoints[i].Item2);
-                    var CurrentTwo = (WireTwoPoints[j].Item1, WireTwoPoints[j].Item2);
-                    var NextOne = (WireOnePoints[i+1].Item1, WireOnePoints[i+1].Item2);
-                    var NextTwo = (WireTwoPoints[j+1].Item1, WireTwoPoints[j+1].Item2);
-
-                    var CurrentOneX = WireOnePoints[i].Item1;
-                    var CurrentOneY = WireOnePoints[i].Item2;
-                    var NextOneX = WireOnePoints[i+1].Item1;
-                    var NextOneY = WireOnePoints[i+1].Item2;
-                    
-                    var CurrentTwoX = WireTwoPoints[j].Item1;
-                    var CurrentTwoY = WireTwoPoints[j].Item2;
-                    var NextTwoX = WireTwoPoints[j+1].Item1;
-                    var NextTwoY = WireTwoPoints[j+1].Item2;
-
-                    var wibble = ((CurrentTwoY <= CurrentOneY && CurrentOneY <= NextTwoY) || (CurrentTwoY >= CurrentOneY && CurrentOneY >= NextTwoY))
-                                && ((CurrentOneX <= CurrentTwoX && CurrentTwoX <= NextOneX) || (CurrentOneX >= CurrentTwoX && CurrentTwoX >= NextOneX));
-                    
-                    var wobble = ((CurrentOneY <= CurrentTwoY && CurrentTwoY <= NextOneY) || (CurrentOneY >= CurrentTwoY && CurrentTwoY >= NextOneY))
-                                && ((CurrentTwoX <= CurrentOneX && CurrentOneX <= NextTwoX) || (CurrentTwoX >= CurrentOneX && CurrentOneX >= NextTwoX));
-
-                    if (wibble)
-                    {
-                        var intersection = (CurrentTwoX, CurrentOneY);
-
-                        if (Intersections.Contains(intersection)) continue;
-                        else Intersections.Add(intersection);
-                    }
-                    if (wobble)
-                    {
-                        var intersection = (CurrentOneX, CurrentTwoY);
-
-                        if (Intersections.Contains(intersection)) continue;
-                        else Intersections.Add(intersection);
-                    }
-                }
-            }
+            Intersections = WireOneSegments.SelectMany(s => FindIntersections(s)).ToList();
         }
 
+        private IEnumerable<(int, int)> FindIntersections(Segment segment)
+        {
+            if (segment.Incline == "H")
+            {
+                return WireTwoSegments.Where(s => s.Incline == "V")
+                               .Where(s => segment.StartPoint.Item1 <= s.StartPoint.Item1
+                                        && s.StartPoint.Item1 <= segment.EndPoint.Item1
+                                        && s.StartPoint.Item2 <= segment.StartPoint.Item2
+                                        && segment.StartPoint.Item2 < s.EndPoint.Item2)
+                               .Select(s => (s.StartPoint.Item1, segment.StartPoint.Item2));
+            }
+            else
+            {
+                return WireTwoSegments.Where(s => s.Incline == "H")
+                               .Where(s => segment.StartPoint.Item2 <= s.StartPoint.Item2
+                                        && s.StartPoint.Item2 <= segment.EndPoint.Item2
+                                        && s.StartPoint.Item1 <= segment.StartPoint.Item1
+                                        && segment.StartPoint.Item1 < s.EndPoint.Item1)
+                               .Select(s => (segment.StartPoint.Item1, s.StartPoint.Item2));
+            }
+        }
 
         public int FindClosestIntersection()
         {
@@ -174,7 +123,7 @@ namespace DojoTemplateConsoleApp.CrossedWires
             foreach (var point in Intersections)
             {
                 var distance = Math.Abs(point.Item1) + Math.Abs(point.Item2);
-                if (distance < lowestTotal)
+                if (distance < lowestTotal && distance != 0)
                 {
                     lowestTotal = distance;
                 };

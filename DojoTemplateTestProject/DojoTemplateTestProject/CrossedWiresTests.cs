@@ -22,35 +22,6 @@ namespace DojoTemplateTestProject
         }
 
         [Fact]
-        public void LoadPointsLoadsPointsToListOfCoordinates()
-        {
-            var crossedWires = new CrossedWiresFinder()
-            {
-                WireOneDirections = new List<string> { "R8", "U5", "L5", "D3" },
-                WireTwoDirections = new List<string> { "U7", "R6", "D4", "L4" }
-            };
-            var expectedWireOnePath = new List<(int, int)> 
-            {
-                (8, 0),
-                (8, 5),
-                (3, 5),
-                (3, 2)
-            };
-            var expectedWireTwoPath = new List<(int, int)> 
-            { 
-                (0, 7),
-                (6, 7),
-                (6, 3),
-                (2, 3)
-            };
-
-            crossedWires.LoadPoints();
-
-            crossedWires.WireOnePoints.Should().BeEquivalentTo(expectedWireOnePath);
-            crossedWires.WireTwoPoints.Should().BeEquivalentTo(expectedWireTwoPath);
-        }
-        
-        [Fact]
         public void LoadSegmentsLoadsSegmentsToCorrectList()
         {
             var crossedWires = new CrossedWiresFinder()
@@ -80,33 +51,34 @@ namespace DojoTemplateTestProject
         }
 
         [Fact]
-        public void FindIntersectionsFindsCorrectIntersections()
+        public void FindIntersectionsWithSegmentsFindsCorrectIntersections()
         {
             var crossedWires = new CrossedWiresFinder()
             {
-                WireOnePoints = new List<(int, int)>
+                WireOneSegments = new List<Segment>
                 {
-                    (8, 0),
-                    (8, 5),
-                    (3, 5),
-                    (3, 2)
+                    new Segment("R", "H", (0, 0), (8, 0)),
+                    new Segment("U", "V", (8, 0), (8, 5)),
+                    new Segment("L", "H", (3, 5), (8, 5)),
+                    new Segment("D", "V", (3, 2), (3, 5))
                 },
-                WireTwoPoints = new List<(int, int)>
+                WireTwoSegments = new List<Segment>
                 {
-                    (0, 7),
-                    (6, 7),
-                    (6, 3),
-                    (2, 3)
+                    new Segment("U", "V", (0, 0), (0, 7)),
+                    new Segment("R", "H", (0, 7), (6, 7)),
+                    new Segment("D", "V", (6, 3), (6, 7)),
+                    new Segment("L", "H", (2, 3), (6, 3))
                 }
-            };
+        };
 
             var expectedIntersections = new List<(int, int)>
             {
+                (0, 0),
                 (3, 3),
                 (6, 5)
             };
 
-            crossedWires.FindIntersections();
+            crossedWires.FindIntersectionsWithSegments();
 
             crossedWires.Intersections.Should().BeEquivalentTo(expectedIntersections);
         }
@@ -118,6 +90,7 @@ namespace DojoTemplateTestProject
             {
                 Intersections = new List<(int, int)>
                 {
+                    (0, 0),
                     (3, 3),
                     (6, 5)
                 }
@@ -138,8 +111,8 @@ namespace DojoTemplateTestProject
             crossedWires.WireOneDirections = wireOneInput.Split(",").ToList();
             crossedWires.WireTwoDirections = wireTwoInput.Split(",").ToList();
 
-            crossedWires.LoadPoints();
-            crossedWires.FindIntersections();
+            crossedWires.LoadSegments();
+            crossedWires.FindIntersectionsWithSegments();
             var result = crossedWires.FindClosestIntersection();
 
             result.Should().Be(shortestDistance);

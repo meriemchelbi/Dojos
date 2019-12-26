@@ -76,11 +76,11 @@ namespace DojoTemplateConsoleApp.CrossedWires
 
                     var CurrentOneX = WireOnePath[i].Item1;
                     var CurrentOneY = WireOnePath[i].Item2;
-                    var NextOneX = WireOnePath[j+1].Item1;
-                    var NextOneY = WireOnePath[j+1].Item2;
+                    var NextOneX = WireOnePath[i+1].Item1;
+                    var NextOneY = WireOnePath[i+1].Item2;
                     
-                    var CurrentTwoX = WireTwoPath[i].Item1;
-                    var CurrentTwoY = WireTwoPath[i].Item2;
+                    var CurrentTwoX = WireTwoPath[j].Item1;
+                    var CurrentTwoY = WireTwoPath[j].Item2;
                     var NextTwoX = WireTwoPath[j+1].Item1;
                     var NextTwoY = WireTwoPath[j+1].Item2;
 

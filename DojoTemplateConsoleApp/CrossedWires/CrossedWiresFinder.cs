@@ -69,6 +69,11 @@ namespace DojoTemplateConsoleApp.CrossedWires
             {
                 for (int j = 0; j < (WireTwoPath.Count - 1); j++)
                 {
+                    var CurrentOne = (WireOnePath[i].Item1, WireOnePath[i].Item2);
+                    var CurrentTwo = (WireTwoPath[j].Item1, WireTwoPath[j].Item2);
+                    var NextOne = (WireOnePath[i+1].Item1, WireOnePath[i+1].Item2);
+                    var NextTwo = (WireTwoPath[j+1].Item1, WireTwoPath[j+1].Item2);
+
                     var CurrentOneX = WireOnePath[i].Item1;
                     var CurrentOneY = WireOnePath[i].Item2;
                     var NextOneX = WireOnePath[j+1].Item1;
@@ -105,15 +110,13 @@ namespace DojoTemplateConsoleApp.CrossedWires
 
         public int FindClosestIntersection()
         {
-            var closest = (0, 0);
             var lowestTotal = int.MaxValue;
 
             foreach (var point in Intersections)
             {
-                var distance = Math.Abs(point.Item1) + Math.Abs(point.Item1);
+                var distance = Math.Abs(point.Item1) + Math.Abs(point.Item2);
                 if (distance < lowestTotal)
                 {
-                    closest = point;
                     lowestTotal = distance;
                 };
             }

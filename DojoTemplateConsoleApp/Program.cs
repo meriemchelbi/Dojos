@@ -76,7 +76,7 @@ namespace DojoTemplateConsoleApp
 
             var crossedWires = new CrossedWiresFinder();
             crossedWires.ParseInput();
-            crossedWires.LoadPaths();
+            crossedWires.LoadPoints();
             crossedWires.FindIntersections();
             var result = crossedWires.FindClosestIntersection();
 

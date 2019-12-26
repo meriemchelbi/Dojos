@@ -29,12 +29,27 @@ namespace DojoTemplateTestProject.CrossedWiresTests
                 }
         };
 
-            var expectedIntersections = new List<(int, int)>
-            {
-                (0, 0),
-                (3, 3),
-                (6, 5)
-            };
+            var expectedIntersections = new List<Intersection>
+                {
+                    new Intersection()
+                    {
+                        Coordinates = (0, 0),
+                        OverlappingSegmentW1 = new Segment("R", "H", (0, 0), (8, 0)),
+                        OverlappingSegmentW2 = new Segment("U", "V", (0, 0), (0, 7))
+                    },
+                    new Intersection()
+                    {
+                        Coordinates = (3, 3),
+                        OverlappingSegmentW1 = new Segment("D", "V", (3, 2), (3, 5)),
+                        OverlappingSegmentW2 = new Segment("L", "H", (2, 3), (6, 3))
+                    },
+                    new Intersection()
+                    { 
+                        Coordinates = (6, 5),
+                        OverlappingSegmentW1 = new Segment("L", "H", (3, 5), (8, 5)),
+                        OverlappingSegmentW2 = new Segment("D", "V", (6, 3), (6, 7))
+                    }
+                };
 
             crossedWires.FindAllIntersections();
 
@@ -46,11 +61,11 @@ namespace DojoTemplateTestProject.CrossedWiresTests
         {
             var crossedWires = new IntersectionFinder()
             {
-                Intersections = new List<(int, int)>
+                Intersections = new List<Intersection>
                 {
-                    (0, 0),
-                    (3, 3),
-                    (6, 5)
+                    new Intersection(){ Coordinates = (0, 0) },
+                    new Intersection(){ Coordinates = (3, 3) },
+                    new Intersection(){ Coordinates = (6, 5) }
                 }
             };
 

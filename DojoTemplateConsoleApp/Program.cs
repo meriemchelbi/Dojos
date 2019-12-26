@@ -74,10 +74,11 @@ namespace DojoTemplateConsoleApp
 
             #region CrossedWires
 
-            var crossedWires = new CrossedWiresFinder();
-            crossedWires.ParseInput();
-            crossedWires.LoadSegments();
-            crossedWires.FindIntersectionsWithSegments();
+            var crossedWires = new IntersectionFinder();
+            var segmentFactory = new SegmentFactory(crossedWires);
+            segmentFactory.ParseInput();
+            segmentFactory.LoadSegments();
+            crossedWires.FindAllIntersections();
             var result = crossedWires.FindClosestIntersection();
 
             Console.WriteLine($"The closest intersection is {result} distance from origin.");

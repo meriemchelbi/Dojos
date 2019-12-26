@@ -13,9 +13,9 @@ namespace DojoTemplateConsoleApp.CrossedWires
             StartPoint = start;
             EndPoint = end;
         }
-
         public string Direction { get; set; }
         public string Incline { get; set; }
+        public int NumOfSteps { get; set; }
         public (int, int) StartPoint { get; set; }
         public (int, int) EndPoint { get; set; }
     }

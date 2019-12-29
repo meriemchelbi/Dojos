@@ -72,20 +72,14 @@ namespace DojoTemplateConsoleApp.CrossedWires
 
         private void CalculateStepsToIntersection(Intersection intersection)
         {
-            var stepsToSegment1 = CalculateStepsToSegment(intersection.OverlappingSegmentW1);
-            var stepsInSegment1 = CalculateStepsWithinSegment(intersection.OverlappingSegmentW1, intersection.Coordinates);
-            
-            intersection.StepsToIntersectionW1 = stepsToSegment1 + stepsInSegment1;
-            
-            var stepsToSegment2 = CalculateStepsToSegment(intersection.OverlappingSegmentW2);
-            var stepsInSegment2 = CalculateStepsWithinSegment(intersection.OverlappingSegmentW2, intersection.Coordinates);
-            
-            intersection.StepsToIntersectionW2 = stepsToSegment2 + stepsInSegment2;
+            intersection.StepsToIntersectionW1 = CalculateStepsForSegment(intersection.OverlappingSegmentW1, intersection.Coordinates);
+
+            intersection.StepsToIntersectionW2 = CalculateStepsForSegment(intersection.OverlappingSegmentW2, intersection.Coordinates);
 
         }
 
 
-        private int CalculateStepsToSegment(Segment segment)
+        private int CalculateStepsForSegment(Segment segment, (int, int) intersectionCoordinates)
         {
             var total = 0;
             var wireSegments = new List<Segment>();
@@ -110,34 +104,26 @@ namespace DojoTemplateConsoleApp.CrossedWires
                 }
                 else break;
             }
-            
-            return total;
-        }
-
-        private int CalculateStepsWithinSegment(Segment segment, (int, int) intersectionCoordinates)
-        {
-            var steps = 0;
 
             switch (segment.Direction)
             {
                 case "U":
-                    steps = Math.Abs(intersectionCoordinates.Item2 - segment.StartPoint.Item2);
+                    total += Math.Abs(intersectionCoordinates.Item2 - segment.StartPoint.Item2);
                     break;
                 case "D":
-                    steps = Math.Abs(intersectionCoordinates.Item2 - segment.EndPoint.Item2);
+                    total += Math.Abs(intersectionCoordinates.Item2 - segment.EndPoint.Item2);
                     break;
                 case "L":
-                    steps = Math.Abs(intersectionCoordinates.Item1 - segment.EndPoint.Item1);
+                    total += Math.Abs(intersectionCoordinates.Item1 - segment.EndPoint.Item1);
                     break;
                 case "R":
-                    steps = Math.Abs(intersectionCoordinates.Item1 - segment.StartPoint.Item1);
+                    total += Math.Abs(intersectionCoordinates.Item1 - segment.StartPoint.Item1);
                     break;
                 default:
                     break;
             }
 
-            return steps;
+            return total;
         }
-
     }
 }

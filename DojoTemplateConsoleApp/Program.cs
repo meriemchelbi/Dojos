@@ -79,9 +79,12 @@ namespace DojoTemplateConsoleApp
             segmentFactory.ParseInput();
             segmentFactory.LoadSegments();
             crossedWires.FindAllIntersections();
-            var result = crossedWires.FindClosestIntersection();
+            crossedWires.CalculateStepsToAllIntersections();
+            var partOneResult = crossedWires.FindClosestIntersection();
+            var partTwoResult = crossedWires.FindShortestDistanceToIntersection();
 
-            Console.WriteLine($"The closest intersection is {result} distance from origin.");
+            Console.WriteLine($"The closest intersection is {partOneResult} distance from origin.");
+            Console.WriteLine($"The fastest intersection to get to is {partTwoResult} steps from origin.");
 
             #endregion
         }

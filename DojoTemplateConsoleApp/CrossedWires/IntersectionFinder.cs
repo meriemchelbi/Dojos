@@ -78,7 +78,6 @@ namespace DojoTemplateConsoleApp.CrossedWires
 
         }
 
-
         private int CalculateStepsForSegment(Segment segment, (int, int) intersectionCoordinates)
         {
             var total = 0;
@@ -124,6 +123,22 @@ namespace DojoTemplateConsoleApp.CrossedWires
             }
 
             return total;
+        }
+
+        public int FindShortestDistanceToIntersection()
+        {
+            var result = int.MaxValue;
+
+            for (int i = 1; i < Intersections.Count; i++)
+            {
+                var totalSteps = Intersections[i].StepsToIntersectionW1 + Intersections[i].StepsToIntersectionW2;
+
+                result = (totalSteps < result)
+                    ? totalSteps
+                    : result;
+            }
+
+            return result;
         }
     }
 }

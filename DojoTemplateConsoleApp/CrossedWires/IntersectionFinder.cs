@@ -64,5 +64,17 @@ namespace DojoTemplateConsoleApp.CrossedWires
 
             return lowestTotal;
         }
+
+        public void CalculateStepsToIntersections()
+        {
+            // for each intersection in Intersections
+            // take wire 1 intersecting segment
+            // add num of steps for all segments in wire 1 segments up until & excluding intersecting segment
+            // add remaining steps within segment to intersection (needs working out)
+
+            // do the same for wire 2
+
+            throw new NotImplementedException();
+        }
     }
 }

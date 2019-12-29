@@ -129,11 +129,11 @@ namespace DojoTemplateConsoleApp.CrossedWires
         {
             var result = int.MaxValue;
 
-            for (int i = 1; i < Intersections.Count; i++)
+            foreach (var intersection in Intersections)
             {
-                var totalSteps = Intersections[i].StepsToIntersectionW1 + Intersections[i].StepsToIntersectionW2;
+                var totalSteps = intersection.StepsToIntersectionW1 + intersection.StepsToIntersectionW2;
 
-                result = (totalSteps < result)
+                result = (totalSteps < result && totalSteps != 0)
                     ? totalSteps
                     : result;
             }

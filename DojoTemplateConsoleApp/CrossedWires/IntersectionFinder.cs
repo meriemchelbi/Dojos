@@ -65,16 +65,79 @@ namespace DojoTemplateConsoleApp.CrossedWires
             return lowestTotal;
         }
 
-        public void CalculateStepsToIntersections()
+        public void CalculateStepsToAllIntersections()
         {
-            // for each intersection in Intersections
-            // take wire 1 intersecting segment
-            // add num of steps for all segments in wire 1 segments up until & excluding intersecting segment
-            // add remaining steps within segment to intersection (needs working out)
-
-            // do the same for wire 2
-
-            throw new NotImplementedException();
+            Intersections.ForEach(i => CalculateStepsToIntersection(i));
         }
+
+        private void CalculateStepsToIntersection(Intersection intersection)
+        {
+            var stepsToSegment1 = CalculateStepsToSegment(intersection.OverlappingSegmentW1);
+            var stepsInSegment1 = CalculateStepsWithinSegment(intersection.OverlappingSegmentW1, intersection.Coordinates);
+            
+            intersection.StepsToIntersectionW1 = stepsToSegment1 + stepsInSegment1;
+            
+            var stepsToSegment2 = CalculateStepsToSegment(intersection.OverlappingSegmentW2);
+            var stepsInSegment2 = CalculateStepsWithinSegment(intersection.OverlappingSegmentW2, intersection.Coordinates);
+            
+            intersection.StepsToIntersectionW2 = stepsToSegment2 + stepsInSegment2;
+
+        }
+
+
+        private int CalculateStepsToSegment(Segment segment)
+        {
+            var total = 0;
+            var wireSegments = new List<Segment>();
+
+            switch (segment.Wire)
+            {
+                case 1:
+                    wireSegments = WireOneSegments;
+                    break;
+                case 2:
+                    wireSegments = WireTwoSegments;
+                    break;
+                default:
+                    break;
+            }
+
+            foreach (var currentSegment in wireSegments)
+            {
+                if (!currentSegment.Equals(segment))
+                {
+                    total += currentSegment.NumOfSteps;
+                }
+                else break;
+            }
+            
+            return total;
+        }
+
+        private int CalculateStepsWithinSegment(Segment segment, (int, int) intersectionCoordinates)
+        {
+            var steps = 0;
+
+            switch (segment.Direction)
+            {
+                case "U":
+                    steps = Math.Abs(intersectionCoordinates.Item2 - segment.StartPoint.Item2);
+                    break;
+                case "D":
+                    steps = Math.Abs(intersectionCoordinates.Item2 - segment.EndPoint.Item2);
+                    break;
+                case "L":
+                    steps = Math.Abs(intersectionCoordinates.Item1 - segment.EndPoint.Item1);
+                    break;
+                case "R":
+                    steps = Math.Abs(intersectionCoordinates.Item1 - segment.StartPoint.Item1);
+                    break;
+                default:
+                    break;
+            }
+
+            return steps;
+        }
+
     }
 }

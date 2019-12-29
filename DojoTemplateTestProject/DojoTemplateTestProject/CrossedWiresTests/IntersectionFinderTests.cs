@@ -15,17 +15,17 @@ namespace DojoTemplateTestProject.CrossedWiresTests
             {
                 WireOneSegments = new List<Segment>
                 {
-                    new Segment("R", "H", (0, 0), (8, 0)),
-                    new Segment("U", "V", (8, 0), (8, 5)),
-                    new Segment("L", "H", (3, 5), (8, 5)),
-                    new Segment("D", "V", (3, 2), (3, 5))
+                    new Segment("R", "H", (0, 0), (8, 0), 1),
+                    new Segment("U", "V", (8, 0), (8, 5), 1),
+                    new Segment("L", "H", (3, 5), (8, 5), 1),
+                    new Segment("D", "V", (3, 2), (3, 5), 1)
                 },
                 WireTwoSegments = new List<Segment>
                 {
-                    new Segment("U", "V", (0, 0), (0, 7)),
-                    new Segment("R", "H", (0, 7), (6, 7)),
-                    new Segment("D", "V", (6, 3), (6, 7)),
-                    new Segment("L", "H", (2, 3), (6, 3))
+                    new Segment("U", "V", (0, 0), (0, 7), 2),
+                    new Segment("R", "H", (0, 7), (6, 7), 2),
+                    new Segment("D", "V", (6, 3), (6, 7), 2),
+                    new Segment("L", "H", (2, 3), (6, 3), 2)
                 }
         };
             var expectedIntersections = new List<Intersection>
@@ -33,20 +33,20 @@ namespace DojoTemplateTestProject.CrossedWiresTests
                     new Intersection()
                     {
                         Coordinates = (0, 0),
-                        OverlappingSegmentW1 = new Segment("R", "H", (0, 0), (8, 0)),
-                        OverlappingSegmentW2 = new Segment("U", "V", (0, 0), (0, 7))
+                        OverlappingSegmentW1 = new Segment("R", "H", (0, 0), (8, 0), 1),
+                        OverlappingSegmentW2 = new Segment("U", "V", (0, 0), (0, 7), 2)
                     },
                     new Intersection()
                     {
                         Coordinates = (3, 3),
-                        OverlappingSegmentW1 = new Segment("D", "V", (3, 2), (3, 5)),
-                        OverlappingSegmentW2 = new Segment("L", "H", (2, 3), (6, 3))
+                        OverlappingSegmentW1 = new Segment("D", "V", (3, 2), (3, 5), 1),
+                        OverlappingSegmentW2 = new Segment("L", "H", (2, 3), (6, 3), 2)
                     },
                     new Intersection()
                     { 
                         Coordinates = (6, 5),
-                        OverlappingSegmentW1 = new Segment("L", "H", (3, 5), (8, 5)),
-                        OverlappingSegmentW2 = new Segment("D", "V", (6, 3), (6, 7))
+                        OverlappingSegmentW1 = new Segment("L", "H", (3, 5), (8, 5), 1),
+                        OverlappingSegmentW2 = new Segment("D", "V", (6, 3), (6, 7), 2)
                     }
                 };
             crossedWires.FindAllIntersections();
@@ -78,53 +78,67 @@ namespace DojoTemplateTestProject.CrossedWiresTests
             var intersectionFinder = new IntersectionFinder();
             intersectionFinder.Intersections = new List<Intersection>()
             {
-                                    new Intersection()
+                    new Intersection()
                     {
                         Coordinates = (0, 0),
-                        OverlappingSegmentW1 = new Segment("R", "H", (0, 0), (8, 0)),
-                        OverlappingSegmentW2 = new Segment("U", "V", (0, 0), (0, 7))
+                        OverlappingSegmentW1 = new Segment("R", "H", (0, 0), (8, 0), 1) { NumOfSteps = 8 },
+                        OverlappingSegmentW2 = new Segment("U", "V", (0, 0), (0, 7), 2) { NumOfSteps = 7 }
                     },
                     new Intersection()
                     {
                         Coordinates = (3, 3),
-                        OverlappingSegmentW1 = new Segment("D", "V", (3, 2), (3, 5)),
-                        OverlappingSegmentW2 = new Segment("L", "H", (2, 3), (6, 3))
+                        OverlappingSegmentW1 = new Segment("D", "V", (3, 2), (3, 5), 1) { NumOfSteps = 3 },
+                        OverlappingSegmentW2 = new Segment("L", "H", (2, 3), (6, 3), 2) { NumOfSteps = 4 }
                     },
                     new Intersection()
                     {
                         Coordinates = (6, 5),
-                        OverlappingSegmentW1 = new Segment("L", "H", (3, 5), (8, 5)),
-                        OverlappingSegmentW2 = new Segment("D", "V", (6, 3), (6, 7))
+                        OverlappingSegmentW1 = new Segment("L", "H", (3, 5), (8, 5), 1) { NumOfSteps = 5 },
+                        OverlappingSegmentW2 = new Segment("D", "V", (6, 3), (6, 7), 2) { NumOfSteps = 4 }
                     }
+            };
+            intersectionFinder.WireOneSegments = new List<Segment>
+            {
+                new Segment("R", "H", (0, 0), (8, 0), 1) { NumOfSteps = 8 },
+                new Segment("U", "V", (8, 0), (8, 5), 1) { NumOfSteps = 5 },
+                new Segment("L", "H", (3, 5), (8, 5), 1) { NumOfSteps = 5 },
+                new Segment("D", "V", (3, 2), (3, 5), 1) { NumOfSteps = 3 }
+            };
+            intersectionFinder.WireTwoSegments = new List<Segment>
+            {
+                new Segment("U", "V", (0, 0), (0, 7), 2) { NumOfSteps = 7 },
+                new Segment("R", "H", (0, 7), (6, 7), 2) { NumOfSteps = 6 },
+                new Segment("D", "V", (6, 3), (6, 7), 2) { NumOfSteps = 4 },
+                new Segment("L", "H", (2, 3), (6, 3), 2) { NumOfSteps = 4 }
             };
             var expectedIntersections = new List<Intersection>()
             {
                     new Intersection()
                     {
                         Coordinates = (0, 0),
-                        OverlappingSegmentW1 = new Segment("R", "H", (0, 0), (8, 0)),
-                        OverlappingSegmentW2 = new Segment("U", "V", (0, 0), (0, 7)),
+                        OverlappingSegmentW1 = new Segment("R", "H", (0, 0), (8, 0), 1) { NumOfSteps = 8 },
+                        OverlappingSegmentW2 = new Segment("U", "V", (0, 0), (0, 7), 2) { NumOfSteps = 7 },
                         StepsToIntersectionW1 = 0,
                         StepsToIntersectionW2 = 0
                     },
                     new Intersection()
                     {
                         Coordinates = (3, 3),
-                        OverlappingSegmentW1 = new Segment("D", "V", (3, 2), (3, 5)),
-                        OverlappingSegmentW2 = new Segment("L", "H", (2, 3), (6, 3)),
+                        OverlappingSegmentW1 = new Segment("D", "V", (3, 2), (3, 5), 1) { NumOfSteps = 3 },
+                        OverlappingSegmentW2 = new Segment("L", "H", (2, 3), (6, 3), 2) { NumOfSteps = 4 },
                         StepsToIntersectionW1 = 20,
                         StepsToIntersectionW2 = 20
                     },
                     new Intersection()
                     {
                         Coordinates = (6, 5),
-                        OverlappingSegmentW1 = new Segment("L", "H", (3, 5), (8, 5)),
-                        OverlappingSegmentW2 = new Segment("D", "V", (6, 3), (6, 7)),
+                        OverlappingSegmentW1 = new Segment("L", "H", (3, 5), (8, 5), 1) { NumOfSteps = 5 },
+                        OverlappingSegmentW2 = new Segment("D", "V", (6, 3), (6, 7), 2) { NumOfSteps = 4 },
                         StepsToIntersectionW1 = 15,
                         StepsToIntersectionW2 = 15
                     }
             };
-            intersectionFinder.CalculateStepsToIntersections();
+            intersectionFinder.CalculateStepsToAllIntersections();
 
             intersectionFinder.Intersections.Should().BeEquivalentTo(expectedIntersections);
         }

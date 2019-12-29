@@ -24,14 +24,14 @@ namespace DojoTemplateConsoleApp.CrossedWires
         {
             var start = (0, 0);
 
-            _intersectionFinder.WireOneSegments = _intersectionFinder.WireOneDirections.Select(d => BuildSegment(d, ref start)).ToList();
+            _intersectionFinder.WireOneSegments = _intersectionFinder.WireOneDirections.Select(d => BuildSegment(d, ref start, 1)).ToList();
 
             start = (0, 0);
 
-            _intersectionFinder.WireTwoSegments = _intersectionFinder.WireTwoDirections.Select(d => BuildSegment(d, ref start)).ToList();
+            _intersectionFinder.WireTwoSegments = _intersectionFinder.WireTwoDirections.Select(d => BuildSegment(d, ref start, 2)).ToList();
         }
 
-        private Segment BuildSegment(string instruction, ref (int, int) startPosition)
+        private Segment BuildSegment(string instruction, ref (int, int) startPosition, int wire)
         {
             var direction = instruction.Substring(0, 1);
             var numOfSteps = int.Parse(instruction.Substring(1));
@@ -48,7 +48,7 @@ namespace DojoTemplateConsoleApp.CrossedWires
                       ? startPosition
                       : next;
 
-            var segment = new Segment(direction, incline, startPosition, end) { NumOfSteps = numOfSteps};
+            var segment = new Segment(direction, incline, startPosition, end, wire) { NumOfSteps = numOfSteps};
 
             startPosition = next;
 

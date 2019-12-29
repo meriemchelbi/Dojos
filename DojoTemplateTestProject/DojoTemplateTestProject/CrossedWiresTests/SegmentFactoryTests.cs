@@ -30,17 +30,17 @@ namespace DojoTemplateTestProject.CrossedWiresTests
             var segmentFactory = new SegmentFactory(crossedWires);
             var expectedWireOneSegments = new List<Segment>
             {
-                new Segment("R", "H", (0, 0), (8, 0)) { NumOfSteps = 8 },
-                new Segment("U", "V", (8, 0), (8, 5)) { NumOfSteps = 5 },
-                new Segment("L", "H", (3, 5), (8, 5)) { NumOfSteps = 5 },
-                new Segment("D", "V", (3, 2), (3, 5)) { NumOfSteps = 3 }
+                new Segment("R", "H", (0, 0), (8, 0), 1) { NumOfSteps = 8 },
+                new Segment("U", "V", (8, 0), (8, 5), 1) { NumOfSteps = 5 },
+                new Segment("L", "H", (3, 5), (8, 5), 1) { NumOfSteps = 5 },
+                new Segment("D", "V", (3, 2), (3, 5), 1) { NumOfSteps = 3 }
             };
             var expectedWireTwoSegments = new List<Segment>
             {
-                new Segment("U", "V", (0, 0), (0, 7)) { NumOfSteps = 7 },
-                new Segment("R", "H", (0, 7), (6, 7)) { NumOfSteps = 6 },
-                new Segment("D", "V", (6, 3), (6, 7)) { NumOfSteps = 4 },
-                new Segment("L", "H", (2, 3), (6, 3)) { NumOfSteps = 4 }
+                new Segment("U", "V", (0, 0), (0, 7), 2) { NumOfSteps = 7 },
+                new Segment("R", "H", (0, 7), (6, 7), 2) { NumOfSteps = 6 },
+                new Segment("D", "V", (6, 3), (6, 7), 2) { NumOfSteps = 4 },
+                new Segment("L", "H", (2, 3), (6, 3), 2) { NumOfSteps = 4 }
             };
 
             segmentFactory.LoadSegments();

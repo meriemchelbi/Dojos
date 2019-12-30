@@ -7,9 +7,9 @@ using DojoTemplateConsoleApp.OpCode;
 using System.Linq;
 using FluentAssertions;
 
-namespace DojoTemplateTestProject
+namespace DojoTemplateTestProject.OpCodeTests
 {
-    public class OpCodeTests
+    public class OpCodeOperationsTests
     {
         [Theory]
         [InlineData(12, 1)]

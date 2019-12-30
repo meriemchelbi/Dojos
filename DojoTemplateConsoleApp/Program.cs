@@ -74,17 +74,17 @@ namespace DojoTemplateConsoleApp
 
             #region CrossedWires
 
-            var crossedWires = new IntersectionFinder();
-            var segmentFactory = new SegmentFactory(crossedWires);
-            segmentFactory.ParseInput();
-            segmentFactory.LoadSegments();
-            crossedWires.FindAllIntersections();
-            crossedWires.CalculateStepsToAllIntersections();
-            var partOneResult = crossedWires.FindClosestIntersection();
-            var partTwoResult = crossedWires.FindShortestDistanceToIntersection();
+            //var crossedWires = new IntersectionFinder();
+            //var segmentFactory = new SegmentFactory(crossedWires);
+            //segmentFactory.ParseInput();
+            //segmentFactory.LoadSegments();
+            //crossedWires.FindAllIntersections();
+            //crossedWires.CalculateStepsToAllIntersections();
+            //var partOneResult = crossedWires.FindClosestIntersection();
+            //var partTwoResult = crossedWires.FindShortestDistanceToIntersection();
 
-            Console.WriteLine($"The closest intersection is {partOneResult} distance from origin.");
-            Console.WriteLine($"The fastest intersection to get to is {partTwoResult} steps from origin.");
+            //Console.WriteLine($"The closest intersection is {partOneResult} distance from origin.");
+            //Console.WriteLine($"The fastest intersection to get to is {partTwoResult} steps from origin.");
 
             #endregion
         }

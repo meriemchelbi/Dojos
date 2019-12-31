@@ -20,15 +20,6 @@ namespace DojoTemplateConsoleApp
                        .Select(l => int.Parse(l))
                        .ToList();
         }
-
-        public int[] ParseOpCode(OpCodeOperations opCodeOperations)
-        {
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"OpCode\OpCode.txt");
-            return opCodeOperations.Input = File.ReadAllText(path)
-                                         .Split(",")
-                                         .Select(c => int.Parse(c))
-                                         .ToArray();
-        }
         
         public void ParseSpaceImageArray(SpaceImageFormat spaceImageFormat)
         {

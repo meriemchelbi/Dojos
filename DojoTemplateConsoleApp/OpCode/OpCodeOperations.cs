@@ -6,8 +6,12 @@ namespace DojoTemplateConsoleApp.OpCode
 {
     public class OpCodeOperations
     {
+        public OpCodeOperations(InputCapturer inputCapturer)
+        {
+            _inputCapturer = inputCapturer;
+        }
+
         public int[] Input { get; set; }
-        
         public int[] OpCodes
         {
             get
@@ -22,7 +26,7 @@ namespace DojoTemplateConsoleApp.OpCode
             set { }
         }
         private int[] _opCodes;
-
+        private InputCapturer _inputCapturer;
 
         public void FindNounVerb(int expectedTotal)
         {
@@ -35,7 +39,7 @@ namespace DojoTemplateConsoleApp.OpCode
                 {
                     OpCodes[1] = noun;
                     OpCodes[2] = verb;
-                    ExecuteOpCode();
+                    RunProgramme();
 
                     if (OpCodes[0] == expectedTotal)
                     {
@@ -49,48 +53,56 @@ namespace DojoTemplateConsoleApp.OpCode
             }
         }
         
-        public void ExecuteOpCode()
+        public void RunProgramme()
         {
             var opCodesLength = OpCodes.Length;
+
             for (int i = 0; i < (opCodesLength - 3); i++)
             {
-                var replaceIndex = OpCodes[i + 3];
-                var nounIndex = OpCodes[i + 1];
-                var verbIndex = OpCodes[i + 2];
+                var opCode = new OpCode()
+                {
+                    Instruction = OpCodes[i],
+                    FirstParameter = OpCodes[i+1],
+                    SecondParameter = OpCodes[i+2],
+                    OutputIndex = OpCodes[i+3]
+                };
 
-                if (replaceIndex < opCodesLength &&
-                    nounIndex < opCodesLength &&
-                    verbIndex < opCodesLength)
+                if (opCode.Instruction == 99) return;
+
+                if (opCode.OutputIndex < opCodesLength
+                    && opCode.FirstParameter < opCodesLength
+                    && opCode.SecondParameter < opCodesLength)
                 {
-                    switch (OpCodes[i])
-                    {
-                        case 99:
-                            return;
-                        case 1:
-                            OpCodes[replaceIndex] = AddOp(nounIndex, verbIndex);
-                            i += 3;
-                            break;
-                        case 2:
-                            OpCodes[replaceIndex] = MultiplyOp(nounIndex, verbIndex);
-                            i += 3;
-                            break;
-                    }
-                }
-                else
-                {
-                    return;
+                    ExecuteOpCode(opCode, ref i);
                 }
             }
         }
 
-        public int AddOp(int operandIndex1, int operandIndex2)
-        {
-            return OpCodes[operandIndex1] + OpCodes[operandIndex2];
-        }
+        private void AddOp(int param1, int param2, int outputIndex) => OpCodes[outputIndex] = OpCodes[param1] + OpCodes[param2];
 
-        public int MultiplyOp(int operandIndex1, int operandIndex2)
+        private void MultiplyOp(int operandIndex1, int operandIndex2, int outputIndex) =>  OpCodes[outputIndex] = OpCodes[operandIndex1] * OpCodes[operandIndex2];
+
+        private void ExecuteOpCode(OpCode opCode, ref int index)
         {
-            return OpCodes[operandIndex1] * OpCodes[operandIndex2];
+            switch (opCode.Instruction)
+            {
+                case 1:
+                    AddOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
+                    index += 3;
+                    break;
+                case 2:
+                    MultiplyOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
+                    index += 3;
+                    break;
+                case 3:
+                    index += 1;
+                    break;
+                case 4:
+                    index += 1;
+                    break;
+                default:
+                    break;
+            }
         }
 
     }

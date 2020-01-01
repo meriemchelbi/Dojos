@@ -41,8 +41,9 @@ namespace DojoTemplateConsoleApp.OpCode
         {
             for (int i = 0; i < OpCodes.Length - 1; i++)
             {
-                if (OpCodes[i] == 99
-                    || ((OpCodes[i] == 1 || OpCodes[i] == 2) && i > OpCodes.Length - 3))
+                var instruction = OpCodes[i] % 100;
+                if (instruction == 99
+                    || ((instruction == 1 || instruction == 2) && i > OpCodes.Length - 3))
                 {
                     return;
                 }
@@ -92,24 +93,24 @@ namespace DojoTemplateConsoleApp.OpCode
         {
             switch (opCode.Instruction)
             {
-                case 1:
-                    AddOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
-                    index += 3;
-                    break;
-                case 2:
-                    MultiplyOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
-                    index += 3;
-                    break;
-                case 3:
-                    RequestInput(opCode.FirstParameter);
-                    index += 1;
-                    break;
-                case 4:
-                    OutputValue(opCode.FirstParameter);
-                    index += 1;
-                    break;
-                default:
-                    break;
+                //case 1:
+                //    AddOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
+                //    index += 3;
+                //    break;
+                //case 2:
+                //    MultiplyOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
+                //    index += 3;
+                //    break;
+                //case 3:
+                //    RequestInput(opCode.FirstParameter);
+                //    index += 1;
+                //    break;
+                //case 4:
+                //    OutputValue(opCode.FirstParameter);
+                //    index += 1;
+                //    break;
+                //default:
+                //    break;
             }
         }
 

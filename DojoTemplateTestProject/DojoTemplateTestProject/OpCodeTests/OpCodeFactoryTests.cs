@@ -23,6 +23,7 @@ namespace DojoTemplateTestProject.OpCodeTests
 
             actual.Should().BeEquivalentTo(expectedOpCode);
         }
+
     }
 
     internal class OpCodeFactoryTestData : IEnumerable<object[]>
@@ -31,24 +32,24 @@ namespace DojoTemplateTestProject.OpCodeTests
         {
             yield return new object[]
             {
-                new int[] { 2, 3, 0, 3 },
+                new int[] { 1002, 4, 3, 4 },
                 new OpCode()
                 {
                     Instruction = 2,
-                    FirstParameter = 3,
-                    SecondParameter = 0,
-                    OutputIndex = 3
+                    FirstParameter = (4, 0),
+                    SecondParameter = (3, 1),
+                    OutputIndex = (4, 0)
                 }
             };
             yield return new object[]
             {
-                new int[] { 1, 5, 3, 99 },
+                new int[] { 101, 5, 3, 99 },
                 new OpCode()
                 {
                     Instruction = 1,
-                    FirstParameter = 5,
-                    SecondParameter = 3,
-                    OutputIndex = 99
+                    FirstParameter = (5, 1),
+                    SecondParameter = (3, 0),
+                    OutputIndex = (99, 0)
                 }
             };
             yield return new object[]
@@ -57,16 +58,16 @@ namespace DojoTemplateTestProject.OpCodeTests
                 new OpCode()
                 {
                     Instruction = 3,
-                    FirstParameter = 6,
+                    FirstParameter = (6, 0),
                 }
             };
             yield return new object[]
             {
-                new int[] { 4, 78 },
+                new int[] { 104, 78 },
                 new OpCode()
                 {
                     Instruction = 4,
-                    FirstParameter = 78,
+                    FirstParameter = (78, 1),
                 }
             };
             yield return new object[]

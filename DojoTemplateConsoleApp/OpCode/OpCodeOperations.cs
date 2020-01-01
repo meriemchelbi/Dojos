@@ -4,11 +4,16 @@ using System.Text;
 
 namespace DojoTemplateConsoleApp.OpCode
 {
-    public class OpCodeOperations
+    public interface IOperateOpCode
+    {
+        public int[] OpCodes { get; set; }
+    }
+    public class OpCodeOperations: IOperateOpCode
     {
         public OpCodeOperations(ICaptureInput inputCapturer)
         {
             _inputCapturer = inputCapturer;
+            _opCodeFactory = new OpCodeFactory(this);
             DiagnosticOutputs = new List<int>();
         }
 
@@ -26,11 +31,29 @@ namespace DojoTemplateConsoleApp.OpCode
             }
             set { }
         }
-
         public List<int> DiagnosticOutputs { get; set; }
-
+        
         private int[] _opCodes;
-        private ICaptureInput _inputCapturer;
+        private readonly ICaptureInput _inputCapturer;
+        private readonly ICreateOpCode _opCodeFactory;
+
+        public void RunProgramme()
+        {
+            for (int i = 0; i < OpCodes.Length - 1; i++)
+            {
+                if (OpCodes[i] == 99
+                    || ((OpCodes[i] == 1 || OpCodes[i] == 2) && i > OpCodes.Length - 3))
+                {
+                    return;
+                }
+
+                var opCode = _opCodeFactory.CreateOpCode(i);
+
+                ExecuteOpCode(opCode, ref i);
+            }
+        }
+
+        
 
         public void FindNounVerb(int expectedTotal)
         {
@@ -59,42 +82,6 @@ namespace DojoTemplateConsoleApp.OpCode
                     }
                 }
             }
-        }
-        
-        public void RunProgramme()
-        {
-            for (int i = 0; i < OpCodes.Length - 1; i++)
-            {
-                if (OpCodes[i] == 99
-                    || ((OpCodes[i] == 1 || OpCodes[i] == 2) && i > OpCodes.Length - 3))
-                {
-                    return;
-                }
-
-                var opCode = CreateOpCode(i);
-
-                ExecuteOpCode(opCode, ref i);
-            }
-        }
-        private OpCode CreateOpCode(int index)
-        {
-            var opCode = (OpCodes[index] == 1 || OpCodes[index] == 2)
-            ? new OpCode()
-            {
-                Instruction = OpCodes[index],
-                FirstParameter = OpCodes[index + 1],
-                SecondParameter = OpCodes[index + 2],
-                OutputIndex = OpCodes[index + 3]
-            }
-            : (OpCodes[index] == 3 || OpCodes[index] == 4)
-            ? new OpCode()
-            {
-                Instruction = OpCodes[index],
-                FirstParameter = OpCodes[index + 1],
-            }
-            : null;
-
-            return opCode;
         }
 
         private void AddOp(int param1, int param2, int outputIndex) => OpCodes[outputIndex] = OpCodes[param1] + OpCodes[param2];

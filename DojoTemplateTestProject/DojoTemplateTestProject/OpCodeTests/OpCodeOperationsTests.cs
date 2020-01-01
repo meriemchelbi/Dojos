@@ -15,13 +15,14 @@ namespace DojoTemplateTestProject.OpCodeTests
         [InlineData(1, 20)]
         public void OpCodeParserParsesToList(int opCode, int expectedElementIndex)
         {
-            var inputCapturer = new InputCapturer();
+            var inputCapturer = new UserInputCapturer();
             var opCodeOperations = new OpCodeOperations(inputCapturer);
+            var opCodeFactory = new OpCodeFactory(opCodeOperations);
             var parser = new OpCodeParser();
-            var list = parser.ParseOpCode(opCodeOperations, @"OpCode\OpCode.txt");
+            parser.ParseOpCode(opCodeOperations, @"OpCode\OpCode.txt");
 
 
-            Assert.Equal(opCode, list[expectedElementIndex]);
+            Assert.Equal(opCode, opCodeOperations.Input[expectedElementIndex]);
         }
                 
         [Theory]
@@ -32,12 +33,13 @@ namespace DojoTemplateTestProject.OpCodeTests
         [InlineData("1,1,1,4,99,5,6,0,99", "30,1,1,4,2,5,6,0,99")]
         public void RunProgrammeInsertsExpectedResultInCorrectPosition(string sourceCode, string expectedOutput)
         {
-            var inputCapturer = new InputCapturer();
+            var inputCapturer = new UserInputCapturer();
             var opCodeOperations = new OpCodeOperations(inputCapturer)
             {
                 Input = sourceCode.Split(',').Select(int.Parse).ToArray()
             };
-            
+            var opCodeFactory = new OpCodeFactory(opCodeOperations);
+
             opCodeOperations.RunProgramme();
             var output = expectedOutput.Split(',').Select(int.Parse).ToArray();
 
@@ -49,11 +51,11 @@ namespace DojoTemplateTestProject.OpCodeTests
         {
             var inputCapturer = Substitute.For<ICaptureInput>();
             inputCapturer.GetUserInput().Returns(1);
-            //var inputCapturer = new InputCapturer();
             var opCodeOps = new OpCodeOperations(inputCapturer)
             {
                 Input = "3,0,4,0,99".Split(',').Select(int.Parse).ToArray()
             };
+            var opCodeFactory = new OpCodeFactory(opCodeOps);
             var expectedOutput = 1;
             var expectedOpCodes = "1,0,4,0,99".Split(',').Select(int.Parse).ToArray();
 
@@ -63,31 +65,18 @@ namespace DojoTemplateTestProject.OpCodeTests
             opCodeOps.DiagnosticOutputs[0].Should().Be(expectedOutput);
         }
 
-        //}
-
-        //[Fact]
-        //public void OpCodeExecutorFinalResult()
-        //{
-        //    var opCodeOperations = new OpCodeOperations();
-        //    var inputParser = new OpCodeParser();
-        //    inputParser.ParseOpCode(opCodeOperations, @"OpCode\OpCode.txt");
-        //    opCodeOperations.ExecuteOpCode();
-        //    var result = opCodeOperations.OpCodes[0];
-
-        //    Console.WriteLine(result);
-        //}
-
         [Theory]
         [InlineData("2,6,9,0,6,33", 4, 5, 198)]
         [InlineData("1,10,8,0,52", 2, 4, 56)]
         public void FindNounVerbTest(string input, int noun, int verb, int expectedOutput)
         {
-            var inputCapturer = new InputCapturer();
+            var inputCapturer = new UserInputCapturer();
             var opCodeOperations = new OpCodeOperations(inputCapturer)
             {
                 Input = input.Split(',').Select(int.Parse).ToArray()
             };
-           
+            var opCodeFactory = new OpCodeFactory(opCodeOperations);
+
             opCodeOperations.FindNounVerb(expectedOutput);
 
             Assert.Equal(noun, opCodeOperations.OpCodes[1]);           

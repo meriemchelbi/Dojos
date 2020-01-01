@@ -9,7 +9,7 @@ namespace DojoTemplateConsoleApp.OpCode
         int GetUserInput();
     }
 
-    public class InputCapturer: ICaptureInput
+    public class UserInputCapturer: ICaptureInput
     {
         public int GetUserInput()
         {

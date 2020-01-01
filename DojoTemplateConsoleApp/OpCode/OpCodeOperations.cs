@@ -6,9 +6,10 @@ namespace DojoTemplateConsoleApp.OpCode
 {
     public class OpCodeOperations
     {
-        public OpCodeOperations(InputCapturer inputCapturer)
+        public OpCodeOperations(ICaptureInput inputCapturer)
         {
             _inputCapturer = inputCapturer;
+            DiagnosticOutputs = new List<int>();
         }
 
         public int[] Input { get; set; }
@@ -25,8 +26,11 @@ namespace DojoTemplateConsoleApp.OpCode
             }
             set { }
         }
+
+        public List<int> DiagnosticOutputs { get; set; }
+
         private int[] _opCodes;
-        private InputCapturer _inputCapturer;
+        private ICaptureInput _inputCapturer;
 
         public void FindNounVerb(int expectedTotal)
         {
@@ -39,13 +43,17 @@ namespace DojoTemplateConsoleApp.OpCode
                 {
                     OpCodes[1] = noun;
                     OpCodes[2] = verb;
-                    RunProgramme();
+                    try
+                    {
+                        RunProgramme();
+                    }
+                    catch (Exception) { }
 
                     if (OpCodes[0] == expectedTotal)
                     {
                         return;
                     }
-                    else
+                    else // reset
                     {
                         Array.Copy(Input, 0, _opCodes, 0, Input.Length);
                     }
@@ -55,27 +63,38 @@ namespace DojoTemplateConsoleApp.OpCode
         
         public void RunProgramme()
         {
-            var opCodesLength = OpCodes.Length;
-
-            for (int i = 0; i < (opCodesLength - 3); i++)
+            for (int i = 0; i < OpCodes.Length - 1; i++)
             {
-                var opCode = new OpCode()
+                if (OpCodes[i] == 99
+                    || ((OpCodes[i] == 1 || OpCodes[i] == 2) && i > OpCodes.Length - 3))
                 {
-                    Instruction = OpCodes[i],
-                    FirstParameter = OpCodes[i+1],
-                    SecondParameter = OpCodes[i+2],
-                    OutputIndex = OpCodes[i+3]
-                };
-
-                if (opCode.Instruction == 99) return;
-
-                if (opCode.OutputIndex < opCodesLength
-                    && opCode.FirstParameter < opCodesLength
-                    && opCode.SecondParameter < opCodesLength)
-                {
-                    ExecuteOpCode(opCode, ref i);
+                    return;
                 }
+
+                var opCode = CreateOpCode(i);
+
+                ExecuteOpCode(opCode, ref i);
             }
+        }
+        private OpCode CreateOpCode(int index)
+        {
+            var opCode = (OpCodes[index] == 1 || OpCodes[index] == 2)
+            ? new OpCode()
+            {
+                Instruction = OpCodes[index],
+                FirstParameter = OpCodes[index + 1],
+                SecondParameter = OpCodes[index + 2],
+                OutputIndex = OpCodes[index + 3]
+            }
+            : (OpCodes[index] == 3 || OpCodes[index] == 4)
+            ? new OpCode()
+            {
+                Instruction = OpCodes[index],
+                FirstParameter = OpCodes[index + 1],
+            }
+            : null;
+
+            return opCode;
         }
 
         private void AddOp(int param1, int param2, int outputIndex) => OpCodes[outputIndex] = OpCodes[param1] + OpCodes[param2];
@@ -95,15 +114,25 @@ namespace DojoTemplateConsoleApp.OpCode
                     index += 3;
                     break;
                 case 3:
+                    RequestInput(opCode.FirstParameter);
                     index += 1;
                     break;
                 case 4:
+                    OutputValue(opCode.FirstParameter);
                     index += 1;
                     break;
                 default:
                     break;
             }
         }
+
+        private void RequestInput(int saveLocation)
+        {
+            var input = _inputCapturer.GetUserInput();
+            OpCodes[saveLocation] = input;
+        }
+
+        private void OutputValue(int inputLocation) => DiagnosticOutputs.Add(OpCodes[inputLocation]);
 
     }
 }

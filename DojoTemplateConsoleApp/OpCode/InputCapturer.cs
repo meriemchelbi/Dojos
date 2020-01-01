@@ -4,7 +4,12 @@ using System.Text;
 
 namespace DojoTemplateConsoleApp.OpCode
 {
-    public class InputCapturer
+    public interface ICaptureInput
+    {
+        int GetUserInput();
+    }
+
+    public class InputCapturer: ICaptureInput
     {
         public int GetUserInput()
         {

@@ -44,19 +44,24 @@ namespace DojoTemplateTestProject.OpCodeTests
             opCodeOperations.OpCodes.Should().BeEquivalentTo(output);
         }
 
-        //[Fact]
-        //public void RunProgrammeOutputsInputInCorrectPosition()
-        //{
-        //    var inputCapturer = Substitute.For<InputCapturer>();
-        //    inputCapturer.GetUserInput().Returns(1);
-        //    var opCodeOps = Substitute.For<OpCodeOperations>(inputCapturer);
-        //    var sourceCode = "3,0,4,0,99";
-        //    opCodeOps.Input = sourceCode.Split(',').Select(int.Parse).ToArray();
-        //    var expectedOutput = 1;
-        //    var expectedOpCodes = "1,0,4,0,99";
+        [Fact]
+        public void RunProgrammeOutputsInputInCorrectPosition()
+        {
+            var inputCapturer = Substitute.For<ICaptureInput>();
+            inputCapturer.GetUserInput().Returns(1);
+            //var inputCapturer = new InputCapturer();
+            var opCodeOps = new OpCodeOperations(inputCapturer)
+            {
+                Input = "3,0,4,0,99".Split(',').Select(int.Parse).ToArray()
+            };
+            var expectedOutput = 1;
+            var expectedOpCodes = "1,0,4,0,99".Split(',').Select(int.Parse).ToArray();
 
-        //    opCodeOps.RunProgramme();
+            opCodeOps.RunProgramme();
 
+            opCodeOps.OpCodes.Should().BeEquivalentTo(expectedOpCodes);
+            opCodeOps.DiagnosticOutputs[0].Should().Be(expectedOutput);
+        }
 
         //}
 

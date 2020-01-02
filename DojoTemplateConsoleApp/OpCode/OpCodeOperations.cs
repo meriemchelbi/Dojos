@@ -54,8 +54,6 @@ namespace DojoTemplateConsoleApp.OpCode
             }
         }
 
-        
-
         public void FindNounVerb(int expectedTotal)
         {
             int noun;
@@ -85,42 +83,49 @@ namespace DojoTemplateConsoleApp.OpCode
             }
         }
 
-        private void AddOp(int param1, int param2, int outputIndex) => OpCodes[outputIndex] = OpCodes[param1] + OpCodes[param2];
-
-        private void MultiplyOp(int operandIndex1, int operandIndex2, int outputIndex) =>  OpCodes[outputIndex] = OpCodes[operandIndex1] * OpCodes[operandIndex2];
-
         private void ExecuteOpCode(OpCode opCode, ref int index)
         {
             switch (opCode.Instruction)
             {
-                //case 1:
-                //    AddOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
-                //    index += 3;
-                //    break;
-                //case 2:
-                //    MultiplyOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
-                //    index += 3;
-                //    break;
-                //case 3:
-                //    RequestInput(opCode.FirstParameter);
-                //    index += 1;
-                //    break;
-                //case 4:
-                //    OutputValue(opCode.FirstParameter);
-                //    index += 1;
-                //    break;
-                //default:
-                //    break;
+                case 1:
+                    AddOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
+                    index += 3;
+                    break;
+                case 2:
+                    MultiplyOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
+                    index += 3;
+                    break;
+                case 3:
+                    RequestInput(opCode.FirstParameter);
+                    index += 1;
+                    break;
+                case 4:
+                    OutputValue(opCode.FirstParameter);
+                    index += 1;
+                    break;
+                default:
+                    break;
             }
         }
 
-        private void RequestInput(int saveLocation)
+        private void AddOp((int, int) param1, (int, int) param2, (int, int) outputIndex)
         {
-            var input = _inputCapturer.GetUserInput();
-            OpCodes[saveLocation] = input;
+            var operand1 = OpCodes[param1.Item1];
+            var operand2 = OpCodes[param2.Item1];
+            OpCodes[outputIndex.Item1] = operand1 + operand2;
         }
 
-        private void OutputValue(int inputLocation) => DiagnosticOutputs.Add(OpCodes[inputLocation]);
+        private void MultiplyOp((int, int) param1, (int, int) param2, (int, int) outputIndex)
+        {
+            OpCodes[outputIndex.Item1] = OpCodes[param1.Item1] * OpCodes[param2.Item1];
+        }
+        private void RequestInput((int, int) saveLocation)
+        {
+            var input = _inputCapturer.GetUserInput();
+            OpCodes[saveLocation.Item1] = input;
+        }
+
+        private void OutputValue((int, int) inputParameter) => DiagnosticOutputs.Add(OpCodes[inputParameter.Item1]);
 
     }
 }

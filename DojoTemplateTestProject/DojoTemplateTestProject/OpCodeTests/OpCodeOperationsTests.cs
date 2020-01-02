@@ -28,9 +28,14 @@ namespace DojoTemplateTestProject.OpCodeTests
         [Theory]
         [InlineData("1,0,3,5,2,7,3,4,99,2,1,7,3", "1,0,3,5,15,6,3,4,99,2,1,7,3")]
         [InlineData("2,3,0,3,99", "2,3,0,6,99")]
+        [InlineData("102,4,0,3,9999", "102,4,0,408,9999")]
         [InlineData("1,0,0,0,99", "2,0,0,0,99")]
+        [InlineData("1001,0,0,6,99999,2,43,2,0", "1001,0,0,6,99999,2,1001,2,0")]
         [InlineData("2,4,4,5,99,0", "2,4,4,5,99,9801")]
+        [InlineData("1102,4,4,5,99,0,8", "1102,4,4,5,99,16,8")]
         [InlineData("1,1,1,4,99,5,6,0,99", "30,1,1,4,2,5,6,0,99")]
+        [InlineData("101,1,1,4,99,5,6,0,99", "30,1,1,4,2,5,6,0,99")]
+        [InlineData("1002,4,3,4,33", "1002,4,3,4,99")]
         public void RunProgrammeInsertsExpectedResultInCorrectPosition(string sourceCode, string expectedOutput)
         {
             var inputCapturer = new UserInputCapturer();
@@ -46,18 +51,19 @@ namespace DojoTemplateTestProject.OpCodeTests
             opCodeOperations.OpCodes.Should().BeEquivalentTo(output);
         }
 
-        [Fact]
-        public void RunProgrammeOutputsInputInCorrectPosition()
+        [Theory]
+        [InlineData("3,0,4,0,99", "1,0,4,0,99", 1)]
+        [InlineData("3,0,104,56,99", "1,0,104,56,99", 56)]
+        public void RunProgrammeOutputsInputInCorrectPosition(string sourceCode, string expectedCode, int expectedOutput)
         {
             var inputCapturer = Substitute.For<ICaptureInput>();
             inputCapturer.GetUserInput().Returns(1);
             var opCodeOps = new OpCodeOperations(inputCapturer)
             {
-                Input = "3,0,4,0,99".Split(',').Select(int.Parse).ToArray()
+                Input = sourceCode.Split(',').Select(int.Parse).ToArray()
             };
             var opCodeFactory = new OpCodeFactory(opCodeOps);
-            var expectedOutput = 1;
-            var expectedOpCodes = "1,0,4,0,99".Split(',').Select(int.Parse).ToArray();
+            var expectedOpCodes = expectedCode.Split(',').Select(int.Parse).ToArray();
 
             opCodeOps.RunProgramme();
 

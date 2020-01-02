@@ -88,19 +88,19 @@ namespace DojoTemplateConsoleApp.OpCode
             switch (opCode.Instruction)
             {
                 case 1:
-                    AddOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
+                    AddOp(opCode);
                     index += 3;
                     break;
                 case 2:
-                    MultiplyOp(opCode.FirstParameter, opCode.SecondParameter, opCode.OutputIndex);
+                    MultiplyOp(opCode);
                     index += 3;
                     break;
                 case 3:
-                    RequestInput(opCode.FirstParameter);
+                    RequestInput(opCode);
                     index += 1;
                     break;
                 case 4:
-                    OutputValue(opCode.FirstParameter);
+                    OutputValue(opCode);
                     index += 1;
                     break;
                 default:
@@ -108,24 +108,59 @@ namespace DojoTemplateConsoleApp.OpCode
             }
         }
 
-        private void AddOp((int, int) param1, (int, int) param2, (int, int) outputIndex)
+        private void AddOp(OpCode opCode)
         {
-            var operand1 = OpCodes[param1.Item1];
-            var operand2 = OpCodes[param2.Item1];
-            OpCodes[outputIndex.Item1] = operand1 + operand2;
+            var p1Pos = OpCodes[opCode.FirstParameter.Item1];
+            var p2Pos = OpCodes[opCode.SecondParameter.Item1];
+            var p1Imm = opCode.FirstParameter.Item1;
+            var p2Imm = opCode.SecondParameter.Item1;
+
+            OpCodes[opCode.OutputIndex.Item1] =
+                (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 0)
+                ? p1Pos + p2Pos
+                : (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 1)
+                ? p1Imm + p2Imm
+                : (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 1)
+                ? p1Pos + p2Imm
+                : p1Imm + p2Pos;
         }
 
-        private void MultiplyOp((int, int) param1, (int, int) param2, (int, int) outputIndex)
+        private void MultiplyOp(OpCode opCode)
         {
-            OpCodes[outputIndex.Item1] = OpCodes[param1.Item1] * OpCodes[param2.Item1];
+            var p1Pos = OpCodes[opCode.FirstParameter.Item1];
+            var p2Pos = OpCodes[opCode.SecondParameter.Item1];
+            var p1Imm = opCode.FirstParameter.Item1;
+            var p2Imm = opCode.SecondParameter.Item1;
+
+            OpCodes[opCode.OutputIndex.Item1] =
+                (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 0)
+                ? p1Pos * p2Pos
+                : (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 1)
+                ? p1Imm * p2Imm
+                : (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 1)
+                ? p1Pos * p2Imm
+                : p1Imm * p2Pos;
         }
-        private void RequestInput((int, int) saveLocation)
+        private void RequestInput(OpCode opCode)
         {
             var input = _inputCapturer.GetUserInput();
-            OpCodes[saveLocation.Item1] = input;
+            OpCodes[opCode.FirstParameter.Item1] = input;
         }
 
-        private void OutputValue((int, int) inputParameter) => DiagnosticOutputs.Add(OpCodes[inputParameter.Item1]);
+        private void OutputValue(OpCode opCode)
+        {
+            switch (opCode.FirstParameter.Item2)
+            {
+                case 0:
+                    DiagnosticOutputs.Add(OpCodes[opCode.FirstParameter.Item1]);
+                    break;
+                case 1:
+                    DiagnosticOutputs.Add(opCode.FirstParameter.Item1);
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
 }

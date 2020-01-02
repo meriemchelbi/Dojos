@@ -19,20 +19,17 @@ namespace DojoTemplateConsoleApp.OpCode
 
         public OpCode CreateOpCode(int index)
         {
-            var instructionCode = _opCodeOperations.OpCodes[index];
-            var instruction = instructionCode % 100;
-            var firstParamMode = instructionCode > 1000
-                ? (instructionCode - instruction) % 1000
-                : instructionCode / 100 > 0
-                    ? (instructionCode - instruction) / 100
-                    : 0;
-            var secondParamMode = instructionCode > 10000
-                ? (instructionCode - firstParamMode - instruction) % 10000
-                : instructionCode / 1000 > 0
-                    ? (instructionCode - instruction- firstParamMode) / 1000
-                    : 0;
-            var thirdParamMode = ((instructionCode - firstParamMode - secondParamMode - instruction) > 100000)
-                ? (instructionCode - firstParamMode - secondParamMode - instruction) % 100000
+            var instructionCodeString = _opCodeOperations.OpCodes[index].ToString();
+
+            var instruction = int.Parse(instructionCodeString[^1].ToString());
+            var firstParamMode = instructionCodeString.Length >= 3 && instructionCodeString[^3].Equals('1')
+                ? 1
+                : 0;
+            var secondParamMode = instructionCodeString.Length >= 4 && instructionCodeString[^4].Equals('1')
+                ? 1
+                : 0;
+            var thirdParamMode = instructionCodeString.Length == 5
+                ? 1
                 : 0;
 
             var opCode = (instruction == 1 || instruction == 2)

@@ -122,19 +122,14 @@ namespace DojoTemplateConsoleApp.OpCode
 
         private void MultiplyOp(OpCode opCode)
         {
-            var p1Pos = OpCodes[Math.Abs(opCode.FirstParameter.Item1)];
-            var p2Pos = OpCodes[Math.Abs(opCode.SecondParameter.Item1)];
-            var p1Imm = opCode.FirstParameter.Item1;
-            var p2Imm = opCode.SecondParameter.Item1;
-
-            OpCodes[opCode.OutputIndex.Item1] =
-                (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 0)
-                ? p1Pos * p2Pos
-                : (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 1)
-                ? p1Imm * p2Imm
+            OpCodes[Math.Abs(opCode.OutputIndex.Item1)] =
+                (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 1)
+                ? opCode.FirstParameter.Item1 * opCode.SecondParameter.Item1
                 : (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 1)
-                ? p1Pos * p2Imm
-                : p1Imm * p2Pos;
+                ? OpCodes[Math.Abs(opCode.FirstParameter.Item1)] * opCode.SecondParameter.Item1
+                : (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 0)
+                ? opCode.FirstParameter.Item1 * OpCodes[Math.Abs(opCode.SecondParameter.Item1)]
+                : OpCodes[Math.Abs(opCode.FirstParameter.Item1)] * OpCodes[Math.Abs(opCode.SecondParameter.Item1)];
         }
 
         private void RequestInput(OpCode opCode)

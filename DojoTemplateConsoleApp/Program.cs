@@ -13,14 +13,15 @@ namespace DojoTemplateConsoleApp
         {
 
             #region OpCode
-            //var opCodeOps = new OpCodeOperations();
-            //var inputParser = new InputParser();
-            //inputParser.ParseOpCode(opCodeOps);
-            //opCodeOps.ExecuteOpCode();
-            //Console.WriteLine($"Day 2 part 1 result is {opCodeOps.OpCodes[0]}.");
+            var opCodeParser = new OpCodeParser();
+            var inputCapturer = new UserInputCapturer();
+            var opCodeOps = new OpCodeOperations(inputCapturer);
+            var output = new OutputRenderer();
 
-            //opCodeOps.FindNounVerb(19690720);
-            //Console.WriteLine($"Day 2 part 2 noun & verb are noun: {opCodeOps.OpCodes[1]} & verb {opCodeOps.OpCodes[2]}.");
+            opCodeParser.ParseOpCode(opCodeOps, @"OpCode\DiagnosticProgramInput.txt");
+            opCodeOps.RunProgramme();
+            output.DisplayDiagnosticOutput(opCodeOps);
+
             #endregion
 
             #region SpaceImage

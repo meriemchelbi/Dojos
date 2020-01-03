@@ -153,6 +153,26 @@ namespace DojoTemplateConsoleApp.OpCode
             }
         }
 
+        private void JumpIfTrue(OpCode opCode)
+        {
+
+        }
+
+        private void JumpIfFalse(OpCode opCode)
+        {
+
+        }
+
+        private void LessThan(OpCode opCode)
+        {
+
+        }
+        
+        private void Equals(OpCode opCode)
+        {
+
+        }
+
     }
 }
 

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DojoTemplateConsoleApp", "DojoTemplateConsoleApp\DojoTemplateConsoleApp.csproj", "{834B5695-4F62-41A9-A670-727C48558E16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DojoTemplateConsoleApp", "src\DojoTemplateConsoleApp\DojoTemplateConsoleApp.csproj", "{3805A676-DD96-4088-920C-ADA9C6528EA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DojoTemplateTestProject", "DojoTemplateTestProject\DojoTemplateTestProject\DojoTemplateTestProject.csproj", "{85719C9E-6A6E-4AB3-8F3B-CEB517AC307E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DojoTemplateTestProject", "test\DojoTemplateTestProject\DojoTemplateTestProject.csproj", "{8416C3AD-6385-4149-AFF9-EFA90CC0A9D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{834B5695-4F62-41A9-A670-727C48558E16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{834B5695-4F62-41A9-A670-727C48558E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{834B5695-4F62-41A9-A670-727C48558E16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{834B5695-4F62-41A9-A670-727C48558E16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85719C9E-6A6E-4AB3-8F3B-CEB517AC307E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85719C9E-6A6E-4AB3-8F3B-CEB517AC307E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85719C9E-6A6E-4AB3-8F3B-CEB517AC307E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85719C9E-6A6E-4AB3-8F3B-CEB517AC307E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3805A676-DD96-4088-920C-ADA9C6528EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3805A676-DD96-4088-920C-ADA9C6528EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3805A676-DD96-4088-920C-ADA9C6528EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3805A676-DD96-4088-920C-ADA9C6528EA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8416C3AD-6385-4149-AFF9-EFA90CC0A9D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8416C3AD-6385-4149-AFF9-EFA90CC0A9D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8416C3AD-6385-4149-AFF9-EFA90CC0A9D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8416C3AD-6385-4149-AFF9-EFA90CC0A9D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

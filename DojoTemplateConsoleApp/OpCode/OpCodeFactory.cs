@@ -32,13 +32,20 @@ namespace DojoTemplateConsoleApp.OpCode
                 ? 1
                 : 0;
 
-            var opCode = (instruction == 1 || instruction == 2)
+            var opCode = (instruction == 1 || instruction == 2 || instruction == 7 || instruction == 8)
             ? new OpCode()
             {
                 Instruction = instruction,
                 FirstParameter = (_opCodeOperations.OpCodes[index + 1], firstParamMode),
                 SecondParameter = (_opCodeOperations.OpCodes[index + 2], secondParamMode),
                 OutputIndex = (_opCodeOperations.OpCodes[index + 3], thirdParamMode)
+            }
+            : (instruction == 5 || instruction == 6)
+            ? new OpCode()
+            {
+                Instruction = instruction,
+                FirstParameter = (_opCodeOperations.OpCodes[index + 1], firstParamMode),
+                SecondParameter = (_opCodeOperations.OpCodes[index + 2], secondParamMode)
             }
             : (instruction == 3 || instruction == 4)
             ? new OpCode()

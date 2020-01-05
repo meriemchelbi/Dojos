@@ -50,7 +50,7 @@ namespace DojoTemplateConsoleApp.OpCode
 
                 var opCode = _opCodeFactory.CreateOpCode(i);
 
-                ExecuteOpCode(opCode, ref i);
+                    ExecuteOpCode(opCode, ref i);
             }
         }
 
@@ -83,25 +83,39 @@ namespace DojoTemplateConsoleApp.OpCode
             }
         }
 
-        private void ExecuteOpCode(OpCode opCode, ref int index)
+        private void ExecuteOpCode(OpCode opCode, ref int instructionPointer)
         {
             switch (opCode.Instruction)
             {
                 case 1:
                     AddOp(opCode);
-                    index += 3;
+                    instructionPointer += 3;
                     break;
                 case 2:
                     MultiplyOp(opCode);
-                    index += 3;
+                    instructionPointer += 3;
                     break;
                 case 3:
                     RequestInput(opCode);
-                    index += 1;
+                    instructionPointer += 1;
                     break;
                 case 4:
                     OutputValue(opCode);
-                    index += 1;
+                    instructionPointer += 1;
+                    break;
+                case 5:
+                    JumpIfTrue(opCode, ref instructionPointer);
+                    break;
+                case 6:
+                    JumpIfFalse(opCode, ref instructionPointer);
+                    break;
+                case 7:
+                    LessThan(opCode);
+                    instructionPointer += 3;
+                    break;
+                case 8:
+                    Equals(opCode);
+                    instructionPointer += 3;
                     break;
                 default:
                     break;
@@ -153,24 +167,104 @@ namespace DojoTemplateConsoleApp.OpCode
             }
         }
 
-        private void JumpIfTrue(OpCode opCode)
+        private void JumpIfTrue(OpCode opCode, ref int instructionPointer)
         {
-
+            if (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 1
+                && opCode.FirstParameter.Item1 != 0)
+            {
+                instructionPointer = opCode.SecondParameter.Item1 - 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 1
+                && OpCodes[Math.Abs(opCode.FirstParameter.Item1)] != 0)
+            {
+                instructionPointer = opCode.SecondParameter.Item1 - 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 0
+                && opCode.FirstParameter.Item1 != 0)
+            {
+                instructionPointer = OpCodes[Math.Abs(opCode.SecondParameter.Item1)] - 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 0
+                && OpCodes[Math.Abs(opCode.FirstParameter.Item1)] != 0)
+            {
+                instructionPointer = OpCodes[Math.Abs(opCode.SecondParameter.Item1)] - 1;
+            }
+            else instructionPointer += 2;
         }
 
-        private void JumpIfFalse(OpCode opCode)
+        private void JumpIfFalse(OpCode opCode, ref int instructionPointer)
         {
-
+            if (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 1
+                && opCode.FirstParameter.Item1 == 0)
+            {
+                instructionPointer = opCode.SecondParameter.Item1 - 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 1
+                && OpCodes[Math.Abs(opCode.FirstParameter.Item1)] == 0)
+            {
+                instructionPointer = opCode.SecondParameter.Item1 - 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 0
+                && opCode.FirstParameter.Item1 == 0)
+            {
+                instructionPointer = OpCodes[Math.Abs(opCode.SecondParameter.Item1)] - 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 0
+                && OpCodes[Math.Abs(opCode.FirstParameter.Item1)] == 0)
+            {
+                instructionPointer = OpCodes[Math.Abs(opCode.SecondParameter.Item1)] - 1;
+            }
+            else instructionPointer += 2;
         }
 
         private void LessThan(OpCode opCode)
         {
-
+            if (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 1
+                && opCode.FirstParameter.Item1 < opCode.SecondParameter.Item1)
+            {
+                OpCodes[Math.Abs(opCode.OutputIndex.Item1)] = 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 1
+                && OpCodes[Math.Abs(opCode.FirstParameter.Item1)] < opCode.SecondParameter.Item1)
+            {
+                OpCodes[Math.Abs(opCode.OutputIndex.Item1)] = 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 0
+                && opCode.FirstParameter.Item1 < OpCodes[Math.Abs(opCode.SecondParameter.Item1)])
+            {
+                OpCodes[Math.Abs(opCode.OutputIndex.Item1)] = 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 0
+                && OpCodes[Math.Abs(opCode.FirstParameter.Item1)] < OpCodes[Math.Abs(opCode.SecondParameter.Item1)])
+            {
+                OpCodes[Math.Abs(opCode.OutputIndex.Item1)] = 1;
+            }
+            else OpCodes[Math.Abs(opCode.OutputIndex.Item1)] = 0;
         }
         
         private void Equals(OpCode opCode)
         {
-
+            if (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 1
+                && opCode.FirstParameter.Item1 == opCode.SecondParameter.Item1)
+            {
+                OpCodes[Math.Abs(opCode.OutputIndex.Item1)] = 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 1
+                && OpCodes[Math.Abs(opCode.FirstParameter.Item1)] == opCode.SecondParameter.Item1)
+            {
+                OpCodes[Math.Abs(opCode.OutputIndex.Item1)] = 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 1 && opCode.SecondParameter.Item2 == 0
+                && opCode.FirstParameter.Item1 == OpCodes[Math.Abs(opCode.SecondParameter.Item1)])
+            {
+                OpCodes[Math.Abs(opCode.OutputIndex.Item1)] = 1;
+            }
+            else if (opCode.FirstParameter.Item2 == 0 && opCode.SecondParameter.Item2 == 0
+                && OpCodes[Math.Abs(opCode.FirstParameter.Item1)] == OpCodes[Math.Abs(opCode.SecondParameter.Item1)])
+            {
+                OpCodes[Math.Abs(opCode.OutputIndex.Item1)] = 1;
+            }
+            else OpCodes[Math.Abs(opCode.OutputIndex.Item1)] = 0;
         }
 
     }

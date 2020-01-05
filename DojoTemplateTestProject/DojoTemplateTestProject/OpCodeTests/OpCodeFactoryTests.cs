@@ -63,6 +63,17 @@ namespace DojoTemplateTestProject.OpCodeTests
             };
             yield return new object[]
             {
+                new int[] { 107, 0, 1, 5 },
+                new OpCode()
+                {
+                    Instruction = 7,
+                    FirstParameter = (0, 1),
+                    SecondParameter = (1, 0),
+                    OutputIndex = (5, 0)
+                }
+            };
+            yield return new object[]
+            {
                 new int[] { 104, 78 },
                 new OpCode()
                 {
@@ -72,7 +83,7 @@ namespace DojoTemplateTestProject.OpCodeTests
             };
             yield return new object[]
             {
-                new int[] { 6, 3, 7 },
+                new int[] { 10, 3, 7 },
                 null
             };
         }

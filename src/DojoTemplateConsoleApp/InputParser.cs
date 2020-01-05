@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using System.Linq;
 using System.IO;
 using DojoTemplateConsoleApp.SpaceImage;
-using DojoTemplateConsoleApp.OpCode;
 using DojoTemplateConsoleApp.UniveralOrbit;
 using DojoTemplateConsoleApp.FuelRequirements;
 

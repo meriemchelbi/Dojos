@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using FluentAssertions;
-using DojoTemplateConsoleApp.OpCode;
 using NSubstitute;
 using System.Collections;
+using IntCodeComputer;
 
-namespace DojoTemplateTestProject.OpCodeTests
+namespace IntCodeComputerTests
 {
     public class OpCodeFactoryTests
     {

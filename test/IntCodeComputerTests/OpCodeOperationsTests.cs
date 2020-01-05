@@ -1,11 +1,11 @@
-using DojoTemplateConsoleApp.OpCode;
 using FluentAssertions;
+using IntCodeComputer;
 using NSubstitute;
 using System;
 using System.Linq;
 using Xunit;
 
-namespace DojoTemplateTestProject.OpCodeTests
+namespace IntCodeComputerTests
 {
     public class OpCodeOperationsTests
     {
@@ -19,7 +19,7 @@ namespace DojoTemplateTestProject.OpCodeTests
             var opCodeOperations = new OpCodeOperations(inputCapturer);
             var opCodeFactory = new OpCodeFactory(opCodeOperations);
             var parser = new OpCodeParser();
-            parser.ParseOpCode(opCodeOperations, @"OpCode\OpCode.txt");
+            parser.ParseOpCode(opCodeOperations, @"OpCode.txt");
 
 
             Assert.Equal(opCode, opCodeOperations.Input[expectedElementIndex]);

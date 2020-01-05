@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DojoTemplateConsoleApp.OpCode
+namespace IntCodeComputer
 {
     public class OutputRenderer
     {

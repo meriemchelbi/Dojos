@@ -1,6 +1,5 @@
 ﻿using System;
 using DojoTemplateConsoleApp.MonitoringStation;
-using DojoTemplateConsoleApp.OpCode;
 using DojoTemplateConsoleApp.SpaceImage;
 using DojoTemplateConsoleApp.UniveralOrbit;
 using DojoTemplateConsoleApp.CrossedWires;
@@ -11,19 +10,6 @@ namespace DojoTemplateConsoleApp
     {
         static void Main(string[] args)
         {
-
-            #region OpCode
-            var opCodeParser = new OpCodeParser();
-            var inputCapturer = new UserInputCapturer();
-            var opCodeOps = new OpCodeOperations(inputCapturer);
-            var output = new OutputRenderer();
-
-            opCodeParser.ParseOpCode(opCodeOps, @"OpCode\DiagnosticProgramInput.txt");
-            opCodeOps.RunProgramme();
-            output.DisplayDiagnosticOutput(opCodeOps);
-
-            #endregion
-
             #region SpaceImage
             //var inputParser = new InputParser();
             //var spaceImageFormat = new SpaceImageFormat();

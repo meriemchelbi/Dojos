@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DojoTemplateConsoleApp.OpCode
+namespace IntCodeComputer
 {
     public interface ICreateOpCode
     {

@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DojoTemplateConsoleApp", "src\DojoTemplateConsoleApp\DojoTemplateConsoleApp.csproj", "{3805A676-DD96-4088-920C-ADA9C6528EA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DojoTemplateConsoleApp", "src\DojoTemplateConsoleApp\DojoTemplateConsoleApp.csproj", "{6463A623-F9B8-4974-8113-3A047A9FD237}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DojoTemplateTestProject", "test\DojoTemplateTestProject\DojoTemplateTestProject.csproj", "{8416C3AD-6385-4149-AFF9-EFA90CC0A9D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DojoTemplateTestProject", "test\DojoTemplateTestProject\DojoTemplateTestProject.csproj", "{571D690B-614D-4491-A1E4-6B7F2810F0BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntCodeComputer", "src\IntCodeComputer\IntCodeComputer.csproj", "{C0EAB0A7-34E7-48A6-99B4-3BC37FBCABDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntCodeComputerTests", "test\IntCodeComputerTests\IntCodeComputerTests.csproj", "{595E9FA2-B3F0-4A24-B271-4890501877D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3805A676-DD96-4088-920C-ADA9C6528EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3805A676-DD96-4088-920C-ADA9C6528EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3805A676-DD96-4088-920C-ADA9C6528EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3805A676-DD96-4088-920C-ADA9C6528EA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8416C3AD-6385-4149-AFF9-EFA90CC0A9D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8416C3AD-6385-4149-AFF9-EFA90CC0A9D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8416C3AD-6385-4149-AFF9-EFA90CC0A9D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8416C3AD-6385-4149-AFF9-EFA90CC0A9D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6463A623-F9B8-4974-8113-3A047A9FD237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6463A623-F9B8-4974-8113-3A047A9FD237}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6463A623-F9B8-4974-8113-3A047A9FD237}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6463A623-F9B8-4974-8113-3A047A9FD237}.Release|Any CPU.Build.0 = Release|Any CPU
+		{571D690B-614D-4491-A1E4-6B7F2810F0BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{571D690B-614D-4491-A1E4-6B7F2810F0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{571D690B-614D-4491-A1E4-6B7F2810F0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{571D690B-614D-4491-A1E4-6B7F2810F0BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0EAB0A7-34E7-48A6-99B4-3BC37FBCABDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0EAB0A7-34E7-48A6-99B4-3BC37FBCABDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0EAB0A7-34E7-48A6-99B4-3BC37FBCABDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0EAB0A7-34E7-48A6-99B4-3BC37FBCABDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{595E9FA2-B3F0-4A24-B271-4890501877D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{595E9FA2-B3F0-4A24-B271-4890501877D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{595E9FA2-B3F0-4A24-B271-4890501877D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{595E9FA2-B3F0-4A24-B271-4890501877D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

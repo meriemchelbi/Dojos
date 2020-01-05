@@ -19,7 +19,7 @@ namespace IntCodeComputerTests
             var opCodeOperations = new OpCodeOperations(inputCapturer);
             var opCodeFactory = new OpCodeFactory(opCodeOperations);
             var parser = new OpCodeParser();
-            parser.ParseOpCode(opCodeOperations, @"OpCode.txt");
+            parser.ParseOpCode(opCodeOperations, @"Input\OpCode.txt");
 
 
             Assert.Equal(opCode, opCodeOperations.Input[expectedElementIndex]);
@@ -89,7 +89,7 @@ namespace IntCodeComputerTests
 
             opCodeOps.RunProgramme();
 
-            //opCodeOps.OpCodes.Should().BeEquivalentTo(expectedOpCodes);
+            // opCodeOps.OpCodes.Should().BeEquivalentTo(expectedOpCodes);
             opCodeOps.DiagnosticOutputs[0].Should().Be(expectedOutput);
         }
 

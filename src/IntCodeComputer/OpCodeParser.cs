@@ -17,5 +17,10 @@ namespace IntCodeComputer
                             .Select(c => int.Parse(c))
                             .ToArray();
         }
+
+        public void LoadInput(string program)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

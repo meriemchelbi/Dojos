@@ -11,7 +11,7 @@ namespace IntCodeComputer
             var opCodeOps = new OpCodeOperations(inputCapturer);
             var output = new OutputRenderer();
 
-            opCodeParser.ParseOpCode(opCodeOps, @"DiagnosticProgramInput.txt");
+            opCodeParser.ParseOpCode(opCodeOps, @"Input\DiagnosticProgramInput.txt");
             opCodeOps.RunProgramme();
             output.DisplayDiagnosticOutput(opCodeOps);
         }

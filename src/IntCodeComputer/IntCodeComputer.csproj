@@ -10,13 +10,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="OpCode.txt">
+    <Content Include="Input\OpCode.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="DiagnosticProgramInput.txt">
+    <None Update="Input\AmplificationCircuit.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Input\DiagnosticProgramInput.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

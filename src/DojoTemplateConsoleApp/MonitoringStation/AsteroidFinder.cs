@@ -33,77 +33,59 @@ namespace DojoTemplateConsoleApp.MonitoringStation
             }
         }
 
-
-        // using Bresenham's line drawing algorithm https://www.codeproject.com/Articles/15604/Ray-casting-in-a-2D-tile-based-environment
-        public IEnumerable<SpaceTile> CastRay(SpaceTile origin, SpaceTile destination)
+        public void CountVisibleAsteroids(SpaceTile referenceAsteroid)
         {
-            var copyOrigin = new SpaceTile(origin.X, origin.Y);
-            var copyDestination = new SpaceTile(destination.X, destination.Y);
+            var visible = new List<SpaceTile>();
+            var quadrants = FindQuadrants(referenceAsteroid);
 
-            var deltaX = copyDestination.X - copyOrigin.X;
-            var deltaY = Math.Abs(copyDestination.Y - copyOrigin.Y);
-            var steep = deltaY > Math.Abs(deltaX);
-            int temp;
+            foreach (var quadrant in quadrants)
+            {
+                var counted = new List<SpaceTile>();
+                var intersect = visible.Intersect(quadrant).ToList();
+                intersect.ForEach(asteroid => counted.Add(asteroid));
 
-            if (steep)
-            {
-                temp = copyOrigin.X; // swap copyOrigin.X and copyOrigin.Y
-                copyOrigin.X = copyOrigin.Y;
-                copyOrigin.Y = temp;
-                temp = copyDestination.X; // swap copyDestination.X and copyDestination.Y
-                copyDestination.X = copyDestination.Y;
-                copyDestination.Y = temp;
-            }
-            if (copyOrigin.X > copyDestination.X)
-            {
-                temp = copyOrigin.X; // swap copyOrigin.X and copyDestination.X
-                copyOrigin.X = copyDestination.X;
-                copyDestination.X = temp;
-                temp = copyOrigin.Y; // swap copyOrigin.Y and copyDestination.Y
-                copyOrigin.Y = copyDestination.Y;
-                copyDestination.Y = temp;
-            }
-            
-            var error = deltaX / 2;
-            var yStep = (copyOrigin.Y < copyDestination.Y) ? 1 : -1;
-            var y = copyOrigin.Y;
-            for (var x = copyOrigin.X; x <= copyDestination.X; x++)
-            {
-                yield return new SpaceTile((steep ? y : x), (steep ? x : y));
-                error -= deltaY;
-                if (error < 0)
+                foreach (var inner in quadrant.Except(new SpaceTile[] { referenceAsteroid }))
                 {
-                    y += yStep;
-                    error += deltaX;
-                }
-            }
-            yield break;
-        }
-        public void CountVisibleAsteroids(SpaceTile originAsteroid)
-        {
-            Asteroids = Asteroids.Select(a => { a.Counted = false; return a; }).ToList();
-            // for each asteroid in my list
-            foreach (var asteroid in Asteroids)
-            {
-                // if the asteroid hasn't already been counted
-                if (asteroid.Counted == false)
-                {
-                    var ray = CastRay(originAsteroid, asteroid).ToList();
-                    originAsteroid.VisibleAsteroids += 1;
-
-                    foreach (var spaceTile in ray)
+                    foreach (var outer in quadrant.Except(new SpaceTile[] { referenceAsteroid }))
                     {
-                        foreach (var a in Asteroids)
+                        var collinear = AreCollinear(referenceAsteroid, outer, inner);
+                        var innerCollinearWithCounted = counted.Any(a => AreCollinear(a, referenceAsteroid, inner));
+                        var outerCollinearWithCounted = counted.Any(a => AreCollinear(a, referenceAsteroid, outer));
+                        
+                        if (!visible.Contains(inner) && collinear && !innerCollinearWithCounted)
                         {
-                            var match = spaceTile.X == a.X && spaceTile.Y == a.Y;
-                            if (match)
-                            {
-                                a.Counted = true;
-                            }
+                            visible.Add(inner);
+                            counted.Add(inner);
+                        }
+                        if (!visible.Contains(outer) && collinear && !outerCollinearWithCounted)
+                        {
+                            visible.Add(outer);
+                            counted.Add(outer);
                         }
                     }
                 }
             }
+
+            referenceAsteroid.VisibleAsteroids = visible.Count();
+        }
+
+        private bool AreCollinear(SpaceTile outer, SpaceTile referenceAsteroid, SpaceTile inner)
+        {
+            var a = outer.X * (referenceAsteroid.Y - inner.Y) +
+                referenceAsteroid.X * (inner.Y - outer.Y) +
+                inner.X * (outer.Y - referenceAsteroid.Y);
+
+            return a == 0;
+        }
+
+        private List<List<SpaceTile>> FindQuadrants(SpaceTile referencePoint)
+        {
+            var lowerRight = Asteroids.Where(a => referencePoint.X <= a.X && referencePoint.Y <= a.Y).ToList();
+            var lowerLeft = Asteroids.Where(a => referencePoint.X >= a.X && referencePoint.Y <= a.Y).ToList();
+            var upperLeft = Asteroids.Where(a => referencePoint.X >= a.X && referencePoint.Y >= a.Y).ToList();
+            var upperRight = Asteroids.Where(a => referencePoint.X <= a.X && referencePoint.Y >= a.Y).ToList();
+
+            return new List<List<SpaceTile>> { lowerLeft, lowerRight, upperLeft, upperRight };
         }
 
         public (int, int) FindMonitoringStationPosition(string[][] map)

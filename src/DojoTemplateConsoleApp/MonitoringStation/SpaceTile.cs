@@ -13,8 +13,12 @@ namespace DojoTemplateConsoleApp.MonitoringStation
         }
         public int X { get; set; }
         public int Y { get; set; }
-        public int VisibleAsteroids { get; set; }
+        public int VisibleAsteroids { get; set; } = 0;
         public bool IsAsteroid { get; set; }
-        public bool Counted { get; set; }
+        
+        public bool IsEqual(SpaceTile a, SpaceTile b)
+        {
+            return a.X == b.X && a.Y == b.Y;
+        }
     }
 }

@@ -38,25 +38,6 @@ namespace DojoTemplateTestProject.MonitoringStationTests
         }
 
         [Theory]
-        [ClassData(typeof(CastRayTestData))]
-        public void CastRayShouldIntersectExpectedTiles(List<SpaceTile> asteroids, List<SpaceTile> expectedRay, int originIndex, int destinationIndex)
-        {
-            // Bresenham algo returns expected intersection points in the map
-            var asteroidFinder = new AsteroidFinder
-            {
-                Asteroids = asteroids
-            };
-
-            var origin = asteroidFinder.Asteroids[originIndex];
-            var destination = asteroidFinder.Asteroids[destinationIndex];
-
-            var result = asteroidFinder.CastRay(origin, destination).ToList();
-
-            result.Should().BeEquivalentTo(expectedRay);
-
-        }
-
-        [Theory]
         [ClassData(typeof(CountVisibleAsteroidsTestData))]
         public void CountVisibleAsteroidsCalculatesAsteroidsVisibleFromOrigin(List<SpaceTile> asteroids, int originAsteroidIndex, int expectedTotal)
         {
@@ -91,16 +72,16 @@ namespace DojoTemplateTestProject.MonitoringStationTests
             {
                 new List<SpaceTile>()
                 {
-                    new SpaceTile(1, 0),// wrong order, index 8
-                    new SpaceTile(4, 0),// index 1
-                    new SpaceTile(0, 2),// index 2
-                    new SpaceTile(1, 2),// index 3
-                    new SpaceTile(2, 2),// index 4
-                    new SpaceTile(3, 2),// index 5
-                    new SpaceTile(4, 2),// index 6
-                    new SpaceTile(4, 3), // duplicated- indexes 0 & 7
-                    new SpaceTile(3, 4), //missing
-                    new SpaceTile(4, 4)// index 9
+                    new SpaceTile(1, 0),
+                    new SpaceTile(4, 0),
+                    new SpaceTile(0, 2),
+                    new SpaceTile(1, 2),
+                    new SpaceTile(2, 2),
+                    new SpaceTile(3, 2),
+                    new SpaceTile(4, 2),
+                    new SpaceTile(4, 3),
+                    new SpaceTile(3, 4),
+                    new SpaceTile(4, 4)
                 },
                 8,
                 8

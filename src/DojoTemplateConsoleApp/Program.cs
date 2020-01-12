@@ -50,13 +50,18 @@ namespace DojoTemplateConsoleApp
 
             #region MonitoringStation
 
-            //var asteroidFinder = new AsteroidFinder();
-            //var parser = new MonitoringStationInputParser(asteroidFinder);
-            //parser.ParseInput();
-            //parser.LoadInputToMap();
-            //asteroidFinder.LoadAsteroids();
-            //asteroidFinder.CountVisibleAsteroids(asteroidFinder.Asteroids[1]);
+            var asteroidFinder = new AsteroidFinder();
+            var parser = new MonitoringStationInputParser(asteroidFinder);
+            parser.ParseInput();
+            parser.LoadInputToMap();
+            asteroidFinder.LoadAsteroids();
+            foreach (var asteroid in asteroidFinder.Asteroids)
+            {
+                asteroidFinder.CountVisibleAsteroids(asteroid);
+            }
+            var result = asteroidFinder.FindMonitoringStationPosition();
 
+            Console.WriteLine($"The monitoring station can see {result} asteroids.");
             #endregion
 
             #region CrossedWires

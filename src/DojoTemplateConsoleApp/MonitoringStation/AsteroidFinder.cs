@@ -88,9 +88,16 @@ namespace DojoTemplateConsoleApp.MonitoringStation
             return new List<List<SpaceTile>> { lowerLeft, lowerRight, upperLeft, upperRight };
         }
 
-        public (int, int) FindMonitoringStationPosition(string[][] map)
+        public int FindMonitoringStationPosition()
         {
-            return (x: 9, y: 9);
+            var highest = int.MinValue;
+
+            foreach (var asteroid in Asteroids)
+            {
+                highest = Math.Max(highest, asteroid.VisibleAsteroids);
+            }
+
+            return highest;
         }
     }
 }

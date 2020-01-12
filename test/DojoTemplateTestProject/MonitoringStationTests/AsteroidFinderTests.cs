@@ -53,15 +53,23 @@ namespace DojoTemplateTestProject.MonitoringStationTests
         }
 
 
-        //[Theory]
-        //[ClassData(typeof(MonitoringStationTestData))]
-        //public void FindMonitoringStationPositionIdentifiesCorrectAsteroid(string[][] map, (int, int) expectedResult)
-        //{
-        //    var asteroidFinder = new AsteroidFinder();
-        //    var result = asteroidFinder.FindMonitoringStationPosition(map);
+        [Theory]
+        [ClassData(typeof(MonitoringStationTestData))]
+        public void FindMonitoringStationPositionIdentifiesCorrectAsteroid(char[][] map, int expectedResult)
+        {
+            var asteroidFinder = new AsteroidFinder
+            {
+                Map = map
+            };
+            asteroidFinder.LoadAsteroids();
+            foreach (var asteroid in asteroidFinder.Asteroids)
+            {
+                asteroidFinder.CountVisibleAsteroids(asteroid);
+            }
+            var result = asteroidFinder.FindMonitoringStationPosition();
 
-        //    result.Should().BeEquivalentTo(expectedResult);
-        //}
+            result.Should().Be(expectedResult);
+        }
     }
 
     internal class CountVisibleAsteroidsTestData : IEnumerable<object[]>

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {}
+    "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {
+    "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
         "projectName": "DojoTemplateConsoleApp",
-        "projectPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
-        "packagesPath": "C:\\Users\\Gordon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\obj\\",
+        "projectPath": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+        "packagesPath": "C:\\Users\\meriemc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Gordon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\meriemc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

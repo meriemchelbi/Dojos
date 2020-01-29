@@ -40,27 +40,27 @@ namespace DojoTemplateConsoleApp.MonitoringStation
 
             foreach (var quadrant in quadrants)
             {
-                var counted = new List<SpaceTile>();
+                var visibleInQuadrant = new List<SpaceTile>();
                 var intersect = visible.Intersect(quadrant).ToList();
-                intersect.ForEach(asteroid => counted.Add(asteroid));
+                intersect.ForEach(asteroid => visibleInQuadrant.Add(asteroid));
 
                 foreach (var inner in quadrant)
                 {
                     foreach (var outer in quadrant)
                     {
                         var collinear = AreCollinear(referenceAsteroid, outer, inner);
-                        var innerCollinearWithCounted = counted.Any(a => AreCollinear(a, referenceAsteroid, inner));
-                        var outerCollinearWithCounted = counted.Any(a => AreCollinear(a, referenceAsteroid, outer));
+                        var innerCollinearWithCounted = visibleInQuadrant.Any(a => AreCollinear(a, referenceAsteroid, inner));
+                        var outerCollinearWithCounted = visibleInQuadrant.Any(a => AreCollinear(a, referenceAsteroid, outer));
                         
                         if (!visible.Contains(inner) && collinear && !innerCollinearWithCounted)
                         {
                             visible.Add(inner);
-                            counted.Add(inner);
+                            visibleInQuadrant.Add(inner);
                         }
                         if (!visible.Contains(outer) && collinear && !outerCollinearWithCounted)
                         {
                             visible.Add(outer);
-                            counted.Add(outer);
+                            visibleInQuadrant.Add(outer);
                         }
                     }
                 }

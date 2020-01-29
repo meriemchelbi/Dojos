@@ -44,9 +44,9 @@ namespace DojoTemplateConsoleApp.MonitoringStation
                 var intersect = visible.Intersect(quadrant).ToList();
                 intersect.ForEach(asteroid => counted.Add(asteroid));
 
-                foreach (var inner in quadrant.Except(new SpaceTile[] { referenceAsteroid }))
+                foreach (var inner in quadrant)
                 {
-                    foreach (var outer in quadrant.Except(new SpaceTile[] { referenceAsteroid }))
+                    foreach (var outer in quadrant)
                     {
                         var collinear = AreCollinear(referenceAsteroid, outer, inner);
                         var innerCollinearWithCounted = counted.Any(a => AreCollinear(a, referenceAsteroid, inner));
@@ -80,10 +80,10 @@ namespace DojoTemplateConsoleApp.MonitoringStation
 
         private List<List<SpaceTile>> FindQuadrants(SpaceTile referencePoint)
         {
-            var lowerRight = Asteroids.Where(a => referencePoint.X <= a.X && referencePoint.Y <= a.Y).ToList();
-            var lowerLeft = Asteroids.Where(a => referencePoint.X >= a.X && referencePoint.Y <= a.Y).ToList();
-            var upperLeft = Asteroids.Where(a => referencePoint.X >= a.X && referencePoint.Y >= a.Y).ToList();
-            var upperRight = Asteroids.Where(a => referencePoint.X <= a.X && referencePoint.Y >= a.Y).ToList();
+            var lowerRight = Asteroids.Except(new SpaceTile[] { referencePoint }).Where(a => referencePoint.X <= a.X && referencePoint.Y <= a.Y).ToList();
+            var lowerLeft = Asteroids.Except(new SpaceTile[] { referencePoint }).Where(a => referencePoint.X >= a.X && referencePoint.Y <= a.Y).ToList();
+            var upperLeft = Asteroids.Except(new SpaceTile[] { referencePoint }).Where(a => referencePoint.X >= a.X && referencePoint.Y >= a.Y).ToList();
+            var upperRight = Asteroids.Except(new SpaceTile[] { referencePoint }).Where(a => referencePoint.X <= a.X && referencePoint.Y >= a.Y).ToList();
 
             return new List<List<SpaceTile>> { lowerLeft, lowerRight, upperLeft, upperRight };
         }

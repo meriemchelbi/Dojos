@@ -7,27 +7,27 @@ namespace DojoTemplateConsoleApp
 {
     public class Board
     {
-        public List<Property> City { get; set; }
+        public List<Land> City { get; set; }
 
         public Board()
         {
-            City = new List<Property>
+            City = new List<Land>
             {
-                new Property("Go"),
+                new Land("Go"),
                 new Property("Old Kent Road"),
-                new Property("Community Chest"),
+                new Land("Community Chest 1"),
                 new Property("Whitechapel Road"),
-                new Property("Income Tax"),
+                new Land("Income Tax"),
                 new Property("King's Cross Station"),
                 new Property("The Angel Islington"),
-                new Property("Chance"),
+                new Land("Chance 1"),
                 new Property("Euston Road"),
                 new Property("Pentonville Road"),
-                new Property("Jail")
+                new Land("Jail")
             };
         }
 
-        internal Property FindDestination(Property position, (int, int) dice)
+        internal Land FindDestination(Land position, (int, int) dice)
         {
             var currentPosition = City.IndexOf(position);
             var distance = dice.Item1 + dice.Item2;

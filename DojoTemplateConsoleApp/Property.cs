@@ -4,18 +4,16 @@ using System.Text;
 
 namespace DojoTemplateConsoleApp
 {
-    public class Property
+    public class Property : Land
     {
-        public string Name { get; private set; }
+        // This covers streets, stations, utilities
+        public bool Owned { get; set; }
+        public int FaceValue { get; set; }
+        public Suite Suite { get; set; }
 
-        public Property(string name)
+        public Property(string name) : base(name)
         {
-            Name = name;
-        }
 
-        public override bool Equals(object obj)
-        {
-            return this.Name == ((Property)obj).Name;
         }
     }
 }

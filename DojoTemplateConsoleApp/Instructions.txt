@@ -5,6 +5,7 @@ A player starts with £1500 and moves around the board randomly (2 rolled dice)
 Some of this land is owned by someone else, lets call them "The One Percent" if a player lands on one of these properties then their balance is reduced by £100
 If a player makes it round the board then their balance is increased by £200
 If a player's balance hits zero they lose the game.
+
 The land on a board appears in the following order (i've included the price and colour group but we may not have time to use that information)
 GO
 Old Kent Road, 60, Brown

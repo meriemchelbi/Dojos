@@ -13,27 +13,27 @@ namespace DojoTemplateTestProject
         [Fact]
         public void PlayerOnOwnedPropertyPaysRent()
         {
-            var dice = new DiceStub();
-            var game = new Game(dice, "Tarquin");
-            ((Property)game.Board.City[3]).Owned = true;
+            var player = new Player("Tarquin")
+            {
+                Position = new Property("Home") { Owned = true }
+            };
 
-            dice.dice = (1, 2);
-            game.TakeTurn();
+            player.Act();
 
-            game.Players[0].Balance.Should().Be(1400);
+            player.Balance.Should().Be(1400);
         }
 
         [Fact]
         public void PlayerOnUnownedPropertyPaysNothing()
         {
-            var dice = new DiceStub();
-            var game = new Game(dice, "Tarquin");
-            ((Property)game.Board.City[3]).Owned = false;
+            var player = new Player("Tarquin")
+            {
+                Position = new Property("Home") { Owned = false }
+            };
 
-            dice.dice = (1, 2);
-            game.TakeTurn();
+            player.Act();
 
-            game.Players[0].Balance.Should().Be(1500);
+            player.Balance.Should().Be(1500);
         }
     }
 }

@@ -1,6 +1,7 @@
 using DojoTemplateConsoleApp;
 using System;
 using Xunit;
+using FluentAssertions;
 
 namespace DojoTemplateTestProject
 {
@@ -12,7 +13,7 @@ namespace DojoTemplateTestProject
             var dice = new DiceStub();
             var game = new Game(dice, "Tarquin");
 
-            var endPosition = game.Players[0].Position;
+            //var endPosition = game.Players[0].Position;
 
             dice.dice = (1, 2);
             game.TakeTurn();
@@ -21,9 +22,9 @@ namespace DojoTemplateTestProject
             game.TakeTurn();
 
             // why does the value assigned to this variable vary depending on where the variable is declared? Not expected from reference type
-            endPosition = game.Players[0].Position;
+            var endPosition = game.Players[0].Position;
 
-            Assert.Equal(new Land("Chance 1"), endPosition);
+            endPosition.Should().BeEquivalentTo(new Land("Chance 1"));
         }
 
         [Fact]
@@ -44,8 +45,5 @@ namespace DojoTemplateTestProject
         {
 
         }
-
-        [Fact]
-
     }
 }

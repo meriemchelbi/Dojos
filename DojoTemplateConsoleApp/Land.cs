@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DojoTemplateConsoleApp
 {
-    public class Land
+    public class Land: ILand
     {
         public string Name { get; private set; }
 
@@ -15,7 +15,7 @@ namespace DojoTemplateConsoleApp
 
         public override bool Equals(object obj)
         {
-            return this.Name == ((Land)obj).Name;
+            return this.Name == ((ILand)obj).Name;
         }
     }
 }

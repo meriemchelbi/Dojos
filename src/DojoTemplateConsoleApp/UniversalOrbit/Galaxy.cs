@@ -83,12 +83,32 @@ namespace DojoTemplateConsoleApp.UniveralOrbit
             return totalOrbit;
         }
 
-        public int CalculateOrbitalTransfer(SpaceBody origin, SpaceBody destination, int depth = 0)
+        public int CountShortestDistance(SpaceBody origin, SpaceBody destination)
         {
-            var orbitalTransfer = 0;
-            
+            var originParents = new List<SpaceBody>();
+            var destinationParents = new List<SpaceBody>();
 
-            return orbitalTransfer;
+            FindSpaceBodyParents(origin, ref originParents);
+            FindSpaceBodyParents(destination, ref destinationParents);
+
+            var mutualParent = originParents.Intersect(destinationParents).FirstOrDefault();
+            var result = originParents.IndexOf(mutualParent) + destinationParents.IndexOf(mutualParent);
+
+            return result;
+        }
+
+        private List<SpaceBody> FindSpaceBodyParents(SpaceBody child, ref List<SpaceBody> result)
+        {
+            foreach (var spaceBody in SpaceBodies)
+            {
+                if (spaceBody.Satellites.Contains(child))
+                {
+                    result.Add(spaceBody);
+                    FindSpaceBodyParents(spaceBody, ref result);
+                }
+            }
+
+            return result;
         }
     }
 }

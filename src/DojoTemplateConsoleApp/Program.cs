@@ -36,32 +36,33 @@ namespace DojoTemplateConsoleApp
 
             #region UniversalOrbit
 
-            //var galaxy = new Galaxy();
-            //galaxy.LoadInput();
-            //galaxy.LoadSpaceBodies();
-            //var COM = galaxy.FindBody("COM");
-            //var YOU = galaxy.FindBody("YOU");
-            //var SAN = galaxy.FindBody("SAN");
-            //var resultDayOne = galaxy.CalculateTotalOrbits(COM);
-            //var resultDayTwo = galaxy.CalculateOrbitalTransfer(COM, SAN);
-            //Console.WriteLine($"Day 6 part 1 result is {resultDayOne} orbits");
+            var galaxy = new Galaxy();
+            galaxy.LoadInput();
+            galaxy.LoadSpaceBodies();
+            var COM = galaxy.FindBody("COM");
+            var YOU = galaxy.FindBody("YOU");
+            var SAN = galaxy.FindBody("SAN");
+            var resultDayOne = galaxy.CalculateTotalOrbits(COM);
+            var resultDayTwo = galaxy.CountShortestDistance(YOU, SAN);
+            Console.WriteLine($"Day 6 part 1 result is {resultDayOne} orbits");
+            Console.WriteLine($"Day 6 part 2 result is {resultDayTwo} orbits");
 
             #endregion
 
             #region MonitoringStation
 
-            var asteroidFinder = new AsteroidFinder();
-            var parser = new MonitoringStationInputParser(asteroidFinder);
-            parser.ParseInput();
-            parser.LoadInputToMap();
-            asteroidFinder.LoadAsteroids();
-            foreach (var asteroid in asteroidFinder.Asteroids)
-            {
-                asteroidFinder.CountVisibleAsteroids(asteroid);
-            }
-            var result = asteroidFinder.FindMonitoringStationPosition();
+            //var asteroidFinder = new AsteroidFinder();
+            //var parser = new MonitoringStationInputParser(asteroidFinder);
+            //parser.ParseInput();
+            //parser.LoadInputToMap();
+            //asteroidFinder.LoadAsteroids();
+            //foreach (var asteroid in asteroidFinder.Asteroids)
+            //{
+            //    asteroidFinder.CountVisibleAsteroids(asteroid);
+            //}
+            //var result = asteroidFinder.FindMonitoringStationPosition();
 
-            Console.WriteLine($"The monitoring station can see {result} asteroids.");
+            //Console.WriteLine($"The monitoring station can see {result} asteroids.");
             #endregion
 
             #region CrossedWires

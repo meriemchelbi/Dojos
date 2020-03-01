@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DojoTemplateConsoleApp
 {
-    public class Property : ILand
+    public class Property : Land
     {
         // This covers streets, stations, utilities
         public bool Owned { get; set; }
@@ -12,14 +12,8 @@ namespace DojoTemplateConsoleApp
         public Suite Suite { get; set; }
         public string Name { get; private set; }
 
-        public Property(string name)
+        public Property(string name) : base (name)
         {
-            Name = name;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return this.Name == ((ILand)obj).Name;
         }
     }
 }

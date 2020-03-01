@@ -263,3 +263,5 @@ paket-files/
 __pycache__/
 *.pyc
 
+.vs/DojoSolution/v16/.suo
+*.cache

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DojoTemplateConsoleApp
 {
@@ -57,7 +55,7 @@ namespace DojoTemplateConsoleApp
         private void MoveActivePlayer((int, int) dice)
         {
             var newPosition = Board.FindDestination(_activePlayer.Position, dice);
-            if (Board.City.IndexOf(_activePlayer.Position) < Board.City.IndexOf(newPosition))
+            if (Board.City.IndexOf(_activePlayer.Position) > Board.City.IndexOf(newPosition))
             {
                 _activePlayer.Pay(200);
             }

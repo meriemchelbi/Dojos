@@ -27,11 +27,17 @@ namespace DojoTemplateConsoleApp
             };
         }
 
+        // n.b. this will break if the player does more than one lap in a single turn, but not catering for this as not possible in Monopoly.
         internal ILand FindDestination(ILand position, (int, int) dice)
         {
             var currentPosition = City.IndexOf(position);
             var distance = dice.Item1 + dice.Item2;
-            return City.ElementAt(currentPosition + distance);
+
+            var destinationIndex = currentPosition + distance > City.Count - 1
+                ? distance - (City.Count - currentPosition)
+                : currentPosition + distance;
+
+            return City.ElementAt(destinationIndex);
         }
     }
 }

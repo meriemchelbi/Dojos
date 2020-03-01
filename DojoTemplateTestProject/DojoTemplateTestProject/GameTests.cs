@@ -1,7 +1,7 @@
 using DojoTemplateConsoleApp;
-using System;
 using Xunit;
 using FluentAssertions;
+using System.Linq;
 
 namespace DojoTemplateTestProject
 {
@@ -30,7 +30,21 @@ namespace DojoTemplateTestProject
         [Fact]
         public void ThreeDoublesSendsPlayerToJail()
         {
+            //var dice = new DiceStub();
+            //var game = new Game(dice, "Tarquin");
 
+            //dice.dice = (2, 2);
+            //game.TakeTurn();
+
+            //dice.dice = (4, 4);
+            //game.TakeTurn();
+            
+            //dice.dice = (1, 1);
+            //game.TakeTurn();
+
+            //var endPosition = game.Players[0].Position;
+
+            //endPosition.Should().BeEquivalentTo(new Land("Jail"));
         }
 
         [Fact]
@@ -43,7 +57,15 @@ namespace DojoTemplateTestProject
         [Fact]
         public void ActivePlayerGetsPaidWhenPassesGo()
         {
+            var dice = new DiceStub();
+            var game = new Game(dice, "Tarquin");
+            var player = game.Players.First();
+            player.Position = new Land("Jail");
 
+            dice.dice = (2, 2);
+            game.TakeTurn();
+            
+            player.Balance.Should().Be(1700);
         }
     }
 }

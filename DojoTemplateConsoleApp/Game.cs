@@ -5,44 +5,58 @@ namespace DojoTemplateConsoleApp
 {
     public class Game 
     {
-        public Game(IRollDice diceRoller, params string[] playerNames)
+        public Game(IRollDice diceRoller, ISelectPlayer playerSelector, OutputRenderer renderer, params string[] playerNames)
         {
             Board = new Board();
-            Players = playerNames.Select(p => new Player(p)).ToList();
+            Players = playerNames.Select(p => new Player(renderer, p)).ToList();
             _diceRoller = diceRoller;
-            _activePlayer = Players.First();
+            _playerSelector = playerSelector;
+            _renderer = renderer;
         }
 
         public Board Board { get; private set; }
         public List<Player> Players { get; private set; }
         private Player _activePlayer;
         private readonly IRollDice _diceRoller;
+        private readonly ISelectPlayer _playerSelector;
+        private readonly OutputRenderer _renderer;
 
         public void TakeTurn()
         {
-            // if player in jail for less than 3 turns, move to next player
-            // if player not in jail, roll dice
+            _activePlayer = _playerSelector.SelectPlayer(Players, _activePlayer);
+            _renderer.AnnounceActivePlayer(_activePlayer.Name);
+            
             var dice = _diceRoller.RollDice();
+            _renderer.DiceSummary(dice);
+            
             MoveActivePlayer(dice);
+            _renderer.StatePlayerPosition(_activePlayer);
+
             _activePlayer.Act();
 
-            // if double rolled, roll again
             if (_diceRoller.IsDouble && _activePlayer.ConsecutiveDoubles < 2)
             {
                 IncrementDoubleStreak();
+                // TODO roll again
+                // TODO if player not in Jail, move
                 MoveActivePlayer(dice);
                 _activePlayer.Act();
             }
-            // if double rolled 3 times, go straight to jail
+            // if double rolled 3 times & player not in Jail, go straight to jail
             else if (_diceRoller.IsDouble && _activePlayer.ConsecutiveDoubles == 2)
             {
+                // TODO roll again
+                // TODO if player not in Jail, move to Jail
                 MoveActivePlayer("Jail");
-                _activePlayer.ConsecutiveDoubles = 0;
+                // TODO if player in Jail, move to Jail (visiting)
+                ResetDoubleStreak();
             }
             else
             {
-                _activePlayer.ConsecutiveDoubles = 0; // reset consecutive doubles
+                ResetDoubleStreak();
             }
+
+            // end turn : change active player        
         }
 
         private void MoveActivePlayer(string destination)
@@ -64,7 +78,12 @@ namespace DojoTemplateConsoleApp
 
         private void IncrementDoubleStreak()
         {
-
+            _activePlayer.ConsecutiveDoubles++;
+        }
+        
+        private void ResetDoubleStreak()
+        {
+            _activePlayer.ConsecutiveDoubles = 0;
         }
     }
 }

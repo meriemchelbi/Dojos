@@ -13,7 +13,15 @@ namespace DojoTemplateConsoleApp
         public List<ILand> Properties { get; set; }
         public ILand Position { get; set; }
         public int ConsecutiveDoubles { get; set; }
+        private readonly OutputRenderer _renderer;
 
+        public Player(OutputRenderer renderer, string name)
+        {
+            Balance = 1500;
+            Name = name;
+            Position = new Land("Go");
+            _renderer = renderer;
+        }
         public Player(string name)
         {
             Balance = 1500;
@@ -34,6 +42,18 @@ namespace DojoTemplateConsoleApp
         internal void Pay(int amount)
         {
             this.Balance += amount;
+        }
+
+        private int DecreaseBalance(int amount)
+        {
+            var newBalance = Balance - amount;
+            _renderer.AnnounceBalanceUpdate(this);
+            return newBalance;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.Name == ((Player)obj).Name;
         }
     }
 }

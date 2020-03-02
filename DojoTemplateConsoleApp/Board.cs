@@ -14,15 +14,15 @@ namespace DojoTemplateConsoleApp
             City = new List<ILand>
             {
                 new Land("Go"),
-                new Property("Old Kent Road"),
+                new Property("Old Kent Road") { Owned = true },
                 new Land("Community Chest 1"),
                 new Property("Whitechapel Road"),
                 new Land("Income Tax"),
-                new Property("King's Cross Station"),
+                new Property("King's Cross Station") { Owned = true },
                 new Property("The Angel Islington"),
                 new Land("Chance 1"),
                 new Property("Euston Road"),
-                new Property("Pentonville Road"),
+                new Property("Pentonville Road") { Owned = true },
                 new Land("Jail")
             };
         }

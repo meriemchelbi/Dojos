@@ -35,7 +35,7 @@ namespace DojoTemplateTestProject
             var players = new List<Player> { tarquin, wibble, kevin };
             var sut = new PlayerSelector();
 
-            var result = sut.SelectPlayer(players, new Player("Tarquin"));
+            var result = sut.SelectPlayer(players, tarquin);
 
             result.Should().BeEquivalentTo(new Player("Wibble"));
         }
@@ -50,7 +50,7 @@ namespace DojoTemplateTestProject
             var players = new List<Player> { tarquin, wibble, kevin };
             var sut = new PlayerSelector();
 
-            var result = sut.SelectPlayer(players, new Player("Kevin Costner"));
+            var result = sut.SelectPlayer(players, kevin);
 
             result.Should().BeEquivalentTo(new Player("Tarquin"));
         }

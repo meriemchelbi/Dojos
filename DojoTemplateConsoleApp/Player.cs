@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 [assembly: InternalsVisibleTo("DojoTemplateTestProject")]
 namespace DojoTemplateConsoleApp
@@ -34,7 +32,7 @@ namespace DojoTemplateConsoleApp
             if (Position.GetType() == typeof(Property))
             {
                 Balance = ((Property)Position).Owned
-                    ? Balance - 100
+                    ? DecreaseBalance(100)
                     : Balance;
             }
         }
@@ -47,13 +45,8 @@ namespace DojoTemplateConsoleApp
         private int DecreaseBalance(int amount)
         {
             var newBalance = Balance - amount;
-            _renderer.AnnounceBalanceUpdate(this);
+            _renderer?.AnnounceBalanceUpdate(newBalance);
             return newBalance;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return this.Name == ((Player)obj).Name;
         }
     }
 }

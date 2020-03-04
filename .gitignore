@@ -267,3 +267,6 @@ __pycache__/
 build/tools/*
 TEMP
 src/ReferenceDataAggregator.Api/Logs/*.log
+*.cache
+*.props
+*.json

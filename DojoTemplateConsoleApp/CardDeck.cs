@@ -8,45 +8,45 @@ namespace DojoTemplateConsoleApp
     {
         private Card[] _cards;
 
-        public readonly List<Card> ShuffledDeck;
-        private Card _topCard;
+        public readonly LinkedList<Card> ShuffledDeck;
+        private LinkedListNode<Card> _topCard;
 
         public CardDeck(Card[] cards)
         {
             _cards = cards;
-            ShuffledDeck = Shuffle(_cards);
+            ShuffledDeck = new LinkedList<Card>(Shuffle(_cards));
         }
 
+        // TODO refactor and remove IsTopOfDeck if not used
         public Card Draw()
         {
-            var topCard = ShuffledDeck.FirstOrDefault(c => c.IsTopOfDeck == true);
-            if (topCard is null)
+            if (_topCard is null)
             {
-                topCard = ShuffledDeck[0];
-                topCard.IsTopOfDeck = true;
-                return topCard;
+                _topCard = ShuffledDeck.First;
+                _topCard.Value.IsTopOfDeck = true;
+            }
+
+            else if (_topCard == ShuffledDeck.Last)
+            {
+                _topCard.Value.IsTopOfDeck = false;
+                _topCard = ShuffledDeck.First;
+                _topCard.Value.IsTopOfDeck = true;
             }
 
             else
             {
-                var topCardIndex = ShuffledDeck.FindLastIndex(c => c.IsTopOfDeck == true);
-                ShuffledDeck[topCardIndex].IsTopOfDeck = false;
-
-                var newCardIndex = topCardIndex == ShuffledDeck.Count - 1
-                    ? 0
-                    : topCardIndex + 1;
-
-                var newCard = ShuffledDeck[newCardIndex];
-                newCard.IsTopOfDeck = true;
-                
-                return newCard;
+                _topCard.Value.IsTopOfDeck = false;
+                _topCard = _topCard.Next;
+                _topCard.Value.IsTopOfDeck = true;
             }
+
+            return _topCard.Value;
         }
 
-        private List<Card> Shuffle(Card[] cards)
+        private IEnumerable<Card> Shuffle(Card[] cards)
         {
             var random = new Random();
-            return cards.OrderBy(x => random.Next()).ToList();
+            return cards.OrderBy(x => random.Next());
         }
     }
 }

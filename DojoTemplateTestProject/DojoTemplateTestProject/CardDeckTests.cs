@@ -1,4 +1,7 @@
-﻿using DojoTemplateConsoleApp;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using DojoTemplateConsoleApp;
 using Xunit;
 using FluentAssertions;
 
@@ -21,7 +24,7 @@ namespace DojoTemplateTestProject
             sut.ShuffledDeck.Should().NotBeNull();
             sut.ShuffledDeck.Count.Should().Be(cards.Length);
             sut.ShuffledDeck.Should().OnlyHaveUniqueItems();
-            sut.ShuffledDeck[0].IsTopOfDeck.Should().BeFalse();
+            sut.ShuffledDeck.First.Value.IsTopOfDeck.Should().BeFalse();
         }
 
         [Fact]
@@ -38,7 +41,7 @@ namespace DojoTemplateTestProject
             var drawn = sut.Draw();
 
             drawn.Should().NotBeNull();
-            drawn.Should().BeEquivalentTo(sut.ShuffledDeck[0]);
+            drawn.Should().BeEquivalentTo(sut.ShuffledDeck.First.Value);
             drawn.IsTopOfDeck.Should().BeTrue();
         }
 
@@ -57,9 +60,9 @@ namespace DojoTemplateTestProject
             var drawn = sut.Draw();
 
             drawn.Should().NotBeNull();
-            drawn.Should().BeEquivalentTo(sut.ShuffledDeck[1]);
+            drawn.Should().BeEquivalentTo(sut.ShuffledDeck.First.Next.Value);
             drawn.IsTopOfDeck.Should().BeTrue();
-            sut.ShuffledDeck[0].IsTopOfDeck.Should().BeFalse();
+            sut.ShuffledDeck.First.Value.IsTopOfDeck.Should().BeFalse();
         }
 
         [Fact]
@@ -80,7 +83,7 @@ namespace DojoTemplateTestProject
             var drawn = sut.Draw();
 
             drawn.Should().NotBeNull();
-            drawn.Should().BeEquivalentTo(sut.ShuffledDeck[0]);
+            drawn.Should().BeEquivalentTo(sut.ShuffledDeck.First.Value);
             drawn.IsTopOfDeck.Should().BeTrue();
         }
     }

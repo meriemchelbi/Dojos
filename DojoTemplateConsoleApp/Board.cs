@@ -8,6 +8,10 @@ namespace DojoTemplateConsoleApp
     public class Board
     {
         public List<ILand> City { get; set; }
+        public CardDeck CommunityChest { get; }
+        public CardDeck Chance { get; }
+        private readonly Card[] _chance;
+        private readonly Card[] _communityChest;
 
         public Board()
         {
@@ -25,6 +29,19 @@ namespace DojoTemplateConsoleApp
                 new Property("Pentonville Road") { Owned = true },
                 new Land("Jail")
             };
+            _communityChest = new Card[]
+            {
+                new Card(CardType.CommunityChest, "Advance to \"GO\". Collect £200."),
+                new Card(CardType.CommunityChest, "Doctor's fees. Pay £50."),
+                new Card(CardType.CommunityChest, "Get out of Jail free")
+            };
+            _chance = new Card[]
+            {
+                new Card(CardType.Chance, "Go to Jail. Go directly to Jail. Do not pass \"Go\""),
+                new Card(CardType.Chance, "Take a trip to Reading Railroad.If you pass Go, collect £200."),
+                new Card(CardType.Chance, "Your building {and} loan matures. Receive {Collect} £150.")
+            };
+            CommunityChest = new CardDeck(_communityChest);
         }
 
         // n.b. this will break if the player does more than one lap in a single turn, but not catering for this as not possible in Monopoly.

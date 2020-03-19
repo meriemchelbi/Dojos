@@ -7,7 +7,6 @@ namespace DojoTemplateConsoleApp
     public class CardDeck
     {
         private Card[] _cards;
-
         public readonly LinkedList<Card> ShuffledDeck;
         private LinkedListNode<Card> _topCard;
 

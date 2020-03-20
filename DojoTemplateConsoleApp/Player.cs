@@ -29,6 +29,7 @@ namespace DojoTemplateConsoleApp
 
         internal void Act()
         {
+            // TODO ILand could return an action (more interfacey) /delegate depending on the type of land you land on 
             if (Position.GetType() == typeof(Property))
             {
                 Balance = ((Property)Position).Owned

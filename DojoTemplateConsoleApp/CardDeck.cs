@@ -16,6 +16,7 @@ namespace DojoTemplateConsoleApp
             ShuffledDeck = new LinkedList<Card>(Shuffle(_cards));
         }
 
+        
         // TODO refactor and remove IsTopOfDeck if not used
         public Card Draw()
         {
@@ -42,6 +43,7 @@ namespace DojoTemplateConsoleApp
             return _topCard.Value;
         }
 
+        // TODO look up Fischer-Yates shuffle
         private IEnumerable<Card> Shuffle(Card[] cards)
         {
             var random = new Random();

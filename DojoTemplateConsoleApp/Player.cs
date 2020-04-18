@@ -30,24 +30,20 @@ namespace DojoTemplateConsoleApp
         internal void Act()
         {
             // TODO ILand could return an action (more interfacey) /delegate depending on the type of land you land on 
-            if (Position.GetType() == typeof(Property))
-            {
-                Balance = ((Property)Position).Owned
-                    ? DecreaseBalance(100)
-                    : Balance;
-            }
+            if (Position.GetType() == typeof(Property) && ((Property)Position).Owned)
+                DecreaseBalance(100);
         }
 
         internal void Pay(int amount)
         {
             this.Balance += amount;
+            _renderer?.AnnounceBalanceUpdate(Balance);
         }
 
-        private int DecreaseBalance(int amount)
+        private void DecreaseBalance(int amount)
         {
-            var newBalance = Balance - amount;
-            _renderer?.AnnounceBalanceUpdate(newBalance);
-            return newBalance;
+            Balance -= amount;
+            _renderer?.AnnounceBalanceUpdate(Balance);
         }
     }
 }

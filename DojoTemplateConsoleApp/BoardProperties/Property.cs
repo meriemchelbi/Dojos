@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DojoTemplateConsoleApp
+﻿namespace DojoTemplateConsoleApp.BoardProperties
 {
     public class Property : Land
     {
@@ -12,7 +8,7 @@ namespace DojoTemplateConsoleApp
         public Suite Suite { get; set; }
         public string Name { get; private set; }
 
-        public Property(string name) : base (name)
+        public Property(string name) : base(name)
         {
         }
     }

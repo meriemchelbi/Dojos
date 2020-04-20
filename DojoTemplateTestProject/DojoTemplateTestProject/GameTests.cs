@@ -2,6 +2,7 @@ using DojoTemplateConsoleApp;
 using Xunit;
 using FluentAssertions;
 using System.Linq;
+using DojoTemplateConsoleApp.BoardProperties;
 
 namespace DojoTemplateTestProject
 {

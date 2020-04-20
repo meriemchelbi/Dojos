@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DojoTemplateConsoleApp
+﻿namespace DojoTemplateConsoleApp
 {
     class Program
     {

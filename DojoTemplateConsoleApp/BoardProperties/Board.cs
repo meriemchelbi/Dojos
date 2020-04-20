@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace DojoTemplateConsoleApp
+namespace DojoTemplateConsoleApp.BoardProperties
 {
     public class Board
     {
@@ -19,12 +17,12 @@ namespace DojoTemplateConsoleApp
             {
                 new Land("Go"),
                 new Property("Old Kent Road") { Owned = true },
-                new Land("Community Chest 1"),
+                new CardTile("Community Chest 1", CardType.CommunityChest),
                 new Property("Whitechapel Road"),
                 new Land("Income Tax"),
                 new Property("King's Cross Station") { Owned = true },
                 new Property("The Angel Islington"),
-                new Land("Chance 1"),
+                new CardTile("Chance 1", CardType.Chance),
                 new Property("Euston Road"),
                 new Property("Pentonville Road") { Owned = true },
                 new Land("Jail")
@@ -39,9 +37,10 @@ namespace DojoTemplateConsoleApp
             {
                 new Card(CardType.Chance, "Go to Jail. Go directly to Jail. Do not pass \"Go\""),
                 new Card(CardType.Chance, "Take a trip to Reading Railroad.If you pass Go, collect £200."),
-                new Card(CardType.Chance, "Your building {and} loan matures. Receive {Collect} £150.")
+                new Card(CardType.Chance, "Your building loan matures. Receive £150.")
             };
             CommunityChest = new CardDeck(_communityChest);
+            Chance = new CardDeck(_chance);
         }
 
         // n.b. this will break if the player does more than one lap in a single turn, but not catering for this as not possible in Monopoly.

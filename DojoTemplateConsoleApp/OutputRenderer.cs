@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DojoTemplateConsoleApp
 {
-    // TODO: add interface for type & tests?
     public class OutputRenderer
     {
         public void AnnounceActivePlayer(string activePlayer)
@@ -25,6 +22,11 @@ namespace DojoTemplateConsoleApp
         internal void AnnounceBalanceUpdate(int balance)
         {
             Console.WriteLine($"Your new balance is {balance}!");
+        }
+
+        internal void Announce(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }

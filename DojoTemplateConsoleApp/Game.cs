@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DojoTemplateConsoleApp.BoardProperties;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DojoTemplateConsoleApp
@@ -30,7 +31,6 @@ namespace DojoTemplateConsoleApp
             _renderer.DiceSummary(dice);
             
             MoveActivePlayer(dice);
-            _renderer.StatePlayerPosition(_activePlayer);
 
             _activePlayer.Act();
 
@@ -64,6 +64,7 @@ namespace DojoTemplateConsoleApp
             var newPosition = Board.City.First(l => l.Name == destination);
             _activePlayer.Position = newPosition;
             if (newPosition.Name == "Go") _activePlayer.Pay(200);
+            _renderer.StatePlayerPosition(_activePlayer);
         }
 
         private void MoveActivePlayer((int, int) dice)
@@ -71,6 +72,8 @@ namespace DojoTemplateConsoleApp
             var newPosition = Board.FindDestination(_activePlayer.Position, dice);
             if (Board.City.IndexOf(_activePlayer.Position) > Board.City.IndexOf(newPosition))
             {
+                var message = "You passed Go!";
+                _renderer.Announce(message);
                 _activePlayer.Pay(200);
             }
             _activePlayer.Position = newPosition;

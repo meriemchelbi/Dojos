@@ -8,7 +8,7 @@ namespace DojoTemplateConsoleApp
     {
         private Card[] _cards;
         public readonly LinkedList<Card> ShuffledDeck;
-        private LinkedListNode<Card> _topCard;
+        public LinkedListNode<Card> TopCard { get; set; }
 
         public CardDeck(Card[] cards)
         {
@@ -16,31 +16,16 @@ namespace DojoTemplateConsoleApp
             ShuffledDeck = new LinkedList<Card>(Shuffle(_cards));
         }
 
-        
-        // TODO refactor and remove IsTopOfDeck if not used
         public Card Draw()
         {
-            if (_topCard is null)
-            {
-                _topCard = ShuffledDeck.First;
-                _topCard.Value.IsTopOfDeck = true;
-            }
-
-            else if (_topCard == ShuffledDeck.Last)
-            {
-                _topCard.Value.IsTopOfDeck = false;
-                _topCard = ShuffledDeck.First;
-                _topCard.Value.IsTopOfDeck = true;
-            }
-
+            if (TopCard is null)
+                TopCard = ShuffledDeck.First;
+            else if (TopCard == ShuffledDeck.Last)
+                TopCard = ShuffledDeck.First;
             else
-            {
-                _topCard.Value.IsTopOfDeck = false;
-                _topCard = _topCard.Next;
-                _topCard.Value.IsTopOfDeck = true;
-            }
+                TopCard = TopCard.Next;
 
-            return _topCard.Value;
+            return TopCard.Value;
         }
 
         // TODO look up Fischer-Yates shuffle

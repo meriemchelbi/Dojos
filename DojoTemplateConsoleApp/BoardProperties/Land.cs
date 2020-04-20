@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DojoTemplateConsoleApp
+﻿namespace DojoTemplateConsoleApp.BoardProperties
 {
-    public class Land: ILand
+    public class Land : ILand
     {
         public string Name { get; private set; }
 
@@ -15,7 +11,7 @@ namespace DojoTemplateConsoleApp
 
         public override bool Equals(object obj)
         {
-            return this.Name == ((ILand)obj).Name;
+            return Name == ((ILand)obj).Name;
         }
     }
 }

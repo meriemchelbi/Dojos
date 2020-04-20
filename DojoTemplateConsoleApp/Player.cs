@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DojoTemplateConsoleApp.BoardProperties;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("DojoTemplateTestProject")]
@@ -31,7 +32,11 @@ namespace DojoTemplateConsoleApp
         {
             // TODO ILand could return an action (more interfacey) /delegate depending on the type of land you land on 
             if (Position.GetType() == typeof(Property) && ((Property)Position).Owned)
-                DecreaseBalance(100);
+                Charge(100);
+            if (Position.GetType() == typeof(Property))
+            {
+
+            }
         }
 
         internal void Pay(int amount)
@@ -40,7 +45,7 @@ namespace DojoTemplateConsoleApp
             _renderer?.AnnounceBalanceUpdate(Balance);
         }
 
-        private void DecreaseBalance(int amount)
+        internal void Charge(int amount)
         {
             Balance -= amount;
             _renderer?.AnnounceBalanceUpdate(Balance);

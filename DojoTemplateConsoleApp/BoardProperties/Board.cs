@@ -6,41 +6,15 @@ namespace DojoTemplateConsoleApp.BoardProperties
     public class Board
     {
         public List<ILand> City { get; set; }
-        public CardDeck CommunityChest { get; }
-        public CardDeck Chance { get; }
-        private readonly Card[] _chance;
-        private readonly Card[] _communityChest;
+        internal IStackCards CommunityChest { get; }
+        internal IStackCards Chance { get; set; }
 
-        public Board()
+        // TODO inject card decks and refactor tests
+        public Board(List<ILand> city, Card[] communityChest, Card[] chance)
         {
-            City = new List<ILand>
-            {
-                new Land("Go"),
-                new Property("Old Kent Road") { Owned = true },
-                new CardTile("Community Chest 1", CardType.CommunityChest),
-                new Property("Whitechapel Road"),
-                new Land("Income Tax"),
-                new Property("King's Cross Station") { Owned = true },
-                new Property("The Angel Islington"),
-                new CardTile("Chance 1", CardType.Chance),
-                new Property("Euston Road"),
-                new Property("Pentonville Road") { Owned = true },
-                new Land("Jail")
-            };
-            _communityChest = new Card[]
-            {
-                new Card(CardType.CommunityChest, "Advance to \"GO\". Collect £200."),
-                new Card(CardType.CommunityChest, "Doctor's fees. Pay £50."),
-                new Card(CardType.CommunityChest, "Get out of Jail free")
-            };
-            _chance = new Card[]
-            {
-                new Card(CardType.Chance, "Go to Jail. Go directly to Jail. Do not pass \"Go\""),
-                new Card(CardType.Chance, "Take a trip to Reading Railroad.If you pass Go, collect £200."),
-                new Card(CardType.Chance, "Your building loan matures. Receive £150.")
-            };
-            CommunityChest = new CardDeck(_communityChest);
-            Chance = new CardDeck(_chance);
+            City = city;
+            CommunityChest = new CardDeck(communityChest);
+            Chance = new CardDeck(chance);
         }
 
         // n.b. this will break if the player does more than one lap in a single turn, but not catering for this as not possible in Monopoly.

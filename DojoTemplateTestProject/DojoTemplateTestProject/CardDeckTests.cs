@@ -34,7 +34,7 @@ namespace DojoTemplateTestProject
                 new Card(CardType.CommunityChest, "Community 2"),
             };
             var sut = new CardDeck(cards);
-            var drawn = sut.Draw();
+            var drawn = sut.GetTopCard();
 
             drawn.Should().NotBeNull();
             drawn.Should().BeEquivalentTo(sut.ShuffledDeck.First.Value);
@@ -51,8 +51,8 @@ namespace DojoTemplateTestProject
                 new Card(CardType.CommunityChest, "Community 2"),
             };
             var sut = new CardDeck(cards);
-            sut.Draw();
-            var drawn = sut.Draw();
+            sut.GetTopCard();
+            var drawn = sut.GetTopCard();
 
             drawn.Should().NotBeNull();
             drawn.Should().BeEquivalentTo(sut.ShuffledDeck.First.Next.Value);
@@ -69,11 +69,11 @@ namespace DojoTemplateTestProject
                 new Card(CardType.CommunityChest, "Community 2"),
             };
             var sut = new CardDeck(cards);
-            sut.Draw();
-            sut.Draw();
-            sut.Draw();
-            sut.Draw();
-            var drawn = sut.Draw();
+            sut.GetTopCard();
+            sut.GetTopCard();
+            sut.GetTopCard();
+            sut.GetTopCard();
+            var drawn = sut.GetTopCard();
 
             drawn.Should().NotBeNull();
             drawn.Should().BeEquivalentTo(sut.ShuffledDeck.First.Value);

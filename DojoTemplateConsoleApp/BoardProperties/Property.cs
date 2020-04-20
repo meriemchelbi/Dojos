@@ -10,6 +10,7 @@
 
         public Property(string name) : base(name)
         {
+            Name = name;
         }
     }
 }

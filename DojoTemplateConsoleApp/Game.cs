@@ -1,4 +1,5 @@
 ﻿using DojoTemplateConsoleApp.BoardProperties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,13 +7,14 @@ namespace DojoTemplateConsoleApp
 {
     public class Game 
     {
-        public Game(IRollDice diceRoller, ISelectPlayer playerSelector, OutputRenderer renderer, params string[] playerNames)
+        public Game(Board board, IRollDice diceRoller, ISelectPlayer playerSelector, OutputRenderer renderer, params string[] playerNames)
         {
-            Board = new Board();
+            Board = board;
             Players = playerNames.Select(p => new Player(renderer, p)).ToList();
             _diceRoller = diceRoller;
             _playerSelector = playerSelector;
             _renderer = renderer;
+            _cardDrawer = new CardDrawer();
         }
 
         public Board Board { get; private set; }
@@ -21,6 +23,7 @@ namespace DojoTemplateConsoleApp
         private readonly IRollDice _diceRoller;
         private readonly ISelectPlayer _playerSelector;
         private readonly OutputRenderer _renderer;
+        private readonly CardDrawer _cardDrawer;
 
         public void TakeTurn()
         {
@@ -32,7 +35,15 @@ namespace DojoTemplateConsoleApp
             
             MoveActivePlayer(dice);
 
-            _activePlayer.Act();
+            // TODO ILand could return an action (more interfacey) /delegate depending on the type of land you land on 
+            if (_activePlayer.Position.GetType() == typeof(Property) && ((Property)_activePlayer.Position).Owned)
+                _activePlayer.Charge(100);
+
+            if (_activePlayer.Position.GetType() == typeof(CardTile))
+            {
+                var position = (CardTile)_activePlayer.Position;
+                var action = DrawCard(position.TileCardType);
+            }
 
             if (_diceRoller.IsDouble && _activePlayer.ConsecutiveDoubles < 2)
             {
@@ -40,7 +51,6 @@ namespace DojoTemplateConsoleApp
                 // TODO roll again
                 // TODO if player not in Jail, move
                 MoveActivePlayer(dice);
-                _activePlayer.Act();
             }
             // if double rolled 3 times & player not in Jail, go straight to jail
             else if (_diceRoller.IsDouble && _activePlayer.ConsecutiveDoubles == 2)
@@ -87,6 +97,16 @@ namespace DojoTemplateConsoleApp
         private void ResetDoubleStreak()
         {
             _activePlayer.ConsecutiveDoubles = 0;
+        }
+
+        internal Action<int> DrawCard(CardType deckType)
+        {
+            var cardDeck = deckType == CardType.Chance
+                ? Board.Chance
+                : Board.CommunityChest;
+            var topCard = cardDeck.GetTopCard();
+
+            return topCard.Instruction;
         }
     }
 }

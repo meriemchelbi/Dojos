@@ -28,17 +28,6 @@ namespace DojoTemplateConsoleApp
             Position = new Land("Go");
         }
 
-        internal void Act()
-        {
-            // TODO ILand could return an action (more interfacey) /delegate depending on the type of land you land on 
-            if (Position.GetType() == typeof(Property) && ((Property)Position).Owned)
-                Charge(100);
-            if (Position.GetType() == typeof(Property))
-            {
-
-            }
-        }
-
         internal void Pay(int amount)
         {
             this.Balance += amount;

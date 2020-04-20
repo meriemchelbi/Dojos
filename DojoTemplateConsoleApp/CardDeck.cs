@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DojoTemplateConsoleApp
 {
-    public class CardDeck
+    public class CardDeck: IStackCards
     {
         private Card[] _cards;
         public readonly LinkedList<Card> ShuffledDeck;
@@ -16,7 +16,7 @@ namespace DojoTemplateConsoleApp
             ShuffledDeck = new LinkedList<Card>(Shuffle(_cards));
         }
 
-        public Card Draw()
+        public Card GetTopCard()
         {
             if (TopCard is null)
                 TopCard = ShuffledDeck.First;

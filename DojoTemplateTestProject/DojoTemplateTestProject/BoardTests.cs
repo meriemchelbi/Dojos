@@ -2,6 +2,7 @@
 using Xunit;
 using FluentAssertions;
 using DojoTemplateConsoleApp.BoardProperties;
+using DojoTemplateConsoleApp;
 
 namespace DojoTemplateTestProject
 {
@@ -13,9 +14,7 @@ namespace DojoTemplateTestProject
         [InlineData("origin", "destination", 5, 5)]
         public void FindDestinationReturnsCorrectLand(string currentPositionName, string expectedDestinationName, int dice1, int dice2)
         {
-            var sut = new Board()
-            {
-                City = new List<ILand>
+            var city = new List<ILand>
                 {
                     new Land("Go"),
                     new Land("origin"),
@@ -23,8 +22,8 @@ namespace DojoTemplateTestProject
                     new Land("middle bit 2"),
                     new Land("middle bit 3"),
                     new Land("destination")
-                }
-            };
+                };
+            var sut = new Board(city, new Card[0], new Card[0]);
             
             var currentPosition = new Land(currentPositionName);
             var expectedDestination = new Land(expectedDestinationName);

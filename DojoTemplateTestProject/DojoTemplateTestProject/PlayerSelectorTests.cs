@@ -2,11 +2,14 @@
 using Xunit;
 using FluentAssertions;
 using DojoTemplateConsoleApp;
+using DojoTemplateConsoleApp.Model;
 
 namespace DojoTemplateTestProject
 {
     public class PlayerSelectorTests
     {
+        private Board _board = new Board(new List<ILand>(), new Card[0], new Card[0]);
+
         [Fact]
         public void SetActivePlayerSelectsFirstPlayerOnFirstTurn()
         {

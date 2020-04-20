@@ -1,4 +1,4 @@
-﻿using DojoTemplateConsoleApp.BoardProperties;
+﻿using DojoTemplateConsoleApp.Model;
 using System.Collections.Generic;
 
 namespace DojoTemplateConsoleApp

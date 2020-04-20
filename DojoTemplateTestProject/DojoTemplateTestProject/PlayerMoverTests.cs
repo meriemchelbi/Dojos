@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Xunit;
 using FluentAssertions;
-using DojoTemplateConsoleApp.BoardProperties;
 using DojoTemplateConsoleApp;
+using DojoTemplateConsoleApp.Model;
 
 namespace DojoTemplateTestProject
 {
-    public class BoardTests
+    public class PlayerMoverTests
     {
         [Theory]
         [InlineData("origin", "destination", 1, 3)]
@@ -23,7 +23,8 @@ namespace DojoTemplateTestProject
                     new Land("middle bit 3"),
                     new Land("destination")
                 };
-            var sut = new Board(city, new Card[0], new Card[0]);
+            var board = new Board(city, new Card[0], new Card[0]);
+            var sut = new PlayerMover(board, new OutputRenderer(), new Banker(new OutputRenderer()));
             
             var currentPosition = new Land(currentPositionName);
             var expectedDestination = new Land(expectedDestinationName);

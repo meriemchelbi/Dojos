@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DojoTemplateConsoleApp
+namespace DojoTemplateConsoleApp.Model
 {
     public class Card
     {
@@ -15,10 +15,10 @@ namespace DojoTemplateConsoleApp
             Description = description;
         }
     }
-}
 
-public enum CardType
-{
-    CommunityChest,
-    Chance
+    public enum CardType
+    {
+        CommunityChest,
+        Chance
+    }
 }

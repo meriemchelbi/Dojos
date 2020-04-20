@@ -1,4 +1,6 @@
-﻿namespace DojoTemplateConsoleApp
+﻿using DojoTemplateConsoleApp.Model;
+
+namespace DojoTemplateConsoleApp
 {
     public interface IStackCards
     {

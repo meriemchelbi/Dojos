@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DojoTemplateConsoleApp
+namespace DojoTemplateConsoleApp.Model
 {
-    public class CardDeck: IStackCards
+    internal class CardDeck : IStackCards
     {
         private Card[] _cards;
         public readonly LinkedList<Card> ShuffledDeck;

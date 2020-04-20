@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DojoTemplateConsoleApp.Model;
+using System;
 
 namespace DojoTemplateConsoleApp
 {

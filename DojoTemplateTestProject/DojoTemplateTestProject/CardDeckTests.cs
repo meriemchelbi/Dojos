@@ -1,6 +1,6 @@
-﻿using DojoTemplateConsoleApp;
-using Xunit;
+﻿using Xunit;
 using FluentAssertions;
+using DojoTemplateConsoleApp.Model;
 
 namespace DojoTemplateTestProject
 {

@@ -1,4 +1,4 @@
-﻿namespace DojoTemplateConsoleApp.BoardProperties
+﻿namespace DojoTemplateConsoleApp.Model
 {
     class CardTile : Land
     {

@@ -2,10 +2,10 @@ using DojoTemplateConsoleApp;
 using Xunit;
 using FluentAssertions;
 using System.Linq;
-using DojoTemplateConsoleApp.BoardProperties;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
+using DojoTemplateConsoleApp.Model;
 
 namespace DojoTemplateTestProject
 {

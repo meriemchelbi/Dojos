@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DojoTemplateConsoleApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DojoTemplateConsoleApp.Model
+namespace DojoTemplateConsoleApp
 {
-    internal class CardDeck : IStackCards
+    public class CardDeck: IStackCards
     {
         private Card[] _cards;
         public readonly LinkedList<Card> ShuffledDeck;

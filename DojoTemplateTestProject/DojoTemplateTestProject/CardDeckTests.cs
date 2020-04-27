@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using DojoTemplateConsoleApp;
+using Xunit;
 using FluentAssertions;
 using DojoTemplateConsoleApp.Model;
 

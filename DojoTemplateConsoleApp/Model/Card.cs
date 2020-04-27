@@ -6,7 +6,7 @@ namespace DojoTemplateConsoleApp.Model
     {
         public CardType Type { get; }
         public string Description { get; set; }
-        public Action<int> Instruction { get; set; }
+        public string Instruction { get; set; }
         public bool IsTopOfDeck { get; set; }
 
         public Card(CardType type, string description)

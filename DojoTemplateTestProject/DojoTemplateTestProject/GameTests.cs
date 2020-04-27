@@ -130,14 +130,16 @@ namespace DojoTemplateTestProject
         {
             var sut = new Game(_board, _dice, _playerSelector, _renderer, "Tarquin");
             _board.Chance = Substitute.For<IStackCards>();
-            var action = new Action<int>(i => i = 2);
-            var card = new Card(CardType.Chance, "chance") { Instruction = action };
+            var card = new Card(CardType.Chance, "chance") { Instruction = "Wibble" };
             _board.Chance.GetTopCard().Returns(card);
 
             var instruction = sut.DrawCard(CardType.Chance);
 
-            instruction.Should().BeSameAs(action);
+            instruction.Should().BeSameAs("Wibble");
         }
+
+        [Fact]
+        public void 
 
     }
 }

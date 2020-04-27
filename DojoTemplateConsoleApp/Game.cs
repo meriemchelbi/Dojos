@@ -7,6 +7,15 @@ namespace DojoTemplateConsoleApp
 {
     public class Game 
     {
+        public Board Board { get; private set; }
+        public List<Player> Players { get; private set; }
+        private Player _activePlayer;
+        private readonly IRollDice _diceRoller;
+        private readonly ISelectPlayer _playerSelector;
+        private readonly OutputRenderer _renderer;
+        private readonly PlayerMover _playerMover;
+        private readonly Banker _banker;
+
         public Game(Board board, IRollDice diceRoller, ISelectPlayer playerSelector, OutputRenderer renderer, params string[] playerNames)
         {
             Board = board;
@@ -17,15 +26,6 @@ namespace DojoTemplateConsoleApp
             _banker = new Banker(_renderer);
             _playerMover = new PlayerMover(Board, _renderer, _banker);
         }
-
-        public Board Board { get; private set; }
-        public List<Player> Players { get; private set; }
-        private Player _activePlayer;
-        private readonly IRollDice _diceRoller;
-        private readonly ISelectPlayer _playerSelector;
-        private readonly OutputRenderer _renderer;
-        private readonly PlayerMover _playerMover;
-        private readonly Banker _banker;
 
         public void TakeTurn()
         {
@@ -45,8 +45,8 @@ namespace DojoTemplateConsoleApp
             if (_activePlayer.Position.GetType() == typeof(CardTile))
             {
                 var position = (CardTile)_activePlayer.Position;
-                var action = DrawCard(position.TileCardType);
-                // TODO execut action. Possibly in form of helper methods?
+                var instruction = DrawCard(position.TileCardType);
+                // TODO execute action. Possibly in form of helper methods?
             }
 
             if (_diceRoller.IsDouble && _activePlayer.ConsecutiveDoubles < 2)
@@ -83,7 +83,7 @@ namespace DojoTemplateConsoleApp
             _activePlayer.ConsecutiveDoubles = 0;
         }
 
-        internal Action<int> DrawCard(CardType deckType)
+        internal string DrawCard(CardType deckType)
         {
             var cardDeck = deckType == CardType.Chance
                 ? Board.Chance

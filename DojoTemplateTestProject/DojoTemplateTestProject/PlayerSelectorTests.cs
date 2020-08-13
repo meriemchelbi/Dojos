@@ -19,9 +19,9 @@ namespace DojoTemplateTestProject
                 new Player("Wibble"),
                 new Player("Kevin Costner")
             };
-            var sut = new PlayerSelector();
+            var slut = new PlayerSelector();
 
-            var result = sut.SelectPlayer(players, null);
+            var result = slut.SelectPlayer(players, null);
 
             result.Should().BeEquivalentTo(new Player("Tarquin"));
         }

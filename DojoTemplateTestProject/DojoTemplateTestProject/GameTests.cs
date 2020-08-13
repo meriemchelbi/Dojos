@@ -138,8 +138,5 @@ namespace DojoTemplateTestProject
             instruction.Should().BeSameAs("Wibble");
         }
 
-        [Fact]
-        public void 
-
     }
 }

@@ -8,23 +8,23 @@
     ".NETCoreApp,Version=v3.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Gordon\\.nuget\\packages\\": {},
+    "C:\\Users\\meriemc\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+      "projectUniqueName": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
       "projectName": "DojoTemplateConsoleApp",
-      "projectPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
-      "packagesPath": "C:\\Users\\Gordon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\obj\\",
+      "projectPath": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+      "packagesPath": "C:\\Users\\meriemc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\meriemc\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Gordon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\meriemc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -62,7 +62,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

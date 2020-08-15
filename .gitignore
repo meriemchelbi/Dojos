@@ -267,3 +267,5 @@ __pycache__/
 build/tools/*
 TEMP
 src/ReferenceDataAggregator.Api/Logs/*.log
+.vs/DojoSolution/v16/.suo
+*.cache

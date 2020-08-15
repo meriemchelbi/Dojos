@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Xunit;
 
@@ -24,22 +23,24 @@ namespace DojoTemplateTestProject
         {
             var standinput = new Queue<string>(new[]
             {
-                "4 4 4",
-                "1 3",
-                "2 3",
-                "0 1",
-                "0 2",
-                "3",
-                "0"
+                "4 4 1", // no of nodes, no of links, no of gateways
+                "1 3", // node 1 is linked to node 3
+                "2 3", // node 2 is linked to node 3
+                "0 1", // node 0 is linked to node 1
+                "0 2", // node 0 is linked to node 2
+                "3", // index of gateway node (each new gateway node is provided as a separate input/line
+                "0" // position of agent
            });
 
             Func<string> readLine = () => standinput.Dequeue();
 
             var initialInputs = readLine().Split(' ');
-
-            var noOfLinks = int.Parse(initialInputs[1]);
             var skynet = new Graph();
 
+            var noOfNodes = int.Parse(initialInputs[0]);
+            skynet.AddNodes(noOfNodes);
+
+            var noOfLinks = int.Parse(initialInputs[1]);
             for (int i = 0; i < noOfLinks; i++)
             {
                 var link = readLine().Split(' ');
@@ -48,14 +49,22 @@ namespace DojoTemplateTestProject
                 skynet.AddLink(node1, node2);
             }
 
-            var wibble = "blurb";
-            
+            var noOfGateways = int.Parse(initialInputs[2]);
+            for (int i = 0; i < noOfGateways; i++)
+            {
+                var gatewayIndex = int.Parse(readLine());
+                skynet.Nodes[gatewayIndex].IsGateway = true;
+            }
+
+            var virus = new Virus();
+            var virusPosition = int.Parse(readLine());
+            virus.CurrentPosition = skynet.Nodes[virusPosition];
         }
 
         class Graph
         {
             public List<(int,int)>  Links { get; set; }
-            public List<Node>  Nodes { get; set; }
+            public List<Node> Nodes { get; set; }
 
             public Graph()
             {
@@ -63,26 +72,44 @@ namespace DojoTemplateTestProject
                 Nodes = new List<Node>();
             }
 
-            public void AddLink(int nodeId1, int nodeId2)
+            public void AddLink(int firstNodeId, int secondNodeId)
             {
-                if (Nodes.Exists(n => n.Id == nodeId1) == false)
-                    Nodes.Add(new Node(nodeId1));
+                var nodeA = Nodes[firstNodeId];
+                var nodeB = Nodes[secondNodeId];
+
+                Links.Add((firstNodeId, secondNodeId));
+
+                if (!nodeA.Neighbours.Exists(n => n == nodeB))
+                    nodeA.Neighbours.Add(nodeB);
                 
-                if (Nodes.Exists(n => n.Id == nodeId2) == false)
-                    Nodes.Add(new Node(nodeId2));
-                
-                Links.Add((nodeId1, nodeId2));
+                if (!nodeB.Neighbours.Exists(n => n == nodeA))
+                    nodeB.Neighbours.Add(nodeA);
+            }
+
+            public void AddNodes(int noOfNodes)
+            {
+                // Node ID must correspond to the node's index in the Nodes collection
+                for (int i = 0; i < noOfNodes; i++)
+                    Nodes.Add(new Node(i));
             }
         }
 
         class Node
         {
             public int Id { get; set; }
+            public List<Node> Neighbours { get; set; }
+            public bool IsGateway { get; set; }
 
             public Node(int id)
             {
                 Id = id;
+                Neighbours = new List<Node>();
             }
+        }
+
+        class Virus
+        {
+            public Node CurrentPosition { get; set; }
         }
 
         private string KillTheVirus(int nodes, int links, int gatweays)

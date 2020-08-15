@@ -269,3 +269,9 @@ TEMP
 src/ReferenceDataAggregator.Api/Logs/*.log
 .vs/DojoSolution/v16/.suo
 *.cache
+*.props
+DojoTemplateConsoleApp/obj/DojoTemplateConsoleApp.csproj.nuget.dgspec.json
+DojoTemplateConsoleApp/obj/project.assets.json
+DojoTemplateTestProject/DojoTemplateTestProject/obj/DojoTemplateTestProject.csproj.nuget.dgspec.json
+*.props
+DojoTemplateTestProject/DojoTemplateTestProject/obj/project.assets.json

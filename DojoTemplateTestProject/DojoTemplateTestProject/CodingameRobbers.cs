@@ -63,7 +63,6 @@ namespace GradeBook.Tests
                     {
                         var firstFreevault = vaults.FirstOrDefault(v => !v.IsCracked);
                         robber.TotalCrackingTime += firstFreevault.TimeToCrack;
-                        Console.Error.WriteLine($"robber total is {robber.TotalCrackingTime}");
                         firstFreevault.IsCracked = true;
                     }
                 }

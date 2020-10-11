@@ -27,7 +27,7 @@ namespace DojoTemplateTestProject
         
         public void MinMax2(int[] arr)
         {
-            var ordered = arr.OrderBy(i => i).Select(i => (long)i);
+            var ordered = arr.OrderBy(i => i).Cast<long>();
             var low = ordered.Take(4).Sum();
             var high = ordered.TakeLast(4).Sum();
             
@@ -37,10 +37,10 @@ namespace DojoTemplateTestProject
         public void MinMaxOldDotnet(int[] arr)
         {
             var low = arr.OrderBy(i => i)
-                        .Select(i => (long)i)
+                        .Cast<long>()
                         .Take(4).Sum();
             var high = arr.OrderByDescending(i => i)
-                        .Select(i => (long)i)
+                        .Cast<long>()
                         .Take(4).Sum();
 
             Console.WriteLine(low + " " + high);

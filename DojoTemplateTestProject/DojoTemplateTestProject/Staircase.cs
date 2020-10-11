@@ -58,10 +58,9 @@ namespace DojoTemplateTestProject
         {
             for (int noOfStairs = 1; noOfStairs <= totalStairs; noOfStairs++)
             {
-                var stairs = new string('#', noOfStairs);
-                var spaces = new String(' ', totalStairs - noOfStairs);
-                string line = string.Concat(spaces, stairs);
-                Console.WriteLine(line);
+                Console.WriteLine(
+                    new string('#', noOfStairs) +
+                    new String(' ', totalStairs - noOfStairs));
             }
         }
     }

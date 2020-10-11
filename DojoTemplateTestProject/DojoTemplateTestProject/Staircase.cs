@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestPlatform.Common.Telemetry;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -28,14 +30,39 @@ namespace DojoTemplateTestProject
                 for (int l = 0; l < n; l++)
                     Console.Write(matrix[k, l]);
                 
-                Console.Write('\n');
+                Console.Write(Environment.NewLine);
             }
         }
 
         [Fact]
         public void Test()
         {
-            staircase(5);
+            staircase2(5);
+        }
+
+        public void staircase2(int n)
+        {
+            var noOfStairs = 1;
+
+            while (noOfStairs++ < n)
+            {
+                var stairs = new string('#', noOfStairs);
+                var spaces = new String(' ', n - noOfStairs);
+                string line = string.Concat(spaces, stairs);
+                Console.WriteLine(line);
+            }
+        }
+
+
+        public void staircase3(int totalStairs)
+        {
+            for (int noOfStairs = 1; noOfStairs <= totalStairs; noOfStairs++)
+            {
+                var stairs = new string('#', noOfStairs);
+                var spaces = new String(' ', totalStairs - noOfStairs);
+                string line = string.Concat(spaces, stairs);
+                Console.WriteLine(line);
+            }
         }
     }
 

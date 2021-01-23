@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {}
+    "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {
+    "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
         "projectName": "DojoTemplateConsoleApp",
-        "projectPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
-        "packagesPath": "C:\\Users\\Gordon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gordon\\source\\repos\\DojoSolution\\DojoTemplateConsoleApp\\obj\\",
+        "projectPath": "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\DojoTemplateConsoleApp.csproj",
+        "packagesPath": "C:\\Users\\merie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\merie\\Documents\\GitHub\\Dojos\\DojoTemplateConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Gordon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\merie\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -50,12 +50,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.3, 3.0.3]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

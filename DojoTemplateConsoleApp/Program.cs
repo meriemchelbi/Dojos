@@ -1,12 +1,16 @@
-﻿using System;
-
-namespace DojoTemplateConsoleApp
+﻿namespace DojoTemplateConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var lift = new Lift();
+            var engine = new Engine(lift);
+
+            while (true)
+            {
+                //engine.Run();
+            }
         }
     }
 }

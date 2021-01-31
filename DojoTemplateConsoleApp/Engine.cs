@@ -5,12 +5,12 @@ namespace DojoTemplateConsoleApp
 {
     public class Engine
     {
-        private readonly List<ILift> _lifts;
+        private readonly IEnumerable<ILift> _lifts;
         private readonly ControlPanel _controlPanel;
 
         public Engine(params ILift[] lifts)
         {
-            _lifts = lifts.ToList();
+            _lifts = lifts;
             _controlPanel = new ControlPanel();
         }
         public Queue<Passenger> JobQueue { get; set; }

@@ -20,7 +20,7 @@ namespace DojoTemplateTestProject
         {
             var passenger = new Passenger(0, 5);
             _lift.CurrentFloor = 2;
-            _sut.CallLift(passenger);
+            _sut.MoveLift(passenger);
 
             _lift.CurrentFloor.Should().Be(0);
             _lift.Passengers.Should().Contain(passenger);
@@ -34,7 +34,7 @@ namespace DojoTemplateTestProject
             _lift.Passengers.Add(passenger);
             _lift.CurrentFloor = 0;
 
-            _sut.CallLift(caller);
+            _sut.MoveLift(caller);
 
             _lift.CurrentFloor.Should().Be(3);
             _lift.Passengers.Should().Contain(caller);
@@ -48,9 +48,9 @@ namespace DojoTemplateTestProject
             _lift.Passengers.Add(passenger);
             _lift.CurrentFloor = 0;
 
-            _sut.CallLift(caller);
+            _sut.MoveLift(caller);
 
-            _lift.CurrentFloor.Should().Be(6);
+            _lift.CurrentFloor.Should().Be(5);
             _lift.Passengers.Should().NotContain(passenger);
             _lift.Passengers.Should().NotContain(caller);
             _sut.JobQueue.Should().Contain(caller);
@@ -64,7 +64,7 @@ namespace DojoTemplateTestProject
             _lift.Passengers.Add(passenger);
             _lift.CurrentFloor = 0;
 
-            _sut.CallLift(caller);
+            _sut.MoveLift(caller);
 
             _lift.CurrentFloor.Should().Be(5);
             _lift.Passengers.Should().NotContain(passenger);

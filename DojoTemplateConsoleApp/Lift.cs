@@ -1,16 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DojoTemplateConsoleApp
 {
     public class Lift : ILift
     {
         public int CurrentFloor { get; set; }
-        public Direction Direction { get; set; }
+        public int CurrentDestination { get; set; }
+        public Direction Direction
+        {
+            get { return GetDirection(); }
+        }
         public List<Passenger> Passengers { get; set; }
 
         public Lift()
         {
             CurrentFloor = 0;
+            CurrentDestination = 0;
             Passengers = new List<Passenger>();
         }
 
@@ -18,20 +24,54 @@ namespace DojoTemplateConsoleApp
         {
             CurrentFloor = passenger.Origin;
             Passengers.Add(passenger);
+            CurrentDestination = passenger.Destination;
         }
 
-        public void Move(int destination)
+        public void Move()
         {
-            // building is 6 stories high and has a basement
-            if (destination > 6 || destination < -1)
+            if (!Passengers.Any())
             {
+                // might want to log?
                 return;
+            }
+
+            var passengerToMove = Passengers.FirstOrDefault();
+
+            // building is 6 stories high and has a basement
+            if (passengerToMove.Destination < 6 
+                && passengerToMove.Destination > -1)
+            {
+                CurrentFloor = passengerToMove.Destination;
+            }
+
+            Passengers.Remove(passengerToMove);
+        }
+
+        public bool CallerOnWay(Passenger caller)
+        {
+            var callerAbove = caller.Origin >= CurrentFloor;
+
+            if (Direction is Direction.Up && callerAbove
+                || Direction is Direction.Down && !callerAbove)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private Direction GetDirection()
+        {
+            if (CurrentFloor > CurrentDestination)
+            {
+                return Direction.Down;
             }
 
             else
             {
-                CurrentFloor = destination;
+                return Direction.Up;
             }
         }
+
     }
 }

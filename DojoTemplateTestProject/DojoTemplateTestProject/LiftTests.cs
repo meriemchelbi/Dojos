@@ -16,7 +16,7 @@ namespace DojoTemplateTestProject
         [Theory]
         [InlineData(0, 0)]
         [InlineData(2, 0)]
-        public void CallLift_MovesLift_ToCaller(int liftFloor, int callFloor)
+        public void Call_NoPassengers_MovesToCaller(int liftFloor, int callFloor)
         {
             var passenger = new Passenger(callFloor, 5);
             _sut.CurrentFloor = liftFloor;
@@ -24,30 +24,80 @@ namespace DojoTemplateTestProject
 
             _sut.CurrentFloor.Should().Be(callFloor);
             _sut.Passengers.Should().Contain(passenger);
+            _sut.CurrentDestination.Should().Be(5);
         }
 
         [Fact]
-        public void MoveLift_ValidDestination_MovesToDestination()
+        public void Move_ValidDestination_MovesToDestination_RemovesPassenger()
         {
-            _sut.Move(5);
+            var passenger = new Passenger(0, 5);
+            _sut.Passengers.Add(passenger);
+
+            _sut.Move();
 
             _sut.CurrentFloor.Should().Be(5);
+            _sut.Passengers.Should().BeEmpty();
         }
 
         [Fact]
-        public void MoveLift_DestinationTooHigh_DoesNotMove()
+        public void Move_DestinationTooHigh_DoesNotMove()
         {
-            _sut.Move(7);
+            var passenger = new Passenger(0, 7);
+            _sut.Passengers.Add(passenger);
+
+            _sut.Move();
 
             _sut.CurrentFloor.Should().Be(0);
+            _sut.Passengers.Should().BeEmpty();
         }
 
         [Fact]
-        public void MoveLift_DestinationTooLow_DoesNotMove()
+        public void Move_DestinationTooLow_DoesNotMove()
         {
-            _sut.Move(-2);
+            var passenger = new Passenger(0, -2);
+            _sut.Passengers.Add(passenger);
+
+            _sut.Move();
 
             _sut.CurrentFloor.Should().Be(0);
+            _sut.Passengers.Should().BeEmpty();
+        }
+        
+        [Fact]
+        public void Move_NoPassenger_DoesNotMove()
+        {
+            _sut.CurrentFloor = 2;
+            _sut.Move();
+
+            _sut.CurrentFloor.Should().Be(2);
+        }
+
+        [Theory]
+        [InlineData(3, 5)]
+        [InlineData(1, -1)]
+        public void CallerOnWay_CallerInOppositeDirection_ReturnsFalse(int currentFloor, int destination)
+        {
+            var caller = new Passenger(2, 5);
+            _sut.CurrentFloor = currentFloor;
+            _sut.CurrentDestination = destination;
+
+            var result = _sut.CallerOnWay(caller);
+
+            result.Should().BeFalse();
+        }
+        
+        [Theory]
+        [InlineData(3, 5)]
+        [InlineData(3, 6)]
+        public void CallerOnWay_CallerInSameDirection_ReturnsTrue(int callerOrigin, int callerDestination)
+        {
+            var caller = new Passenger(callerOrigin, callerDestination);
+            _sut.CurrentFloor = 1;
+            _sut.CurrentDestination = 5;
+
+            var result = _sut.CallerOnWay(caller);
+
+            result.Should().BeTrue();
         }
     }
 }

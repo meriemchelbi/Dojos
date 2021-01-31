@@ -5,10 +5,11 @@ namespace DojoTemplateConsoleApp
     public interface ILift
     {
         int CurrentFloor { get; set; }
-        Direction Direction { get; set; }
+        Direction Direction { get; }
         List<Passenger> Passengers { get; set; }
 
         void Call(Passenger passenger);
-        public void Move(int destination);
+        public void Move();
+        bool CallerOnWay(Passenger caller);
     }
 }

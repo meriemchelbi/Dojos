@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DojoTemplateConsoleApp.Extensions;
 
 namespace DojoTemplateConsoleApp
 {
@@ -44,7 +45,7 @@ namespace DojoTemplateConsoleApp
             }
 
             // if lift has passenger and caller on way and going opposite direction, add caller to job queue and move lift
-            
+
             // if lift has passenger and caller on the way and going to or beyond passenger destination, call lift
         }
     }

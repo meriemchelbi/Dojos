@@ -71,33 +71,5 @@ namespace DojoTemplateTestProject
 
             _sut.CurrentFloor.Should().Be(2);
         }
-
-        [Theory]
-        [InlineData(3, 5)]
-        [InlineData(1, -1)]
-        public void CallerOnWay_CallerInOppositeDirection_ReturnsFalse(int currentFloor, int destination)
-        {
-            var caller = new Passenger(2, 5);
-            _sut.CurrentFloor = currentFloor;
-            _sut.CurrentDestination = destination;
-
-            var result = _sut.CallerOnWay(caller);
-
-            result.Should().BeFalse();
-        }
-        
-        [Theory]
-        [InlineData(3, 5)]
-        [InlineData(3, 6)]
-        public void CallerOnWay_CallerInSameDirection_ReturnsTrue(int callerOrigin, int callerDestination)
-        {
-            var caller = new Passenger(callerOrigin, callerDestination);
-            _sut.CurrentFloor = 1;
-            _sut.CurrentDestination = 5;
-
-            var result = _sut.CallerOnWay(caller);
-
-            result.Should().BeTrue();
-        }
     }
 }

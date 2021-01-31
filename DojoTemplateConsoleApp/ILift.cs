@@ -10,6 +10,5 @@ namespace DojoTemplateConsoleApp
 
         void Call(Passenger passenger);
         public void Move();
-        bool CallerOnWay(Passenger caller);
     }
 }

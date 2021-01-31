@@ -47,19 +47,6 @@ namespace DojoTemplateConsoleApp
             Passengers.Remove(passengerToMove);
         }
 
-        public bool CallerOnWay(Passenger caller)
-        {
-            var callerAbove = caller.Origin >= CurrentFloor;
-
-            if (Direction is Direction.Up && callerAbove
-                || Direction is Direction.Down && !callerAbove)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         private Direction GetDirection()
         {
             if (CurrentFloor > CurrentDestination)

@@ -14,5 +14,10 @@
 
             return false;
         }
+
+        public static bool GoingSameDirection(this ILift lift, Passenger caller)
+        {
+            return lift.Direction == caller.Direction;
+        }
     }
 }

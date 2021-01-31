@@ -40,5 +40,45 @@ namespace DojoTemplateTestProject.Extensions
 
             result.Should().BeTrue();
         }
+
+        [Theory]
+        [InlineData(2, 5, 1, 5)]
+        [InlineData(4, -1, 5, 0)]
+        public void GoingSameDirection_CallerSameDirectionAsLift_ReturnsTrue(int callerOrigin,
+                                                                             int callerDestination,
+                                                                             int currentFloor,
+                                                                             int currentDestination)
+        {
+            var caller = new Passenger(callerOrigin, callerDestination);
+            var lift = new Lift
+            {
+                CurrentFloor = currentFloor,
+                CurrentDestination = currentDestination
+            };
+
+            var result = lift.GoingSameDirection(caller);
+
+            result.Should().BeTrue();
+        }
+        
+        [Theory]
+        [InlineData(2, 5, 5, 0)]
+        [InlineData(4, -1, 1, 5)]
+        public void GoingSameDirection_CallerDifferentDirectionToLift_ReturnsFalse(int callerOrigin,
+                                                                             int callerDestination,
+                                                                             int currentFloor,
+                                                                             int currentDestination)
+        {
+            var caller = new Passenger(callerOrigin, callerDestination);
+            var lift = new Lift
+            {
+                CurrentFloor = currentFloor,
+                CurrentDestination = currentDestination
+            };
+
+            var result = lift.GoingSameDirection(caller);
+
+            result.Should().BeFalse();
+        }
     }
 }

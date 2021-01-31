@@ -36,17 +36,21 @@ namespace DojoTemplateConsoleApp
             }
 
             bool callerOnLiftPath = lift.CallerOnWay(caller);
+            bool callerGoingLiftDirection = lift.GoingSameDirection(caller);
 
             // if lift has passenger and caller not on way, add caller to job queue and move lift
-            if (!callerOnLiftPath)
+            // if lift has passenger and caller going opposite direction, add caller to job queue and move lift
+            if (!callerOnLiftPath || !callerGoingLiftDirection)
             {
                 JobQueue.Enqueue(caller);
                 lift.Move();
             }
 
-            // if lift has passenger and caller on way and going opposite direction, add caller to job queue and move lift
-
-            // if lift has passenger and caller on the way and going to or beyond passenger destination, call lift
+            else
+            {
+                // if lift has passenger and caller on the way and going to or beyond passenger destination, call lift
+                lift.Call(caller);
+            }
         }
     }
 }

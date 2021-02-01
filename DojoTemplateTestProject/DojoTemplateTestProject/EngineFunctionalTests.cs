@@ -16,7 +16,7 @@ namespace DojoTemplateTestProject
         }
 
         [Fact]
-        public void SingleCaller_MovesLiftToCaller()
+        public void NoPassengerInLift_MovesLiftToCaller()
         {
             var passenger = new Passenger(0, 5);
             _lift.CurrentFloor = 2;
@@ -27,7 +27,7 @@ namespace DojoTemplateTestProject
         }
         
         [Fact]
-        public void PassengerInLift_NewCallerOnWay_GoingSameDirection_MovesLiftToNewCaller()
+        public void PassengerInLift_CallerOnWay_GoingSameDirection_MovesLiftToNewCaller()
         {
             var passenger = new Passenger(0, 5);
             var caller = new Passenger(3, 6);
@@ -41,7 +41,7 @@ namespace DojoTemplateTestProject
         }
         
         [Fact]
-        public void PassengerInLift_NewCallerOppositeWay_GoingSameDirection_MovesLiftToPassengerDestination()
+        public void PassengerInLift_CallerNotOnWay_GoingSameDirection_MovesLiftToPassengerDestination()
         {
             var passenger = new Passenger(0, 5);
             var caller = new Passenger(-1, 6);
@@ -57,7 +57,7 @@ namespace DojoTemplateTestProject
         }
         
         [Fact]
-        public void PassengerInLift_NewCallerGoingDifferentDirection_MovesLiftToPassengerDestination()
+        public void PassengerInLift_CallerGoingDifferentDirection_MovesLiftToPassengerDestination()
         {
             var passenger = new Passenger(0, 5);
             var caller = new Passenger(3, -1);
@@ -70,6 +70,42 @@ namespace DojoTemplateTestProject
             _lift.Passengers.Should().NotContain(passenger);
             _lift.Passengers.Should().NotContain(caller);
             _sut.JobQueue.Should().Contain(caller);
+        }
+
+        [Fact]
+        public void TwoPassengersInLift_MovesLiftToClosestPassengerDestination()
+        {
+
+        }
+        
+        [Fact]
+        public void NoPassengerInLift_SingleQueuedJob_PicksUpWaitingCaller()
+        {
+
+        }
+        
+        [Fact]
+        public void NoPassengerInLift_SingleQueuedJob_OneNewCallerOnWayToQueued_PicksUpNewCaller()
+        {
+
+        }
+        
+        [Fact]
+        public void NoPassengerInLift_SingleQueuedJob_NewCaller_GoingSameDirectionAsQueued_PicksUpNewCaller()
+        {
+
+        }
+        
+        [Fact]
+        public void NoPassengerInLift_SingleQueuedJob_NewCaller_GoingDifferentDirectionToQueued_PicksUpQueued()
+        {
+
+        }
+        
+        [Fact]
+        public void NoPassengerInLift_TwoQueuedJobs_PicksUpClosestCaller()
+        {
+
         }
     }
 }

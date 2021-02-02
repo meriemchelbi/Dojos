@@ -40,6 +40,22 @@ namespace DojoTemplateTestProject.Extensions
 
             result.Should().BeTrue();
         }
+        
+        [Fact]
+        public void CallerOnWay_NullCaller_ReturnsFalse()
+        {
+            var lift = new Lift
+            {
+                CurrentFloor = 1,
+                CurrentDestination = 5
+            };
+
+            var result = lift.CallerOnWay(null);
+
+            result.Should().BeFalse();
+        }
+
+
 
         [Theory]
         [InlineData(2, 5, 1, 5)]
@@ -77,6 +93,20 @@ namespace DojoTemplateTestProject.Extensions
             };
 
             var result = lift.GoingSameDirection(caller);
+
+            result.Should().BeFalse();
+        }
+        
+        [Fact]
+        public void GoingSameDirection_NullCaller_ReturnsFalse()
+        {
+            var lift = new Lift
+            {
+                CurrentFloor = 0,
+                CurrentDestination = 10
+            };
+
+            var result = lift.GoingSameDirection(null);
 
             result.Should().BeFalse();
         }

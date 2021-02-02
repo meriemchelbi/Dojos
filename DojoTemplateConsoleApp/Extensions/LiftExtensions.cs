@@ -2,8 +2,13 @@
 {
     public static class LiftExtensions
     {
-        public static bool CallerOnWay(this ILift lift, Passenger caller)
+        public static bool CallerOnWay(this ILift lift, Passenger? caller)
         {
+            if (caller is null)
+            {
+                return false;
+            }
+
             var callerAbove = caller.Origin >= lift.CurrentFloor;
 
             if (lift.Direction is Direction.Up && callerAbove
@@ -15,8 +20,13 @@
             return false;
         }
 
-        public static bool GoingSameDirection(this ILift lift, Passenger caller)
+        public static bool GoingSameDirection(this ILift lift, Passenger? caller)
         {
+            if (caller is null)
+            {
+                return false;
+            }
+
             return lift.Direction == caller.Direction;
         }
     }

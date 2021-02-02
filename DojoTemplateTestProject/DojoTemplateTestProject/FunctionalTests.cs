@@ -4,12 +4,12 @@ using Xunit;
 
 namespace DojoTemplateTestProject
 {
-    public class EngineFunctionalTests
+    public class FunctionalTests
     {
         private readonly ILift _lift;
         private readonly Engine _sut;
 
-        public EngineFunctionalTests()
+        public FunctionalTests()
         {
             _lift = new Lift();
             _sut = new Engine(_lift);
@@ -75,7 +75,17 @@ namespace DojoTemplateTestProject
         [Fact]
         public void TwoPassengersInLift_MovesLiftToClosestPassengerDestination()
         {
+            var passenger1 = new Passenger(0, 5);
+            var passenger2 = new Passenger(0, 3);
+            _lift.Passengers.Add(passenger1);
+            _lift.Passengers.Add(passenger2);
+            _lift.CurrentFloor = 2;
 
+            _sut.MoveLift();
+
+            _lift.CurrentFloor.Should().Be(3);
+            _lift.Passengers.Should().Contain(passenger1);
+            _lift.Passengers.Should().NotContain(passenger2);
         }
         
         [Fact]

@@ -18,27 +18,23 @@ namespace DojoTemplateConsoleApp
             JobQueue = new Queue<Passenger>();
         }
 
-        //public void Run()
-        //{
-        //    // Check for new jobs
-        //    // Register new job
-        //    // Assign job to lift
-        //    // Move lifts by 1
-        //}
-
-        public void MoveLift(Passenger caller)
+        public void MoveLift(Passenger caller = null)
         {
             var lift = _lifts.FirstOrDefault();
+            bool callerOnLiftPath = lift.CallerOnWay(caller);
+            bool callerGoingLiftDirection = lift.GoingSameDirection(caller);
 
-            if (!lift.Passengers.Any())
+            if (caller is null)
+            {
+                lift.Move();
+            }
+            
+            else if (!lift.Passengers.Any())
             {
                 lift.Call(caller);
             }
 
-            bool callerOnLiftPath = lift.CallerOnWay(caller);
-            bool callerGoingLiftDirection = lift.GoingSameDirection(caller);
-
-            if (!callerOnLiftPath || !callerGoingLiftDirection)
+            else if (!callerOnLiftPath || !callerGoingLiftDirection)
             {
                 JobQueue.Enqueue(caller);
                 lift.Move();

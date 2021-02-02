@@ -91,31 +91,47 @@ namespace DojoTemplateTestProject
         [Fact]
         public void NoPassengerInLift_SingleQueuedJob_PicksUpWaitingCaller()
         {
+            var queued = new Passenger(4, 6);
+            _sut.JobQueue.Enqueue(queued);
+            _lift.CurrentFloor = 2;
 
+            _sut.MoveLift();
+
+            _lift.CurrentFloor.Should().Be(4);
+            _lift.Passengers.Should().Contain(queued);
+            _sut.JobQueue.Should().BeEmpty();
         }
         
         [Fact]
-        public void NoPassengerInLift_SingleQueuedJob_OneNewCallerOnWayToQueued_PicksUpNewCaller()
+        public void NoPassenger_SingleQueuedJob_CallerOnWayToQueuedSameDirection_PicksUpQueued_EnqueuesNewCaller()
         {
+            var queued = new Passenger(4, 6);
+            _sut.JobQueue.Enqueue(queued);
+            var caller = new Passenger(3, 5);
+            _lift.CurrentFloor = 2;
 
+            _sut.MoveLift(caller);
+
+            _lift.CurrentFloor.Should().Be(4);
+            _lift.Passengers.Should().Contain(queued);
+            _sut.JobQueue.Should().Contain(caller);
         }
-        
-        [Fact]
-        public void NoPassengerInLift_SingleQueuedJob_NewCaller_GoingSameDirectionAsQueued_PicksUpNewCaller()
-        {
 
-        }
-        
         [Fact]
-        public void NoPassengerInLift_SingleQueuedJob_NewCaller_GoingDifferentDirectionToQueued_PicksUpQueued()
+        public void NoPassengerInLift_TwoQueuedJobs_PicksUpFrontOfQueue()
         {
+            var queued1 = new Passenger(4, 6);
+            var queued2 = new Passenger(3, 5);
+            _sut.JobQueue.Enqueue(queued1);
+            _sut.JobQueue.Enqueue(queued2);
+            _lift.CurrentFloor = 2;
 
-        }
-        
-        [Fact]
-        public void NoPassengerInLift_TwoQueuedJobs_PicksUpClosestCaller()
-        {
+            _sut.MoveLift();
 
+            _lift.CurrentFloor.Should().Be(4);
+            _lift.Passengers.Should().Contain(queued1);
+            _sut.JobQueue.Should().Contain(queued2);
+            _sut.JobQueue.Should().NotContain(queued1);
         }
     }
 }

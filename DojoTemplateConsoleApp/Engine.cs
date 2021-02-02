@@ -24,10 +24,18 @@ namespace DojoTemplateConsoleApp
             bool callerOnLiftPath = lift.CallerOnWay(caller);
             bool callerGoingLiftDirection = lift.GoingSameDirection(caller);
 
-            if (caller is null)
+            if (JobQueue.Any())
             {
-                lift.Move();
+                lift.Call(JobQueue.Dequeue());
+                if (caller != null)
+                {
+                    JobQueue.Enqueue(caller);
+                }
             }
+            
+            else if (caller is null & !JobQueue.Any())
+                lift.Move();
+
             
             else if (!lift.Passengers.Any())
             {

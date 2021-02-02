@@ -18,12 +18,24 @@ namespace DojoTemplateTestProject
         }
 
         [Fact]
-        public void MoveLift_NoPassengers_CallsLift()
+        public void MoveLift_Caller_NoPassengers_NoQueuedJob_CallsLift()
         {
             var caller = new Passenger(0, 3);
             _lift.Passengers.Returns(new List<Passenger>());
 
             _sut.MoveLift(caller);
+
+            _lift.Received(1).Call(caller);
+        }
+        
+        [Fact]
+        public void MoveLift_NoCaller_NoPassengers_SingleQueuedJob_CallsLift()
+        {
+            var caller = new Passenger(0, 3);
+            _sut.JobQueue.Enqueue(caller);
+            _lift.Passengers.Returns(new List<Passenger>());
+
+            _sut.MoveLift();
 
             _lift.Received(1).Call(caller);
         }
@@ -63,6 +75,20 @@ namespace DojoTemplateTestProject
             _sut.MoveLift(caller);
 
             _lift.Received(1).Move();
+            _sut.JobQueue.Should().Contain(caller);
+        }
+        
+        [Fact]
+        public void MoveLift_NoPassenger_Caller_QueuedJob_CallsLiftWithQueued()
+        {
+            var caller = new Passenger(2, -1);
+            var queued = new Passenger(3, 0);
+            _sut.JobQueue.Enqueue(queued);
+            _lift.Passengers.Returns(new List<Passenger>());
+
+            _sut.MoveLift(caller);
+
+            _lift.Received(1).Call(queued);
             _sut.JobQueue.Should().Contain(caller);
         }
 

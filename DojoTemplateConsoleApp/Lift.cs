@@ -88,6 +88,5 @@ namespace DojoTemplateConsoleApp
             var nextPassenger = GetNextPassenger();
             NextStop = nextPassenger.Destination;
         }
-
     }
 }

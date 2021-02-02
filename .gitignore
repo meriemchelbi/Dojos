@@ -365,3 +365,6 @@ FodyWeavers.xsd
 *.props
 .vs/DojoSolution/v16/.suo
 .vs/DojoSolution/v16/.suo
+DojoTemplateConsoleApp/obj/DojoTemplateConsoleApp.csproj.nuget.dgspec.json
+DojoTemplateConsoleApp/obj/project.assets.json
+DojoTemplateTestProject/DojoTemplateTestProject/obj/project.assets.json

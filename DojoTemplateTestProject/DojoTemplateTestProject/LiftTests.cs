@@ -24,7 +24,7 @@ namespace DojoTemplateTestProject
 
             _sut.CurrentFloor.Should().Be(callFloor);
             _sut.Passengers.Should().Contain(passenger);
-            _sut.CurrentDestination.Should().Be(5);
+            _sut.NextStop.Should().Be(5);
         }
 
         [Fact]
@@ -37,6 +37,7 @@ namespace DojoTemplateTestProject
 
             _sut.CurrentFloor.Should().Be(5);
             _sut.Passengers.Should().BeEmpty();
+            _sut.NextStop.Should().Be(0);
         }
 
         [Fact]
@@ -49,6 +50,7 @@ namespace DojoTemplateTestProject
 
             _sut.CurrentFloor.Should().Be(0);
             _sut.Passengers.Should().BeEmpty();
+            _sut.NextStop.Should().Be(0);
         }
 
         [Fact]
@@ -61,15 +63,51 @@ namespace DojoTemplateTestProject
 
             _sut.CurrentFloor.Should().Be(0);
             _sut.Passengers.Should().BeEmpty();
+            _sut.NextStop.Should().Be(0);
         }
         
         [Fact]
         public void Move_NoPassenger_DoesNotMove()
         {
             _sut.CurrentFloor = 2;
+            
             _sut.Move();
 
             _sut.CurrentFloor.Should().Be(2);
+            _sut.NextStop.Should().Be(0);
+        }
+        
+        [Fact]
+        public void Move_DestinationSameAsOrigin_DoesNotMove()
+        {
+            var passenger = new Passenger(2, 2);
+            _sut.Passengers.Add(passenger);
+            _sut.CurrentFloor = 2;
+            
+            _sut.Move();
+
+            _sut.CurrentFloor.Should().Be(2);
+            _sut.NextStop.Should().Be(0);
+            _sut.Passengers.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void Move_MultiplePassengers_MovesToClosestDestination()
+        {
+            var passenger1 = new Passenger(0, 5);
+            var passenger2 = new Passenger(1, 3);
+            var passenger3 = new Passenger(0, 6);
+            _sut.Passengers.Add(passenger1);
+            _sut.Passengers.Add(passenger2);
+            _sut.Passengers.Add(passenger3);
+
+            _sut.Move();
+
+            _sut.CurrentFloor.Should().Be(3);
+            _sut.Passengers.Should().Contain(passenger1);
+            _sut.Passengers.Should().Contain(passenger3);
+            _sut.Passengers.Should().NotContain(passenger2);
+            _sut.NextStop.Should().Be(5);
         }
     }
 }

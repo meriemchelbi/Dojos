@@ -15,7 +15,7 @@ namespace DojoTemplateTestProject.Extensions
             var lift = new Lift
             {
                 CurrentFloor = currentFloor,
-                CurrentDestination = destination
+                NextStop = destination
             };
             var caller = new Passenger(2, 5);
 
@@ -32,7 +32,7 @@ namespace DojoTemplateTestProject.Extensions
             var lift = new Lift
             {
                 CurrentFloor = 1,
-                CurrentDestination = 5
+                NextStop = 5
             };
             var caller = new Passenger(callerOrigin, callerDestination);
 
@@ -47,7 +47,7 @@ namespace DojoTemplateTestProject.Extensions
             var lift = new Lift
             {
                 CurrentFloor = 1,
-                CurrentDestination = 5
+                NextStop = 5
             };
 
             var result = lift.CallerOnWay(null);
@@ -69,7 +69,7 @@ namespace DojoTemplateTestProject.Extensions
             var lift = new Lift
             {
                 CurrentFloor = currentFloor,
-                CurrentDestination = currentDestination
+                NextStop = currentDestination
             };
 
             var result = lift.GoingSameDirection(caller);
@@ -89,7 +89,7 @@ namespace DojoTemplateTestProject.Extensions
             var lift = new Lift
             {
                 CurrentFloor = currentFloor,
-                CurrentDestination = currentDestination
+                NextStop = currentDestination
             };
 
             var result = lift.GoingSameDirection(caller);
@@ -103,7 +103,7 @@ namespace DojoTemplateTestProject.Extensions
             var lift = new Lift
             {
                 CurrentFloor = 0,
-                CurrentDestination = 10
+                NextStop = 10
             };
 
             var result = lift.GoingSameDirection(null);

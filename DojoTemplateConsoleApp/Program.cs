@@ -1,4 +1,6 @@
-﻿namespace DojoTemplateConsoleApp
+﻿using DojoTemplateConsoleApp.UserInterface;
+
+namespace DojoTemplateConsoleApp
 {
     class Program
     {
@@ -6,10 +8,13 @@
         {
             var lift = new Lift();
             var engine = new Engine(lift);
+            var inputCapturer = new InputCapturer();
+            var controlPanel = new ControlPanel(inputCapturer);
 
             while (true)
             {
-                //engine.Run();
+                var caller = controlPanel.CheckForCaller();
+                engine.MoveLift(caller);
             }
         }
     }

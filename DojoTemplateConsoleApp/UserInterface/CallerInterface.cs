@@ -4,17 +4,19 @@ namespace DojoTemplateConsoleApp.UserInterface
 {
     public class CallerInterface : ICallerInterface
     {
+        private readonly IConsole _console;
         private readonly IFloorValidator _floorValidator;
 
-        public CallerInterface(IFloorValidator floorValidator)
+        public CallerInterface(IConsole console, IFloorValidator floorValidator)
         {
+            _console = console;
             _floorValidator = floorValidator;
         }
 
         public bool CheckForCall()
         {
             Console.WriteLine("Would you like to call the lift? Y/N");
-            var response = Console.ReadLine().ToUpperInvariant();
+            var response = _console.ReadLine().ToUpperInvariant();
 
             switch (response)
             {
@@ -24,14 +26,14 @@ namespace DojoTemplateConsoleApp.UserInterface
                     return false;
                 default:
                     Console.WriteLine("Input not recognised");
-                    return CheckForCall();
+                    return false;
             }
         }
 
         public int GetDestination()
         {
             Console.WriteLine("What is your destination? Please input a number between -1 and 6.");
-            var response = Console.ReadLine();
+            var response = _console.ReadLine();
             var destination = int.Parse(response);
 
             var isValidDestination = _floorValidator.ValidateFloor(destination);
@@ -48,7 +50,7 @@ namespace DojoTemplateConsoleApp.UserInterface
         public int GetOrigin()
         {
             Console.WriteLine("What is your current floor? Please input a number between -1 and 6.");
-            var response = Console.ReadLine();
+            var response = _console.ReadLine();
             var origin = int.Parse(response);
 
             var isValidOrigin = _floorValidator.ValidateFloor(origin);

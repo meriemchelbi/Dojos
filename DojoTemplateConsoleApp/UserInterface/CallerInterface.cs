@@ -2,11 +2,11 @@
 
 namespace DojoTemplateConsoleApp.UserInterface
 {
-    public class InputCapturer : IInputCapturer
+    public class CallerInterface : ICallerInterface
     {
         private readonly IFloorValidator _floorValidator;
 
-        public InputCapturer(IFloorValidator floorValidator)
+        public CallerInterface(IFloorValidator floorValidator)
         {
             _floorValidator = floorValidator;
         }

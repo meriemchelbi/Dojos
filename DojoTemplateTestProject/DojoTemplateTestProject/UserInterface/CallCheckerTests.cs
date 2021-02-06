@@ -8,12 +8,12 @@ namespace DojoTemplateTestProject.UserInterface
 {
     public class CallCheckerTests
     {
-        private readonly IInputCapturer _inputCapturer;
+        private readonly ICallerInterface _inputCapturer;
         private readonly CallChecker _sut;
 
         public CallCheckerTests()
         {
-            _inputCapturer = Substitute.For<IInputCapturer>();
+            _inputCapturer = Substitute.For<ICallerInterface>();
             _sut = new CallChecker(_inputCapturer);
         }
 

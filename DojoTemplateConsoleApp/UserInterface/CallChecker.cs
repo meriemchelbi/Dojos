@@ -4,9 +4,9 @@ namespace DojoTemplateConsoleApp
 {
     public class CallChecker : ICallChecker
     {
-        private readonly IInputCapturer _inputCapturer;
+        private readonly ICallerInterface _inputCapturer;
 
-        public CallChecker(IInputCapturer inputCapturer)
+        public CallChecker(ICallerInterface inputCapturer)
         {
             _inputCapturer = inputCapturer;
         }

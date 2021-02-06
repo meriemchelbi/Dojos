@@ -1,6 +1,6 @@
 ﻿namespace DojoTemplateConsoleApp.UserInterface
 {
-    public interface IInputCapturer
+    public interface ICallerInterface
     {
         bool CheckForCall();
         int GetOrigin();

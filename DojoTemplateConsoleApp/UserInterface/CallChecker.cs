@@ -19,16 +19,7 @@ namespace DojoTemplateConsoleApp
                 return null;
 
             var callerOrigin = _inputCapturer.GetOrigin();
-
-            // TODO add floor validator
-            // TODO move validation to InputCapturer
-            if (callerOrigin < -1 || callerOrigin > 6)
-                return null;
-
             var callerDestination = _inputCapturer.GetDestination();
-
-            if (callerDestination < -1 || callerDestination > 6)
-                return null;
 
             return new Passenger(callerOrigin, callerDestination);
         }

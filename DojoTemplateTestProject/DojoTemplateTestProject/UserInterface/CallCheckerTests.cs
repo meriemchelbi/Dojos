@@ -28,7 +28,7 @@ namespace DojoTemplateTestProject.UserInterface
         }
 
         [Fact]
-        public void CheckForCaller_ValidInput_ReturnsValidPassenger()
+        public void CheckForCaller_ReturnsValidPassenger()
         {
             _inputCapturer.CheckForCall().Returns(true);
             _inputCapturer.GetOrigin().Returns(0);
@@ -39,54 +39,6 @@ namespace DojoTemplateTestProject.UserInterface
             var result = _sut.CheckForCaller();
 
             result.Should().BeEquivalentTo(expected);
-        }
-
-        [Fact]
-        public void CheckForCaller_OriginTooLow_ReturnsNull()
-        {
-            _inputCapturer.CheckForCall().Returns(true);
-            _inputCapturer.GetOrigin().Returns(-5);
-            _inputCapturer.GetDestination().Returns(3);
-
-            var result = _sut.CheckForCaller();
-
-            result.Should().BeNull();
-        }
-        
-        [Fact]
-        public void CheckForCaller_OriginTooHigh_ReturnsNull()
-        {
-            _inputCapturer.CheckForCall().Returns(true);
-            _inputCapturer.GetOrigin().Returns(10);
-            _inputCapturer.GetDestination().Returns(3);
-
-            var result = _sut.CheckForCaller();
-
-            result.Should().BeNull();
-        }
-        
-        [Fact]
-        public void CheckForCaller_DestinationTooHigh_ReturnsNull()
-        {
-            _inputCapturer.CheckForCall().Returns(true);
-            _inputCapturer.GetOrigin().Returns(2);
-            _inputCapturer.GetDestination().Returns(10);
-
-            var result = _sut.CheckForCaller();
-
-            result.Should().BeNull();
-        }
-        
-        [Fact]
-        public void CheckForCaller_DestinationTooLow_ReturnsNull()
-        {
-            _inputCapturer.CheckForCall().Returns(true);
-            _inputCapturer.GetOrigin().Returns(2);
-            _inputCapturer.GetDestination().Returns(-10);
-
-            var result = _sut.CheckForCaller();
-
-            result.Should().BeNull();
         }
     }
 }

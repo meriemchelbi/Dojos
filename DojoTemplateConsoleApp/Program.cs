@@ -6,9 +6,10 @@ namespace DojoTemplateConsoleApp
     {
         static void Main(string[] args)
         {
+            var floorValidator = new FloorValidator();
             var lift = new Lift();
             var engine = new Engine(lift);
-            var inputCapturer = new InputCapturer();
+            var inputCapturer = new InputCapturer(floorValidator);
             var controlPanel = new CallChecker(inputCapturer);
 
             while (true)

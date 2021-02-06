@@ -6,6 +6,8 @@ namespace DojoTemplateConsoleApp
 {
     public class Lift : ILift
     {
+        private readonly IFloorValidator _floorValidator;
+
         public int CurrentFloor { get; set; }
         public int NextStop { get; set; }
         public Direction Direction
@@ -38,10 +40,7 @@ namespace DojoTemplateConsoleApp
 
             Passenger passengerToMove = GetNextPassenger();
 
-            // building is 6 stories high and has a basement
-            if (passengerToMove.Destination < 6 
-                && passengerToMove.Destination > -1
-                && passengerToMove.Origin != passengerToMove.Destination)
+            if (passengerToMove.Origin != passengerToMove.Destination)
             {
                 CurrentFloor = passengerToMove.Destination;
             }

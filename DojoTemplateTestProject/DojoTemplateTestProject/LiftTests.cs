@@ -41,32 +41,6 @@ namespace DojoTemplateTestProject
         }
 
         [Fact]
-        public void Move_DestinationTooHigh_DoesNotMove()
-        {
-            var passenger = new Passenger(0, 7);
-            _sut.Passengers.Add(passenger);
-
-            _sut.Move();
-
-            _sut.CurrentFloor.Should().Be(0);
-            _sut.Passengers.Should().BeEmpty();
-            _sut.NextStop.Should().Be(0);
-        }
-
-        [Fact]
-        public void Move_DestinationTooLow_DoesNotMove()
-        {
-            var passenger = new Passenger(0, -2);
-            _sut.Passengers.Add(passenger);
-
-            _sut.Move();
-
-            _sut.CurrentFloor.Should().Be(0);
-            _sut.Passengers.Should().BeEmpty();
-            _sut.NextStop.Should().Be(0);
-        }
-        
-        [Fact]
         public void Move_NoPassenger_DoesNotMove()
         {
             _sut.CurrentFloor = 2;

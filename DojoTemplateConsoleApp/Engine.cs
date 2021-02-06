@@ -7,14 +7,12 @@ namespace DojoTemplateConsoleApp
     public class Engine
     {
         private readonly IEnumerable<ILift> _lifts;
-        private readonly ControlPanel _controlPanel;
 
         public Queue<Passenger> JobQueue { get; set; }
 
         public Engine(params ILift[] lifts)
         {
             _lifts = lifts;
-            _controlPanel = new ControlPanel();
             JobQueue = new Queue<Passenger>();
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace DojoTemplateConsoleApp.UserInterface
 {
-    internal interface IControlPanel
+    public interface ICallChecker
     {
         Passenger CheckForCaller();
     }

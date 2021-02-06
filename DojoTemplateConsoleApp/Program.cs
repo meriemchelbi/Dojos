@@ -9,7 +9,7 @@ namespace DojoTemplateConsoleApp
             var lift = new Lift();
             var engine = new Engine(lift);
             var inputCapturer = new InputCapturer();
-            var controlPanel = new ControlPanel(inputCapturer);
+            var controlPanel = new CallChecker(inputCapturer);
 
             while (true)
             {

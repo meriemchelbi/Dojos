@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DojoTemplateConsoleApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace DojoTemplateConsoleApp
 {
@@ -47,6 +49,23 @@ namespace DojoTemplateConsoleApp
 
             Passengers.Remove(passengerToMove);
             SetNextStop();
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.Append("Passengers in lift:\n");
+            foreach (var passenger in Passengers)
+            {
+                sb.Append($"{passenger}\n");
+            }
+
+            sb.Append($"Lift going {Direction}.\n");
+            sb.Append($"Current floor: {CurrentFloor}.\n");
+            sb.Append($"Next stop: {NextStop}.");
+
+            return sb.ToString();
         }
 
         private Direction GetDirection()

@@ -6,6 +6,7 @@ namespace DojoTemplateConsoleApp
     public interface ILift
     {
         int CurrentFloor { get; set; }
+        int NextStop { get; set; }
         Direction Direction { get; }
         List<Passenger> Passengers { get; set; }
 

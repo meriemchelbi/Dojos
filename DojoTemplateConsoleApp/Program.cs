@@ -1,4 +1,5 @@
-﻿using DojoTemplateConsoleApp.UserInterface;
+﻿using DojoTemplateConsoleApp.Model;
+using DojoTemplateConsoleApp.UserInterface;
 
 namespace DojoTemplateConsoleApp
 {
@@ -9,14 +10,19 @@ namespace DojoTemplateConsoleApp
             var floorValidator = new FloorValidator();
             var console = new ConsoleWrapper();
             var lift = new Lift();
-            var engine = new Engine(lift);
+            var queue = new WaitingPassengers();
+            var engine = new Engine(queue, lift);
             var callerInterface = new CallerInterface(console,floorValidator);
-            var controlPanel = new CallChecker(callerInterface);
+            var statusReporter = new LiftStatusReporter(console, queue, lift);
+            var callChecker = new CallChecker(callerInterface);
 
+            statusReporter.ReportLiftStatus();
+            
             while (true)
             {
-                var caller = controlPanel.CheckForCaller();
+                var caller = callChecker.CheckForCaller();
                 engine.MoveLift(caller);
+                statusReporter.ReportLiftStatus();
             }
         }
     }

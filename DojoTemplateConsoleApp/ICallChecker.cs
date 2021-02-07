@@ -1,4 +1,4 @@
-﻿namespace DojoTemplateConsoleApp.UserInterface
+﻿namespace DojoTemplateConsoleApp
 {
     public interface ICallChecker
     {

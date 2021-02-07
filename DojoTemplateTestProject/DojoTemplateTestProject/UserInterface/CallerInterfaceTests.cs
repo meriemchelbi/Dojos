@@ -4,7 +4,7 @@ using FluentAssertions;
 using NSubstitute;
 using Xunit;
 
-namespace DojoTemplateTestProject
+namespace DojoTemplateTestProject.UserInterface
 {
     public class CallerInterfaceTests
     {
@@ -28,7 +28,7 @@ namespace DojoTemplateTestProject
 
             result.Should().BeTrue();
         }
-        
+
         [Fact]
         public void CheckForCall_ValidNoInput_ReturnsFalse()
         {
@@ -38,7 +38,7 @@ namespace DojoTemplateTestProject
 
             result.Should().BeFalse();
         }
-        
+
         [Fact]
         public void CheckForCall_InvalidInput_ReturnsFalse()
         {
@@ -59,7 +59,7 @@ namespace DojoTemplateTestProject
 
             result.Should().Be(3);
         }
-        
+
         [Fact]
         public void GetDestination_ValidFloor_ReturnsFloor()
         {

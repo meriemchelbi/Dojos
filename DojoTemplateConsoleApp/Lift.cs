@@ -8,8 +8,6 @@ namespace DojoTemplateConsoleApp
 {
     public class Lift : ILift
     {
-        private readonly IFloorValidator _floorValidator;
-
         public int CurrentFloor { get; set; }
         public int NextStop { get; set; }
         public Direction Direction
@@ -27,6 +25,7 @@ namespace DojoTemplateConsoleApp
 
         public void Call(Passenger passenger)
         {
+            Console.WriteLine("Calling lift...");
             CurrentFloor = passenger.Origin;
             Passengers.Add(passenger);
             SetNextStop();
@@ -34,6 +33,7 @@ namespace DojoTemplateConsoleApp
 
         public void Move()
         {
+            Console.WriteLine("Moving lift...");
             if (!Passengers.Any())
             {
                 // might want to log?

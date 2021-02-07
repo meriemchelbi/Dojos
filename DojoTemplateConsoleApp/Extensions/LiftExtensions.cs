@@ -1,4 +1,6 @@
-﻿namespace DojoTemplateConsoleApp.Extensions
+﻿using DojoTemplateConsoleApp.Model;
+
+namespace DojoTemplateConsoleApp.Extensions
 {
     public static class LiftExtensions
     {

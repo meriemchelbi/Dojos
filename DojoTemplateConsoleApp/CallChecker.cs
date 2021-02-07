@@ -1,4 +1,5 @@
-﻿using DojoTemplateConsoleApp.UserInterface;
+﻿using DojoTemplateConsoleApp.Model;
+using DojoTemplateConsoleApp.UserInterface;
 
 namespace DojoTemplateConsoleApp
 {

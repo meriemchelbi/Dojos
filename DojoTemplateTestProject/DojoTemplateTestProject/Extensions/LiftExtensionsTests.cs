@@ -1,5 +1,6 @@
 ﻿using DojoTemplateConsoleApp;
 using DojoTemplateConsoleApp.Extensions;
+using DojoTemplateConsoleApp.Model;
 using FluentAssertions;
 using Xunit;
 

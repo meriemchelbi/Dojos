@@ -1,4 +1,4 @@
-﻿namespace DojoTemplateConsoleApp
+﻿namespace DojoTemplateConsoleApp.Model
 {
     public class Passenger
     {
@@ -14,6 +14,11 @@
         {
             Origin = origin;
             Destination = destination;
+        }
+
+        public override string ToString()
+        {
+            return $"Passenger going {Direction}. Origin: {Origin}, Destination: {Destination}.";
         }
 
         private Direction GetDirection()

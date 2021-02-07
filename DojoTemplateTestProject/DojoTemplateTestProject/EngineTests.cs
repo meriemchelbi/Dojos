@@ -10,12 +10,14 @@ namespace DojoTemplateTestProject
     public class EngineTests
     {
         private readonly ILift _lift;
+        private readonly WaitingPassengers _waitingPassengers;
         private readonly Engine _sut;
 
         public EngineTests()
         {
             _lift = Substitute.For<ILift>();
-            _sut = new Engine(_lift);
+            _waitingPassengers = new WaitingPassengers();
+            _sut = new Engine(_waitingPassengers, _lift);
         }
 
         [Fact]
@@ -33,7 +35,7 @@ namespace DojoTemplateTestProject
         public void MoveLift_NoCaller_NoPassengers_SingleQueuedJob_CallsLift()
         {
             var caller = new Passenger(0, 3);
-            _sut.JobQueue.Enqueue(caller);
+            _waitingPassengers.JobQueue.Enqueue(caller);
             _lift.Passengers.Returns(new List<Passenger>());
 
             _sut.MoveLift();
@@ -63,7 +65,7 @@ namespace DojoTemplateTestProject
             _sut.MoveLift(caller);
 
             _lift.Received(1).Move();
-            _sut.JobQueue.Should().Contain(caller);
+            _waitingPassengers.JobQueue.Should().Contain(caller);
         }
         
         [Fact]
@@ -76,7 +78,7 @@ namespace DojoTemplateTestProject
             _sut.MoveLift(caller);
 
             _lift.Received(1).Move();
-            _sut.JobQueue.Should().Contain(caller);
+            _waitingPassengers.JobQueue.Should().Contain(caller);
         }
         
         [Fact]
@@ -84,13 +86,13 @@ namespace DojoTemplateTestProject
         {
             var caller = new Passenger(2, -1);
             var queued = new Passenger(3, 0);
-            _sut.JobQueue.Enqueue(queued);
+            _waitingPassengers.JobQueue.Enqueue(queued);
             _lift.Passengers.Returns(new List<Passenger>());
 
             _sut.MoveLift(caller);
 
             _lift.Received(1).Call(queued);
-            _sut.JobQueue.Should().Contain(caller);
+            _waitingPassengers.JobQueue.Should().Contain(caller);
         }
 
         [Fact]
@@ -102,7 +104,7 @@ namespace DojoTemplateTestProject
             _sut.MoveLift();
 
             _lift.Received(1).Move();
-            _sut.JobQueue.Should().BeEmpty();
+            _waitingPassengers.JobQueue.Should().BeEmpty();
         }
     }
 }

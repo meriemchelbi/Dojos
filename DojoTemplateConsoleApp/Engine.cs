@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DojoTemplateConsoleApp.Extensions;
+using DojoTemplateConsoleApp.Model;
 
 namespace DojoTemplateConsoleApp
 {
     public class Engine
     {
         private readonly IEnumerable<ILift> _lifts;
+        private readonly Queue<Passenger> _waitingPassengers;
 
-        public Queue<Passenger> JobQueue { get; set; }
 
-        public Engine(params ILift[] lifts)
+        public Engine(WaitingPassengers jobQueue, params ILift[] lifts)
         {
             _lifts = lifts;
-            JobQueue = new Queue<Passenger>();
+            _waitingPassengers = jobQueue.JobQueue;
         }
 
         public void MoveLift(Passenger caller = null)
@@ -22,16 +23,16 @@ namespace DojoTemplateConsoleApp
             bool callerOnLiftPath = lift.CallerOnWay(caller);
             bool callerGoingLiftDirection = lift.GoingSameDirection(caller);
 
-            if (JobQueue.Any())
+            if (_waitingPassengers.Any())
             {
-                lift.Call(JobQueue.Dequeue());
+                lift.Call(_waitingPassengers.Dequeue());
                 if (caller != null)
                 {
-                    JobQueue.Enqueue(caller);
+                    _waitingPassengers.Enqueue(caller);
                 }
             }
             
-            else if (caller is null & !JobQueue.Any())
+            else if (caller is null & !_waitingPassengers.Any())
                 lift.Move();
 
             
@@ -42,7 +43,7 @@ namespace DojoTemplateConsoleApp
 
             else if (!callerOnLiftPath || !callerGoingLiftDirection)
             {
-                JobQueue.Enqueue(caller);
+                _waitingPassengers.Enqueue(caller);
                 lift.Move();
             }
 

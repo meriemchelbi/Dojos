@@ -8,12 +8,14 @@ namespace DojoTemplateTestProject
     public class FunctionalTests
     {
         private readonly ILift _lift;
+        private readonly WaitingPassengers _waitingPassengers;
         private readonly Engine _sut;
 
         public FunctionalTests()
         {
             _lift = new Lift();
-            _sut = new Engine(_lift);
+            _waitingPassengers = new WaitingPassengers();
+            _sut = new Engine(_waitingPassengers, _lift);
         }
 
         [Fact]
@@ -54,7 +56,7 @@ namespace DojoTemplateTestProject
             _lift.CurrentFloor.Should().Be(5);
             _lift.Passengers.Should().NotContain(passenger);
             _lift.Passengers.Should().NotContain(caller);
-            _sut.JobQueue.Should().Contain(caller);
+            _waitingPassengers.JobQueue.Should().Contain(caller);
         }
         
         [Fact]
@@ -70,7 +72,7 @@ namespace DojoTemplateTestProject
             _lift.CurrentFloor.Should().Be(5);
             _lift.Passengers.Should().NotContain(passenger);
             _lift.Passengers.Should().NotContain(caller);
-            _sut.JobQueue.Should().Contain(caller);
+            _waitingPassengers.JobQueue.Should().Contain(caller);
         }
 
         [Fact]
@@ -93,21 +95,21 @@ namespace DojoTemplateTestProject
         public void NoPassengerInLift_SingleQueuedJob_PicksUpWaitingCaller()
         {
             var queued = new Passenger(4, 6);
-            _sut.JobQueue.Enqueue(queued);
+            _waitingPassengers.JobQueue.Enqueue(queued);
             _lift.CurrentFloor = 2;
 
             _sut.MoveLift();
 
             _lift.CurrentFloor.Should().Be(4);
             _lift.Passengers.Should().Contain(queued);
-            _sut.JobQueue.Should().BeEmpty();
+            _waitingPassengers.JobQueue.Should().BeEmpty();
         }
         
         [Fact]
         public void NoPassenger_SingleQueuedJob_CallerOnWayToQueuedSameDirection_PicksUpQueued_EnqueuesNewCaller()
         {
             var queued = new Passenger(4, 6);
-            _sut.JobQueue.Enqueue(queued);
+            _waitingPassengers.JobQueue.Enqueue(queued);
             var caller = new Passenger(3, 5);
             _lift.CurrentFloor = 2;
 
@@ -115,7 +117,7 @@ namespace DojoTemplateTestProject
 
             _lift.CurrentFloor.Should().Be(4);
             _lift.Passengers.Should().Contain(queued);
-            _sut.JobQueue.Should().Contain(caller);
+            _waitingPassengers.JobQueue.Should().Contain(caller);
         }
 
         [Fact]
@@ -123,16 +125,16 @@ namespace DojoTemplateTestProject
         {
             var queued1 = new Passenger(4, 6);
             var queued2 = new Passenger(3, 5);
-            _sut.JobQueue.Enqueue(queued1);
-            _sut.JobQueue.Enqueue(queued2);
+            _waitingPassengers.JobQueue.Enqueue(queued1);
+            _waitingPassengers.JobQueue.Enqueue(queued2);
             _lift.CurrentFloor = 2;
 
             _sut.MoveLift();
 
             _lift.CurrentFloor.Should().Be(4);
             _lift.Passengers.Should().Contain(queued1);
-            _sut.JobQueue.Should().Contain(queued2);
-            _sut.JobQueue.Should().NotContain(queued1);
+            _waitingPassengers.JobQueue.Should().Contain(queued2);
+            _waitingPassengers.JobQueue.Should().NotContain(queued1);
         }
     }
 }

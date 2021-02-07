@@ -26,6 +26,7 @@ namespace DojoTemplateTestProject.UserInterface
 
             var result = _sut.CheckForCall();
 
+            _console.Received(1).WriteLine(Arg.Any<string>());
             result.Should().BeTrue();
         }
 
@@ -36,6 +37,7 @@ namespace DojoTemplateTestProject.UserInterface
 
             var result = _sut.CheckForCall();
 
+            _console.Received(1).WriteLine(Arg.Any<string>());
             result.Should().BeFalse();
         }
 
@@ -46,6 +48,7 @@ namespace DojoTemplateTestProject.UserInterface
 
             var result = _sut.CheckForCall();
 
+            _console.Received(1).WriteLine(Arg.Any<string>());
             result.Should().BeFalse();
         }
 
@@ -57,6 +60,7 @@ namespace DojoTemplateTestProject.UserInterface
 
             var result = _sut.GetOrigin();
 
+            _console.Received(1).WriteLine(Arg.Any<string>());
             result.Should().Be(3);
         }
 
@@ -68,6 +72,7 @@ namespace DojoTemplateTestProject.UserInterface
 
             var result = _sut.GetOrigin();
 
+            _console.Received(1).WriteLine(Arg.Any<string>());
             result.Should().Be(3);
         }
     }

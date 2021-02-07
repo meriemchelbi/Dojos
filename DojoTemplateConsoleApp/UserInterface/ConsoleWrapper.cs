@@ -8,5 +8,10 @@ namespace DojoTemplateConsoleApp.UserInterface
         {
             return Console.ReadLine();
         }
+
+        public void WriteLine(string lineToWrite)
+        {
+            Console.WriteLine(lineToWrite);
+        }
     }
 }

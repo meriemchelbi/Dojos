@@ -15,7 +15,7 @@ namespace DojoTemplateConsoleApp.UserInterface
 
         public bool CheckForCall()
         {
-            Console.WriteLine("Would you like to call the lift? Y/N");
+            _console.WriteLine("Would you like to call the lift? Y/N");
             var response = _console.ReadLine().ToUpperInvariant();
 
             switch (response)
@@ -32,7 +32,7 @@ namespace DojoTemplateConsoleApp.UserInterface
 
         public int GetDestination()
         {
-            Console.WriteLine("What is your destination? Please input a number between -1 and 6.");
+            _console.WriteLine("What is your destination? Please input a number between -1 and 6.");
             var response = _console.ReadLine();
             var destination = int.Parse(response);
 
@@ -49,7 +49,7 @@ namespace DojoTemplateConsoleApp.UserInterface
 
         public int GetOrigin()
         {
-            Console.WriteLine("What is your current floor? Please input a number between -1 and 6.");
+            _console.WriteLine("What is your current floor? Please input a number between -1 and 6.");
             var response = _console.ReadLine();
             var origin = int.Parse(response);
 
@@ -57,7 +57,7 @@ namespace DojoTemplateConsoleApp.UserInterface
 
             if (!isValidOrigin)
             {
-                Console.WriteLine("That is not a valid floor.");
+                _console.WriteLine("That is not a valid floor.");
                 GetOrigin();
             }
 

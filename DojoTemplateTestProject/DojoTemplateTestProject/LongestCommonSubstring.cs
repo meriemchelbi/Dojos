@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace DojoTemplateTestProject
@@ -42,10 +43,10 @@ namespace DojoTemplateTestProject
 
         private string[] GetSubstrings(string s)
         {
-            var substrings = new List<string>();
+            //var substrings = new List<string>();
 
-            var substringLength = s.Length - 1;
-            
+            //var substringLength = s.Length - 1;
+            throw new NotImplementedException();
         }
 
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace DojoTemplateTestProject
+namespace DojoTemplateTestProject.Leetcode
 {
-    public class LeetCodeBuySellStock2
+    public class BuySellStock2
     {
         private int _strategy1Profit = 0;
         private int _strategy2Profit = 0;
@@ -71,7 +71,7 @@ namespace DojoTemplateTestProject
 
 
             var profits = new List<int> { _strategy1Profit, _strategy2Profit, _strategy3Profit };
-            
+
             return profits.Max();
         }
 
@@ -111,7 +111,7 @@ namespace DojoTemplateTestProject
         {
             // sell whenever you hit a higher value
             var currentPrice = remainingPrices.First();
-            
+
             if (currentPrice > holding)
             {
                 _strategy1Profit += currentPrice - holding;
@@ -120,7 +120,7 @@ namespace DojoTemplateTestProject
 
             return holding;
         }
-        
+
         public int SellStrategy2(int[] remainingPrices, int holding)
         {
             var currentPrice = remainingPrices.First();
@@ -134,7 +134,7 @@ namespace DojoTemplateTestProject
 
             return holding;
         }
-        
+
         public int SellStrategy3(int[] remainingPrices, int holding)
         {
             var currentPrice = remainingPrices.First();

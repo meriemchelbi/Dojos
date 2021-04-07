@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿using Xunit;
 
-namespace DojoTemplateTestProject
+namespace DojoTemplateTestProject.HackerRank
 {
     // https://www.hackerrank.com/challenges/counting-valleys/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup&h_r=next-challenge&h_v=zen
     public class CountingValleys
@@ -23,13 +20,13 @@ namespace DojoTemplateTestProject
 
                     level -= 1;
                 }
-                
+
                 if (step == 'U')
                 {
                     level += 1;
                 }
             }
-                
+
             return noOfValleys;
         }
 

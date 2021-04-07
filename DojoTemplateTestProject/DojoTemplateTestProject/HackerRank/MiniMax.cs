@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace DojoTemplateTestProject
+namespace DojoTemplateTestProject.HackerRank
 {
     public class MiniMax
     {
@@ -24,16 +24,16 @@ namespace DojoTemplateTestProject
             var low = ordered.Take(4).Sum();
             var high = ordered.TakeLast(4).Sum();
         }
-        
+
         public void MinMax2(int[] arr)
         {
             var ordered = arr.OrderBy(i => i).Cast<long>();
             var low = ordered.Take(4).Sum();
             var high = ordered.TakeLast(4).Sum();
-            
+
             Console.WriteLine(low + " " + high);
         }
-        
+
         public void MinMaxOldDotnet(int[] arr)
         {
             var low = arr.OrderBy(i => i)

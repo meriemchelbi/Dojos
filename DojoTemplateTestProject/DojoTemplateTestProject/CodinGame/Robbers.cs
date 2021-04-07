@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace DojoTemplateTestProject
+namespace DojoTemplateTestProject.CodinGame
 {
-    public class CodingameRobbers
+    public class Robbers
     {
         public void Start(string[] args)
         {
@@ -95,7 +95,7 @@ namespace DojoTemplateTestProject
                 var vault4 = new Vault { TimeToCrack = 156250 };
                 var vaults = new List<Vault> { vault1, vault2, vault3, vault4 };
 
-                var sut = new CodingameRobbers();
+                var sut = new Robbers();
                 var result = sut.DoTheThing(robbers, vaults);
             }
         }

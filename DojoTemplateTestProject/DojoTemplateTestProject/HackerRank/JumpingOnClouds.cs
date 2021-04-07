@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿using Xunit;
 
-namespace DojoTemplateTestProject
+namespace DojoTemplateTestProject.HackerRank
 {
     public class JumpingOnClouds
     {
@@ -14,8 +11,8 @@ namespace DojoTemplateTestProject
 
             for (int i = 0; i < clouds.Length - 1; i++)
             {
-                if (clouds[i+1] == 1 ||
-                    (i < clouds.Length - 2 && clouds[i + 2] == 0))
+                if (clouds[i + 1] == 1 ||
+                    i < clouds.Length - 2 && clouds[i + 2] == 0)
                 {
                     jumps += 1;
                     i++;

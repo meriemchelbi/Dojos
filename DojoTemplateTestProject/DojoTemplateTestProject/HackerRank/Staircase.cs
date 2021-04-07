@@ -1,11 +1,7 @@
-﻿using Microsoft.VisualStudio.TestPlatform.Common.Telemetry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using Xunit;
 
-namespace DojoTemplateTestProject
+namespace DojoTemplateTestProject.HackerRank
 {
     public class Staircase
     {
@@ -29,7 +25,7 @@ namespace DojoTemplateTestProject
             {
                 for (int l = 0; l < n; l++)
                     Console.Write(matrix[k, l]);
-                
+
                 Console.Write(Environment.NewLine);
             }
         }
@@ -47,7 +43,7 @@ namespace DojoTemplateTestProject
             while (noOfStairs++ < n)
             {
                 var stairs = new string('#', noOfStairs);
-                var spaces = new String(' ', n - noOfStairs);
+                var spaces = new string(' ', n - noOfStairs);
                 string line = string.Concat(spaces, stairs);
                 Console.WriteLine(line);
             }
@@ -60,7 +56,7 @@ namespace DojoTemplateTestProject
             {
                 Console.WriteLine(
                     new string('#', noOfStairs) +
-                    new String(' ', totalStairs - noOfStairs));
+                    new string(' ', totalStairs - noOfStairs));
             }
         }
     }

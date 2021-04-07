@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xunit;
+﻿using Xunit;
 
-namespace DojoTemplateTestProject
+namespace DojoTemplateTestProject.HackerRank
 {
     public class PlusMinus
     {
@@ -13,7 +9,7 @@ namespace DojoTemplateTestProject
             decimal positives = 0;
             decimal negatives = 0;
             decimal zeros = 0;
-            
+
             foreach (var entry in arr)
             {
                 if (entry < 0)
@@ -36,9 +32,9 @@ namespace DojoTemplateTestProject
             }
 
             var noOfElements = arr.Length;
-            positives = decimal.Round(positives/noOfElements, 6);
-            negatives = decimal.Round(negatives/noOfElements, 6);
-            zeros = decimal.Round(zeros/noOfElements, 6);
+            positives = decimal.Round(positives / noOfElements, 6);
+            negatives = decimal.Round(negatives / noOfElements, 6);
+            zeros = decimal.Round(zeros / noOfElements, 6);
 
             return new decimal[] { positives, negatives, zeros };
         }
